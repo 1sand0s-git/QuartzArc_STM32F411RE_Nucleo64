@@ -1,0 +1,7 @@
+QAD_UARTMgr.cpp:33:1:QAD_UARTMgr::QAD_UARTMgr()	24	static
+QAD_UARTMgr.cpp:67:11:QA_Result QAD_UARTMgr::imp_registerUART(QAD_UART_Periph)	16	static
+QAD_UARTMgr.cpp:85:6:void QAD_UARTMgr::imp_deregisterUART(QAD_UART_Periph)	16	static
+QAD_UARTMgr.cpp:103:6:void QAD_UARTMgr::imp_enableClock(QAD_UART_Periph)	32	static
+QAD_UARTMgr.cpp:132:6:void QAD_UARTMgr::imp_disableClock(QAD_UART_Periph)	16	static
+QAD_UARTMgr.cpp:158:9:uint8_t QAD_UARTMgr::imp_getUARTsActive()	24	static
+QAD_UARTMgr.cpp:173:9:uint8_t QAD_UARTMgr::imp_getUARTsInactive()	24	static

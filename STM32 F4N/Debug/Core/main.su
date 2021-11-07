@@ -1,0 +1,53 @@
+QAD_Timer.hpp:83:2:QAD_Timer::QAD_Timer(QAD_Timer_InitStruct&)	16	static
+QAD_Encoder.hpp:85:3:QAD_Encoder::QAD_Encoder(QAD_Encoder_InitStruct&)	16	static
+QAD_PWM.hpp:44:30:QAD_PWM_Channel_InitStruct& QAD_PWM_Channel_InitStruct::operator=(const QAD_PWM_Channel_InitStruct&)	16	static
+QAD_PWM.hpp:99:3:QAD_PWM::QAD_PWM(QAD_PWM_InitStruct&)	24	static
+gthr-default.h:229:1:int __gthread_key_delete(__gthread_key_t)	16	static
+QAT_FIFO.hpp:48:2:QAT_FIFOBuffer::QAT_FIFOBuffer(uint16_t)	16	static
+QAS_Serial_Dev_Base.hpp:66:2:QAS_Serial_Dev_Base::QAS_Serial_Dev_Base(uint16_t, uint16_t, QAS_Serial_Dev_Base::DeviceType)	24	static
+QAD_UART.hpp:99:2:QAD_UART::QAD_UART(QAD_UART_InitStruct&)	16	static
+QAS_Serial_Dev_UART.hpp:63:3:QAS_Serial_Dev_UART::QAS_Serial_Dev_UART(QAS_Serial_Dev_UART_InitStruct&)	16	static
+main.cpp:48:6:void EXTI_Test_Handler(void*)	16	static
+main.cpp:58:6:void Timer_Test_Handler(void*)	16	static
+main.cpp:93:5:int main()	176	static
+unique_ptr.h:862:5:typename std::_MakeUniq<_Tp>::__array std::make_unique(std::size_t) [with _Tp = unsigned char []]	24	static
+unique_ptr.h:856:5:) [with _Tp = QAT_FIFOBuffer; _Args = {short unsigned int&}]	24	static
+unique_ptr.h:856:5:) [with _Tp = QAD_UART; _Args = {QAD_UART_InitStruct&}]	24	static
+unique_ptr.h:493:2:std::unique_ptr<_Tp [], _Dp>::unique_ptr(_Up) [with _Up = unsigned char*; _Vp = std::default_delete<unsigned char []>; <template-parameter-2-3> = void; <template-parameter-2-4> = bool; _Tp = unsigned char; _Dp = std::default_delete<unsigned char []>]	16	static
+unique_ptr.h:153:18:std::__uniq_ptr_impl<_Tp, _Dp>::pointer& std::__uniq_ptr_impl<_Tp, _Dp>::_M_ptr() [with _Tp = unsigned char; _Dp = std::default_delete<unsigned char []>]	16	static
+move.h:74:5:constexpr _Tp&& std::forward(typename std::remove_reference<_Tp>::type&) [with _Tp = short unsigned int&]	16	static
+unique_ptr.h:211:2:std::unique_ptr<_Tp, _Dp>::unique_ptr(std::unique_ptr<_Tp, _Dp>::pointer) [with _Del = std::default_delete<QAT_FIFOBuffer>; <template-parameter-2-2> = void; _Tp = QAT_FIFOBuffer; _Dp = std::default_delete<QAT_FIFOBuffer>]	16	static
+unique_ptr.h:153:18:std::__uniq_ptr_impl<_Tp, _Dp>::pointer& std::__uniq_ptr_impl<_Tp, _Dp>::_M_ptr() [with _Tp = QAT_FIFOBuffer; _Dp = std::default_delete<QAT_FIFOBuffer>]	16	static
+move.h:74:5:constexpr _Tp&& std::forward(typename std::remove_reference<_Tp>::type&) [with _Tp = QAD_UART_InitStruct&]	16	static
+unique_ptr.h:211:2:std::unique_ptr<_Tp, _Dp>::unique_ptr(std::unique_ptr<_Tp, _Dp>::pointer) [with _Del = std::default_delete<QAD_UART>; <template-parameter-2-2> = void; _Tp = QAD_UART; _Dp = std::default_delete<QAD_UART>]	16	static
+unique_ptr.h:153:18:std::__uniq_ptr_impl<_Tp, _Dp>::pointer& std::__uniq_ptr_impl<_Tp, _Dp>::_M_ptr() [with _Tp = QAD_UART; _Dp = std::default_delete<QAD_UART>]	16	static
+unique_ptr.h:147:7:std::__uniq_ptr_impl<_Tp, _Dp>::__uniq_ptr_impl(std::__uniq_ptr_impl<_Tp, _Dp>::pointer) [with _Tp = unsigned char; _Dp = std::default_delete<unsigned char []>]	16	static
+tuple:1320:5:>&) [with unsigned int __i = 0; _Elements = {unsigned char*, std::default_delete<unsigned char []>}]	16	static
+unique_ptr.h:147:7:std::__uniq_ptr_impl<_Tp, _Dp>::__uniq_ptr_impl(std::__uniq_ptr_impl<_Tp, _Dp>::pointer) [with _Tp = QAT_FIFOBuffer; _Dp = std::default_delete<QAT_FIFOBuffer>]	16	static
+tuple:1320:5:>&) [with unsigned int __i = 0; _Elements = {QAT_FIFOBuffer*, std::default_delete<QAT_FIFOBuffer>}]	16	static
+unique_ptr.h:147:7:std::__uniq_ptr_impl<_Tp, _Dp>::__uniq_ptr_impl(std::__uniq_ptr_impl<_Tp, _Dp>::pointer) [with _Tp = QAD_UART; _Dp = std::default_delete<QAD_UART>]	16	static
+tuple:1320:5:>&) [with unsigned int __i = 0; _Elements = {QAD_UART*, std::default_delete<QAD_UART>}]	16	static
+tuple:918:12:constexpr std::tuple<_T1, _T2>::tuple() [with _U1 = unsigned char*; _U2 = std::default_delete<unsigned char []>; typename std::enable_if<std::__and_<std::__is_implicitly_default_constructible<_U1>, std::__is_implicitly_default_constructible<_U2> >::value, bool>::type <anonymous> = true; _T1 = unsigned char*; _T2 = std::default_delete<unsigned char []>]	16	static
+tuple:1309:5:>&) [with unsigned int __i = 0; _Head = unsigned char*; _Tail = {std::default_delete<unsigned char []>}]	16	static
+tuple:918:12:constexpr std::tuple<_T1, _T2>::tuple() [with _U1 = QAT_FIFOBuffer*; _U2 = std::default_delete<QAT_FIFOBuffer>; typename std::enable_if<std::__and_<std::__is_implicitly_default_constructible<_U1>, std::__is_implicitly_default_constructible<_U2> >::value, bool>::type <anonymous> = true; _T1 = QAT_FIFOBuffer*; _T2 = std::default_delete<QAT_FIFOBuffer>]	16	static
+tuple:1309:5:>&) [with unsigned int __i = 0; _Head = QAT_FIFOBuffer*; _Tail = {std::default_delete<QAT_FIFOBuffer>}]	16	static
+tuple:918:12:constexpr std::tuple<_T1, _T2>::tuple() [with _U1 = QAD_UART*; _U2 = std::default_delete<QAD_UART>; typename std::enable_if<std::__and_<std::__is_implicitly_default_constructible<_U1>, std::__is_implicitly_default_constructible<_U2> >::value, bool>::type <anonymous> = true; _T1 = QAD_UART*; _T2 = std::default_delete<QAD_UART>]	16	static
+tuple:1309:5:>&) [with unsigned int __i = 0; _Head = QAD_UART*; _Tail = {std::default_delete<QAD_UART>}]	16	static
+tuple:206:17:>::_Tuple_impl() [with unsigned int _Idx = 0; _Head = unsigned char*; _Tail = {std::default_delete<unsigned char []>}]	16	static
+tuple:195:7:>&) [with unsigned int _Idx = 0; _Head = unsigned char*; _Tail = {std::default_delete<unsigned char []>}]	16	static
+tuple:206:17:>::_Tuple_impl() [with unsigned int _Idx = 0; _Head = QAT_FIFOBuffer*; _Tail = {std::default_delete<QAT_FIFOBuffer>}]	16	static
+tuple:195:7:>&) [with unsigned int _Idx = 0; _Head = QAT_FIFOBuffer*; _Tail = {std::default_delete<QAT_FIFOBuffer>}]	16	static
+tuple:206:17:>::_Tuple_impl() [with unsigned int _Idx = 0; _Head = QAD_UART*; _Tail = {std::default_delete<QAD_UART>}]	16	static
+tuple:195:7:>&) [with unsigned int _Idx = 0; _Head = QAD_UART*; _Tail = {std::default_delete<QAD_UART>}]	16	static
+tuple:339:17:constexpr std::_Tuple_impl<_Idx, _Head>::_Tuple_impl() [with unsigned int _Idx = 1; _Head = std::default_delete<unsigned char []>]	16	static
+tuple:122:17:constexpr std::_Head_base<_Idx, _Head, false>::_Head_base() [with unsigned int _Idx = 0; _Head = unsigned char*]	16	static
+tuple:160:7:static constexpr _Head& std::_Head_base<_Idx, _Head, false>::_M_head(std::_Head_base<_Idx, _Head, false>&) [with unsigned int _Idx = 0; _Head = unsigned char*]	16	static
+tuple:339:17:constexpr std::_Tuple_impl<_Idx, _Head>::_Tuple_impl() [with unsigned int _Idx = 1; _Head = std::default_delete<QAT_FIFOBuffer>]	16	static
+tuple:122:17:constexpr std::_Head_base<_Idx, _Head, false>::_Head_base() [with unsigned int _Idx = 0; _Head = QAT_FIFOBuffer*]	16	static
+tuple:160:7:static constexpr _Head& std::_Head_base<_Idx, _Head, false>::_M_head(std::_Head_base<_Idx, _Head, false>&) [with unsigned int _Idx = 0; _Head = QAT_FIFOBuffer*]	16	static
+tuple:339:17:constexpr std::_Tuple_impl<_Idx, _Head>::_Tuple_impl() [with unsigned int _Idx = 1; _Head = std::default_delete<QAD_UART>]	16	static
+tuple:122:17:constexpr std::_Head_base<_Idx, _Head, false>::_Head_base() [with unsigned int _Idx = 0; _Head = QAD_UART*]	16	static
+tuple:160:7:static constexpr _Head& std::_Head_base<_Idx, _Head, false>::_M_head(std::_Head_base<_Idx, _Head, false>&) [with unsigned int _Idx = 0; _Head = QAD_UART*]	16	static
+tuple:76:17:constexpr std::_Head_base<_Idx, _Head, true>::_Head_base() [with unsigned int _Idx = 1; _Head = std::default_delete<unsigned char []>]	16	static
+tuple:76:17:constexpr std::_Head_base<_Idx, _Head, true>::_Head_base() [with unsigned int _Idx = 1; _Head = std::default_delete<QAT_FIFOBuffer>]	16	static
+tuple:76:17:constexpr std::_Head_base<_Idx, _Head, true>::_Head_base() [with unsigned int _Idx = 1; _Head = std::default_delete<QAD_UART>]	16	static

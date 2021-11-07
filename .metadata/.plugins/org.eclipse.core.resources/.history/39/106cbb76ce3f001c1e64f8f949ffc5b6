@@ -1,0 +1,31 @@
+/* ----------------------------------------------------------------------- */
+/*                                                                         */
+/*   Quartz Arc                                                            */
+/*                                                                         */
+/*   STM32 F411RE Nucleo 64                                                */
+/*                                                                         */
+/*   System: Drivers                                                       */
+/*   Role: GPIO Management Driver                                          */
+/*   Filename: QAD_GPIOMgr.hpp                                             */
+/*   Date: 4th November 2021                                               */
+/*   Created By: Sitting Waves                                             */
+/*                                                                         */
+/* ----------------------------------------------------------------------- */
+
+//Prevent Recursive Inclusion
+#ifndef __QAD_GPIOMGR_HPP_
+#define __QAD_GPIOMGR_HPP_
+
+//Includes
+#include "setup.hpp"
+
+
+	//------------------------------------------
+	//------------------------------------------
+	//------------------------------------------
+
+
+
+
+//Prevent Recursive Inclusion
+#endif /* __QAD_GPIOMGR_HPP_ */

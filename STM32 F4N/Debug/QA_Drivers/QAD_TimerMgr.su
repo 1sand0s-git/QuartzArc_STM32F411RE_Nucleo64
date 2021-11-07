@@ -1,0 +1,8 @@
+QAD_TimerMgr.cpp:25:1:QAD_TimerMgr::QAD_TimerMgr()	24	static
+QAD_TimerMgr.cpp:100:11:QA_Result QAD_TimerMgr::imp_registerTimer(QAD_Timer_Periph, QAD_Timer_State)	16	static
+QAD_TimerMgr.cpp:111:6:void QAD_TimerMgr::imp_deregisterTimer(QAD_Timer_Periph)	16	static
+QAD_TimerMgr.cpp:118:18:QAD_Timer_Periph QAD_TimerMgr::imp_findTimer(QAD_Timer_Type, bool)	24	static
+QAD_TimerMgr.cpp:139:6:void QAD_TimerMgr::imp_enableClock(QAD_Timer_Periph)	48	static
+QAD_TimerMgr.cpp:173:6:void QAD_TimerMgr::imp_disableClock(QAD_Timer_Periph)	16	static
+QAD_TimerMgr.cpp:211:9:uint8_t QAD_TimerMgr::imp_getTimersActive()	24	static
+QAD_TimerMgr.cpp:223:9:uint8_t QAD_TimerMgr::imp_getTimersInactive()	24	static

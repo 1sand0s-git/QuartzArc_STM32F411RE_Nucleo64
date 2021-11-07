@@ -1,0 +1,5 @@
+main.cpp:39:6:void EXTI_Test_Handler(void*)	0	static
+main.cpp:46:6:void Timer_Test_Handler(void*)	0	static
+unique_ptr.h:862:5:typename std::_MakeUniq<_Tp>::__array std::make_unique(std::size_t) [with _Tp = unsigned char []]	16	static
+QAS_Serial_Dev_UART.hpp:63:3:QAS_Serial_Dev_UART::QAS_Serial_Dev_UART(QAS_Serial_Dev_UART_InitStruct&)	24	static
+main.cpp:63:5:int main()	72	static
