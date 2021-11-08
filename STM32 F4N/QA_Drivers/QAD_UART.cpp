@@ -36,16 +36,24 @@
 //QAD_UART Initialization Method
 //
 //Used to initialize the UART driver
-//Returns QA_OK if initialization successful, or QA_Fail if initialization has failed
+//Returns QA_OK if initialization successful, or an error if not successful (a member of QA_Result as defined in setup.hpp)
 QA_Result QAD_UART::init(void) {
+
+	//Check if selected UART peripheral is currently available
 	if (QAD_UARTMgr::getState(m_eUART))
 		return QA_Error_PeriphBusy;
 
+	//Register UART peripheral as now being in use
   QAD_UARTMgr::registerUART(m_eUART);
+
+  //Initialize UART peripheral
   QA_Result eRes = periphInit();
 
+  //If initialization failed then deregister UART peripheral
   if (eRes)
   	QAD_UARTMgr::deregisterUART(m_eUART);
+
+  //Return initialization result
   return eRes;
 }
 
@@ -55,10 +63,15 @@ QA_Result QAD_UART::init(void) {
 //
 //Used to deinitialize the UART driver
 void QAD_UART::deinit(void) {
-  if (!m_eInitState)
+
+	//Return if UART driver is not currently initialized
+	if (!m_eInitState)
   	return;
 
+	//Deinitialize UART driver
   periphDeinit(DeinitFull);
+
+  //Deregister UART peripheral
   QAD_UARTMgr::deregisterUART(m_eUART);
 }
 
@@ -89,7 +102,11 @@ UART_HandleTypeDef& QAD_UART::getHandle(void) {
 //
 //Used to start transmission of the UART peripheral
 void QAD_UART::startTX(void) {
+
+	//Enable Transmit Register Empty (TXE) interrupt
   __HAL_UART_ENABLE_IT(&m_sHandle, UART_IT_TXE);
+
+  //Set TX State to active
   m_eTXState = QA_Active;
 }
 
@@ -99,7 +116,11 @@ void QAD_UART::startTX(void) {
 //
 //Used to stop transmission of the UART peripheral
 void QAD_UART::stopTX(void) {
+
+	//Disable Transmit Register Empty (TXE) interrupt
   __HAL_UART_DISABLE_IT(&m_sHandle, UART_IT_TXE);
+
+  //Set TX State to inactive
   m_eTXState = QA_Inactive;
 }
 
@@ -108,7 +129,10 @@ void QAD_UART::stopTX(void) {
 //QAD_UART Control Method
 //
 //Used to retrieve whether the UART peripheral transmit is active
+//Returns QA_Active if transmission currently active, or QA_Inactive if not currently active
 QA_ActiveState QAD_UART::getTXState(void) {
+
+	//Return current TX state
   return m_eTXState;
 }
 
@@ -118,7 +142,11 @@ QA_ActiveState QAD_UART::getTXState(void) {
 //
 //Used to start receive of the UART peripheral
 void QAD_UART::startRX(void) {
+
+	//Enable RX Register Not-Empty (RXNE) interrupt
   __HAL_UART_ENABLE_IT(&m_sHandle, UART_IT_RXNE);
+
+  //Set RX State to active
   m_eRXState = QA_Active;
 }
 
@@ -128,7 +156,11 @@ void QAD_UART::startRX(void) {
 //
 //Used to stop receive of the UART peripheral
 void QAD_UART::stopRX(void) {
+
+	//Disable RX Register Not-Empty (RXNE) interrupt
   __HAL_UART_DISABLE_IT(&m_sHandle, UART_IT_RXNE);
+
+  //Set TX State to inactive
   m_eRXState = QA_Inactive;
 }
 
@@ -137,7 +169,10 @@ void QAD_UART::stopRX(void) {
 //QAD_UART Control Method
 //
 //Used to retrieve whether the UART peripheral receive is active
+//Returns QA_Active if receive currently active, or QA_Inactive if not currently active
 QA_ActiveState QAD_UART::getRXState(void) {
+
+	//Return current RX State
   return m_eRXState;
 }
 
@@ -152,6 +187,8 @@ QA_ActiveState QAD_UART::getRXState(void) {
 //Used to transmit a single byte of data
 //uData - the byte to be transmitted, which is placed into the UART data register (DR)
 void QAD_UART::dataTX(uint8_t uData) {
+
+	//Place uData into UART Data Register
   m_sHandle.Instance->DR = uData;
 }
 
@@ -162,6 +199,8 @@ void QAD_UART::dataTX(uint8_t uData) {
 //Used to receive a single byte of data
 //Returns the data retrieved from the UART data register (DR)
 uint8_t QAD_UART::dataRX(void) {
+
+	//Read data from UART Data Register and return value
   return m_sHandle.Instance->DR;
 }
 
@@ -174,7 +213,7 @@ uint8_t QAD_UART::dataRX(void) {
 //QAD_UART Private Initialization Method
 //
 //Used to initialize the GPIOs, peripheral clock, and the peripheral itself, as well as setting the interrupt priority and enabling the interrupt
-//In the case of a failed initialization a partial deinitialization will be performed to make sure the peripheral, clock and GPIOs are all in the
+//In the case of a failed initialization, a partial deinitialization will be performed to make sure the peripheral, clock and GPIOs are all in the
 //uninitialized state
 //Returns QA_OK if successful, or QA_Fail if initialization fails
 QA_Result QAD_UART::periphInit(void) {
@@ -235,11 +274,11 @@ QA_Result QAD_UART::periphInit(void) {
 //QAD_UART Private Initialization Method
 //
 //Used to deinitialize the GPIOs, peripheral clock, and the peripheral itself, as well as disabling the interrupt
-//eDeinitMode - Set to DeinitPartial to perform a partial deinitialization (only to be used by periphInit in a case where peripheral initialization has failed)
+//eDeinitMode - Set to DeinitPartial to perform a partial deinitialization (only to be used by periphInit() method
+//              in a case where peripheral initialization has failed)
 //            - Set to DeinitFull to perform a full deinitialization in a case where the driver is fully initialized
 void QAD_UART::periphDeinit(QAD_UART::DeinitMode eDeinitMode) {
 
-	//Disable IRQs
 	//Check if full deinitialization is required
 	if (eDeinitMode) {
 

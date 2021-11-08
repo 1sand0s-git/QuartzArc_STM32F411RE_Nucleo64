@@ -77,7 +77,7 @@ public:
 
 
 
-	//NOTE: See QAS_Serial_Dev_Base.cpp for details on the folloing methods
+	//NOTE: See QAS_Serial_Dev_Base.cpp for details on the following methods
 
 	//----------------------
 	//Initialization Methods

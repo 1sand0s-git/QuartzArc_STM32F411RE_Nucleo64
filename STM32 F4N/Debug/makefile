@@ -81,8 +81,8 @@ all: main-build
 main-build: STM32\ F4N.elf secondary-outputs
 
 # Tool invocations
-STM32\ F4N.elf: $(OBJS) $(USER_OBJS) C:\Users\binar\Desktop\Quartz\ Arc\STM32\ F4N\QuartzArc_STM32_F4N\STM32\ F4N\STM32F411RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-g++ -o "STM32 F4N.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\binar\Desktop\Quartz Arc\STM32 F4N\QuartzArc_STM32_F4N\STM32 F4N\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32 F4N.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+STM32\ F4N.elf: $(OBJS) $(USER_OBJS) C:\Users\binar\Desktop\Quartz\ Arc\QA\ Codebase\ Repos\QA_STM32F411RENUCLEO64\QuartzArc_STM32F411RE_Nucleo64\STM32\ F4N\STM32F411RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-g++ -o "STM32 F4N.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\binar\Desktop\Quartz Arc\QA Codebase Repos\QA_STM32F411RENUCLEO64\QuartzArc_STM32F411RE_Nucleo64\STM32 F4N\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32 F4N.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

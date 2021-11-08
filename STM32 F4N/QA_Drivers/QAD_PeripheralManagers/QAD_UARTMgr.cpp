@@ -66,6 +66,7 @@ QAD_UARTMgr::QAD_UARTMgr() {
 //
 //To be called from static method registerUART()
 //Used to register a UART peripheral as being used by a driver
+//eUART - the UART peripheral to be registered. A member of QAD_UART_Periph
 //Returns QA_OK if registration is successful, or returns QA_Error_PeriphBusy if the selected UART is already in use
 QA_Result QAD_UARTMgr::imp_registerUART(QAD_UART_Periph eUART) {
 	if (eUART >= QAD_UARTNone)
@@ -84,7 +85,7 @@ QA_Result QAD_UARTMgr::imp_registerUART(QAD_UART_Periph eUART) {
 //
 //To be called from static method deregisterUART()
 //Used to deregister a UART peripheral to mark it as no longer being used by a driver
-//eUART - the UART peripheral to be deregistered
+//eUART - the UART peripheral to be deregistered. A member of QAD_UART_Periph
 void QAD_UARTMgr::imp_deregisterUART(QAD_UART_Periph eUART) {
 	if (eUART >= QAD_UARTNone)
 		return;

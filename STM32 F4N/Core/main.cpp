@@ -120,17 +120,17 @@ int main(void) {
 
 	//Fill out initialization structure required to create UART class (defined in QAS_Serial_Dev_UART.hpp)
   QAS_Serial_Dev_UART_InitStruct sSerialInit;
-  sSerialInit.uart.uart        = QAD_UART2;                //Define the UART peripheral to be used (enum defined in QAD_UART.hpp)
-  sSerialInit.uart.baudrate    = QAD_UART2_BAUDRATE;       //Define the baudrate to be used by the UART peripheral
-  sSerialInit.uart.irqpriority = QAD_IRQPRIORITY_UART2;    //Defined the IRQ priority to be used by the TX and RX interrupts
-  sSerialInit.uart.txgpio      = QAD_UART2_TX_PORT;        //Define the GPIO port for the TX pin
-  sSerialInit.uart.txpin       = QAD_UART2_TX_PIN;         //Define the pin number for the TX pin
-  sSerialInit.uart.txaf        = QAD_UART2_TX_AF;          //Define the alternate function for the TX pin
-  sSerialInit.uart.rxgpio      = QAD_UART2_RX_PORT;        //Define the GPIO port for the RX pin
-  sSerialInit.uart.rxpin       = QAD_UART2_RX_PIN;         //Define the pin number for the RX pin
-  sSerialInit.uart.rxaf        = QAD_UART2_RX_AF;          //Define the alternate function for the TX pin
-  sSerialInit.txfifo_size      = QAD_UART2_TX_FIFOSIZE;    //Define the size (in bytes) for the transmit FIFO
-  sSerialInit.rxfifo_size      = QAD_UART2_RX_FIFOSIZE;    //Define the size (in bytes) for the receive FIFO
+  sSerialInit.sUART_Init.uart        = QAD_UART2;                //Define the UART peripheral to be used (enum defined in QAD_UART.hpp)
+  sSerialInit.sUART_Init.baudrate    = QAD_UART2_BAUDRATE;       //Define the baudrate to be used by the UART peripheral
+  sSerialInit.sUART_Init.irqpriority = QAD_IRQPRIORITY_UART2;    //Defined the IRQ priority to be used by the TX and RX interrupts
+  sSerialInit.sUART_Init.txgpio      = QAD_UART2_TX_PORT;        //Define the GPIO port for the TX pin
+  sSerialInit.sUART_Init.txpin       = QAD_UART2_TX_PIN;         //Define the pin number for the TX pin
+  sSerialInit.sUART_Init.txaf        = QAD_UART2_TX_AF;          //Define the alternate function for the TX pin
+  sSerialInit.sUART_Init.rxgpio      = QAD_UART2_RX_PORT;        //Define the GPIO port for the RX pin
+  sSerialInit.sUART_Init.rxpin       = QAD_UART2_RX_PIN;         //Define the pin number for the RX pin
+  sSerialInit.sUART_Init.rxaf        = QAD_UART2_RX_AF;          //Define the alternate function for the TX pin
+  sSerialInit.uTXFIFO_Size           = QAD_UART2_TX_FIFOSIZE;    //Define the size (in bytes) for the transmit FIFO
+  sSerialInit.uRXFIFO_Size           = QAD_UART2_RX_FIFOSIZE;    //Define the size (in bytes) for the receive FIFO
 
   //Create the UART class, passing to it a reference to the initialization structure
   UART_STLink = new QAS_Serial_Dev_UART(sSerialInit);
@@ -167,12 +167,12 @@ int main(void) {
 
   //Fill out the initialization structure required to create the driver class (defined in QAD_Timer.hpp)
   QAD_Timer_InitStruct Timer_Test_Init;
-  Timer_Test_Init.eTimer         = QAD_Timer2;      //Define the timer peripheral is to be used (enum defined in QAD_TimerMgr.hpp)
-  Timer_Test_Init.eMode          = TimerMultiple;   //Define which mode to use (Continuous, Multiple or Single)
-  Timer_Test_Init.uPrescaler     = 20000;           //Define the timer prescaler
-  Timer_Test_Init.uPeriod        = 5000;            //Define the timer period
-  Timer_Test_Init.uIRQPriority   = 0x9;             //Set the interrupt priority
-  Timer_Test_Init.uCounterTarget = 6;               //Set the counter target (used when driver is in Multiple mode)
+  Timer_Test_Init.eTimer         = QAD_Timer2;          //Define the timer peripheral is to be used (enum defined in QAD_TimerMgr.hpp)
+  Timer_Test_Init.eMode          = QAD_TimerMultiple;   //Define which mode to use (Continuous, Multiple or Single)
+  Timer_Test_Init.uPrescaler     = 20000;               //Define the timer prescaler
+  Timer_Test_Init.uPeriod        = 5000;                //Define the timer period
+  Timer_Test_Init.uIRQPriority   = 0x9;                 //Set the interrupt priority
+  Timer_Test_Init.uCounterTarget = 6;                   //Set the counter target (used when driver is in Multiple mode)
 
   //Create the timer class, passing it a reference to the initialization structure
   //Driver class is created in an uninitialized state
@@ -369,7 +369,7 @@ int main(void) {
       	iPWMVal = 0;
       if (iPWMVal > 255)
       	iPWMVal = 255;
-      PWM_Test->setPWMVal(QAD_PWM::PWM_Channel_1, iPWMVal);  //Update PWM value
+      PWM_Test->setPWMVal(QAD_PWM_Channel_1, iPWMVal);  //Update PWM value
 
 
     	uEncoderTicks -= QA_FT_EncoderTickThreshold;      //Reset encoder ticks

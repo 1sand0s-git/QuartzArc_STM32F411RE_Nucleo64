@@ -1,21 +1,21 @@
-QAD_TimerMgr.hpp:111:23:static QAD_TimerMgr& QAD_TimerMgr::get()	8	static
-QAD_TimerMgr.hpp:117:25:static QAD_Timer_State QAD_TimerMgr::getState(QAD_Timer_Periph)	16	static
-QAD_TimerMgr.hpp:133:14:static bool QAD_TimerMgr::getEncoder(QAD_Timer_Periph)	16	static
-QAD_TimerMgr.hpp:137:22:static TIM_TypeDef* QAD_TimerMgr::getInstance(QAD_Timer_Periph)	16	static
-QAD_TimerMgr.hpp:147:19:static QA_Result QAD_TimerMgr::registerTimer(QAD_Timer_Periph, QAD_Timer_State)	16	static
-QAD_TimerMgr.hpp:151:14:static void QAD_TimerMgr::deregisterTimer(QAD_Timer_Periph)	16	static
-QAD_TimerMgr.hpp:161:14:static void QAD_TimerMgr::enableClock(QAD_Timer_Periph)	16	static
-QAD_TimerMgr.hpp:165:14:static void QAD_TimerMgr::disableClock(QAD_Timer_Periph)	16	static
-QAD_Encoder.cpp:29:11:QA_Result QAD_Encoder::init()	24	static
-QAD_Encoder.cpp:48:6:void QAD_Encoder::deinit()	16	static
-QAD_Encoder.cpp:62:6:void QAD_Encoder::start()	16	static
-QAD_Encoder.cpp:73:6:void QAD_Encoder::stop()	16	static
-QAD_Encoder.cpp:83:6:void QAD_Encoder::update(uint32_t)	24	static
-QAD_Encoder.cpp:109:16:QA_ActiveState QAD_Encoder::getState()	16	static
-QAD_Encoder.cpp:116:9:int16_t QAD_Encoder::getValue()	24	static
-QAD_Encoder.cpp:128:10:uint16_t QAD_Encoder::getAccel()	16	static
-QAD_Encoder.cpp:135:6:void QAD_Encoder::setMode(QAD_EncoderMode)	16	static
-QAD_Encoder.cpp:142:17:QAD_EncoderMode QAD_Encoder::getMode()	16	static
-QAD_Encoder.cpp:152:11:QA_Result QAD_Encoder::periphInit()	72	static
-QAD_Encoder.cpp:206:6:void QAD_Encoder::periphDeinit(QAD_Encoder::DeinitMode)	16	static
-QAD_Encoder.cpp:229:6:void QAD_Encoder::clearData()	16	static
+QAD_TimerMgr.hpp:137:23:static QAD_TimerMgr& QAD_TimerMgr::get()	8	static
+QAD_TimerMgr.hpp:149:25:static QAD_Timer_State QAD_TimerMgr::getState(QAD_Timer_Periph)	16	static
+QAD_TimerMgr.hpp:177:14:static bool QAD_TimerMgr::getEncoder(QAD_Timer_Periph)	16	static
+QAD_TimerMgr.hpp:191:22:static TIM_TypeDef* QAD_TimerMgr::getInstance(QAD_Timer_Periph)	16	static
+QAD_TimerMgr.hpp:209:19:static QA_Result QAD_TimerMgr::registerTimer(QAD_Timer_Periph, QAD_Timer_State)	16	static
+QAD_TimerMgr.hpp:215:14:static void QAD_TimerMgr::deregisterTimer(QAD_Timer_Periph)	16	static
+QAD_TimerMgr.hpp:245:14:static void QAD_TimerMgr::enableClock(QAD_Timer_Periph)	16	static
+QAD_TimerMgr.hpp:251:14:static void QAD_TimerMgr::disableClock(QAD_Timer_Periph)	16	static
+QAD_Encoder.cpp:36:11:QA_Result QAD_Encoder::init()	24	static
+QAD_Encoder.cpp:66:6:void QAD_Encoder::deinit()	16	static
+QAD_Encoder.cpp:88:6:void QAD_Encoder::start()	16	static
+QAD_Encoder.cpp:109:6:void QAD_Encoder::stop()	16	static
+QAD_Encoder.cpp:132:6:void QAD_Encoder::update(uint32_t)	24	static
+QAD_Encoder.cpp:165:16:QA_ActiveState QAD_Encoder::getState()	16	static
+QAD_Encoder.cpp:179:9:int16_t QAD_Encoder::getValue()	24	static
+QAD_Encoder.cpp:204:10:uint16_t QAD_Encoder::getAccel()	16	static
+QAD_Encoder.cpp:214:6:void QAD_Encoder::setMode(QAD_EncoderMode)	16	static
+QAD_Encoder.cpp:223:17:QAD_EncoderMode QAD_Encoder::getMode()	16	static
+QAD_Encoder.cpp:239:11:QA_Result QAD_Encoder::periphInit()	72	static
+QAD_Encoder.cpp:300:6:void QAD_Encoder::periphDeinit(QAD_Encoder::DeinitMode)	16	static
+QAD_Encoder.cpp:330:6:void QAD_Encoder::clearData()	16	static

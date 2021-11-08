@@ -83,7 +83,7 @@ QAD_EXTI::~QAD_EXTI() {
 //QAD_EXTI::handler
 //QAD_EXTI Handler Method
 //
-//This method is to be called by the interrupt handler method from handlers.cpp
+//This method is to be called by the interrupt handler function from handlers.cpp
 void QAD_EXTI::handler(void) {
 
 	//Check if required pin interrupt has been triggered

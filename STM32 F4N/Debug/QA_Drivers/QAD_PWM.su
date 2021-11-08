@@ -1,15 +1,15 @@
-QAD_TimerMgr.hpp:111:23:static QAD_TimerMgr& QAD_TimerMgr::get()	8	static
-QAD_TimerMgr.hpp:117:25:static QAD_Timer_State QAD_TimerMgr::getState(QAD_Timer_Periph)	16	static
-QAD_TimerMgr.hpp:129:17:static uint8_t QAD_TimerMgr::getChannels(QAD_Timer_Periph)	16	static
-QAD_TimerMgr.hpp:137:22:static TIM_TypeDef* QAD_TimerMgr::getInstance(QAD_Timer_Periph)	16	static
-QAD_TimerMgr.hpp:147:19:static QA_Result QAD_TimerMgr::registerTimer(QAD_Timer_Periph, QAD_Timer_State)	16	static
-QAD_TimerMgr.hpp:151:14:static void QAD_TimerMgr::deregisterTimer(QAD_Timer_Periph)	16	static
-QAD_TimerMgr.hpp:161:14:static void QAD_TimerMgr::enableClock(QAD_Timer_Periph)	16	static
-QAD_TimerMgr.hpp:165:14:static void QAD_TimerMgr::disableClock(QAD_Timer_Periph)	16	static
-QAD_PWM.cpp:29:11:QA_Result QAD_PWM::init()	24	static
-QAD_PWM.cpp:44:6:void QAD_PWM::deinit()	16	static
-QAD_PWM.cpp:58:6:void QAD_PWM::start()	24	static
-QAD_PWM.cpp:71:6:void QAD_PWM::stop()	24	static
-QAD_PWM.cpp:84:6:void QAD_PWM::setPWMVal(QAD_PWM::PWM_Channel, uint16_t)	16	static
-QAD_PWM.cpp:98:11:QA_Result QAD_PWM::periphInit()	72	static
-QAD_PWM.cpp:159:6:void QAD_PWM::periphDeinit(QAD_PWM::DeinitMode)	24	static
+QAD_TimerMgr.hpp:137:23:static QAD_TimerMgr& QAD_TimerMgr::get()	8	static
+QAD_TimerMgr.hpp:149:25:static QAD_Timer_State QAD_TimerMgr::getState(QAD_Timer_Periph)	16	static
+QAD_TimerMgr.hpp:170:17:static uint8_t QAD_TimerMgr::getChannels(QAD_Timer_Periph)	16	static
+QAD_TimerMgr.hpp:191:22:static TIM_TypeDef* QAD_TimerMgr::getInstance(QAD_Timer_Periph)	16	static
+QAD_TimerMgr.hpp:209:19:static QA_Result QAD_TimerMgr::registerTimer(QAD_Timer_Periph, QAD_Timer_State)	16	static
+QAD_TimerMgr.hpp:215:14:static void QAD_TimerMgr::deregisterTimer(QAD_Timer_Periph)	16	static
+QAD_TimerMgr.hpp:245:14:static void QAD_TimerMgr::enableClock(QAD_Timer_Periph)	16	static
+QAD_TimerMgr.hpp:251:14:static void QAD_TimerMgr::disableClock(QAD_Timer_Periph)	16	static
+QAD_PWM.cpp:36:11:QA_Result QAD_PWM::init()	24	static
+QAD_PWM.cpp:61:6:void QAD_PWM::deinit()	16	static
+QAD_PWM.cpp:83:6:void QAD_PWM::start()	24	static
+QAD_PWM.cpp:102:6:void QAD_PWM::stop()	24	static
+QAD_PWM.cpp:123:6:void QAD_PWM::setPWMVal(QAD_PWM_Channel, uint16_t)	16	static
+QAD_PWM.cpp:146:11:QA_Result QAD_PWM::periphInit()	72	static
+QAD_PWM.cpp:221:6:void QAD_PWM::periphDeinit(QAD_PWM::DeinitMode)	24	static

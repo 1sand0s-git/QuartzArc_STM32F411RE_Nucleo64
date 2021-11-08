@@ -1,23 +1,23 @@
-QAD_TimerMgr.hpp:111:23:static QAD_TimerMgr& QAD_TimerMgr::get()	8	static
-QAD_TimerMgr.hpp:117:25:static QAD_Timer_State QAD_TimerMgr::getState(QAD_Timer_Periph)	16	static
-QAD_TimerMgr.hpp:137:22:static TIM_TypeDef* QAD_TimerMgr::getInstance(QAD_Timer_Periph)	16	static
-QAD_TimerMgr.hpp:141:19:static IRQn_Type QAD_TimerMgr::getUpdateIRQ(QAD_Timer_Periph)	16	static
-QAD_TimerMgr.hpp:147:19:static QA_Result QAD_TimerMgr::registerTimer(QAD_Timer_Periph, QAD_Timer_State)	16	static
-QAD_TimerMgr.hpp:151:14:static void QAD_TimerMgr::deregisterTimer(QAD_Timer_Periph)	16	static
-QAD_TimerMgr.hpp:161:14:static void QAD_TimerMgr::enableClock(QAD_Timer_Periph)	16	static
-QAD_TimerMgr.hpp:165:14:static void QAD_TimerMgr::disableClock(QAD_Timer_Periph)	16	static
-QAD_Timer.cpp:29:11:QA_Result QAD_Timer::init()	24	static
-QAD_Timer.cpp:44:6:void QAD_Timer::deinit()	16	static
-QAD_Timer.cpp:58:6:void QAD_Timer::handler()	16	static
-QAD_Timer.cpp:90:6:void QAD_Timer::setHandlerFunction(QAD_IRQHandler_CallbackFunction)	16	static
-QAD_Timer.cpp:97:6:void QAD_Timer::setHandlerClass(QAD_IRQHandler_CallbackClass*)	16	static
-QAD_Timer.cpp:104:6:void QAD_Timer::setTimerMode(TimerMode)	16	static
-QAD_Timer.cpp:111:11:TimerMode QAD_Timer::getTimerMode()	16	static
-QAD_Timer.cpp:118:6:void QAD_Timer::setIRQCounterTarget(uint16_t)	16	static
-QAD_Timer.cpp:125:10:uint16_t QAD_Timer::getIRQCounterTarget()	16	static
-QAD_Timer.cpp:132:10:uint16_t QAD_Timer::getIRQCounterValue()	16	static
-QAD_Timer.cpp:139:6:void QAD_Timer::clearIRQCounterValue()	16	static
-QAD_Timer.cpp:146:6:void QAD_Timer::start()	16	static
-QAD_Timer.cpp:161:6:void QAD_Timer::stop()	16	static
-QAD_Timer.cpp:177:11:QA_Result QAD_Timer::periphInit()	16	static
-QAD_Timer.cpp:211:6:void QAD_Timer::periphDeinit(QAD_Timer::DeinitMode)	16	static
+QAD_TimerMgr.hpp:137:23:static QAD_TimerMgr& QAD_TimerMgr::get()	8	static
+QAD_TimerMgr.hpp:149:25:static QAD_Timer_State QAD_TimerMgr::getState(QAD_Timer_Periph)	16	static
+QAD_TimerMgr.hpp:191:22:static TIM_TypeDef* QAD_TimerMgr::getInstance(QAD_Timer_Periph)	16	static
+QAD_TimerMgr.hpp:198:19:static IRQn_Type QAD_TimerMgr::getUpdateIRQ(QAD_Timer_Periph)	16	static
+QAD_TimerMgr.hpp:209:19:static QA_Result QAD_TimerMgr::registerTimer(QAD_Timer_Periph, QAD_Timer_State)	16	static
+QAD_TimerMgr.hpp:215:14:static void QAD_TimerMgr::deregisterTimer(QAD_Timer_Periph)	16	static
+QAD_TimerMgr.hpp:245:14:static void QAD_TimerMgr::enableClock(QAD_Timer_Periph)	16	static
+QAD_TimerMgr.hpp:251:14:static void QAD_TimerMgr::disableClock(QAD_Timer_Periph)	16	static
+QAD_Timer.cpp:36:11:QA_Result QAD_Timer::init()	24	static
+QAD_Timer.cpp:61:6:void QAD_Timer::deinit()	16	static
+QAD_Timer.cpp:83:6:void QAD_Timer::handler()	16	static
+QAD_Timer.cpp:126:6:void QAD_Timer::setHandlerFunction(QAD_IRQHandler_CallbackFunction)	16	static
+QAD_Timer.cpp:136:6:void QAD_Timer::setHandlerClass(QAD_IRQHandler_CallbackClass*)	16	static
+QAD_Timer.cpp:146:6:void QAD_Timer::setTimerMode(QAD_TimerMode)	16	static
+QAD_Timer.cpp:155:15:QAD_TimerMode QAD_Timer::getTimerMode()	16	static
+QAD_Timer.cpp:165:6:void QAD_Timer::setIRQCounterTarget(uint16_t)	16	static
+QAD_Timer.cpp:174:10:uint16_t QAD_Timer::getIRQCounterTarget()	16	static
+QAD_Timer.cpp:183:10:uint16_t QAD_Timer::getIRQCounterValue()	16	static
+QAD_Timer.cpp:192:6:void QAD_Timer::clearIRQCounterValue()	16	static
+QAD_Timer.cpp:201:6:void QAD_Timer::start()	16	static
+QAD_Timer.cpp:225:6:void QAD_Timer::stop()	16	static
+QAD_Timer.cpp:253:11:QA_Result QAD_Timer::periphInit()	16	static
+QAD_Timer.cpp:294:6:void QAD_Timer::periphDeinit(QAD_Timer::DeinitMode)	16	static

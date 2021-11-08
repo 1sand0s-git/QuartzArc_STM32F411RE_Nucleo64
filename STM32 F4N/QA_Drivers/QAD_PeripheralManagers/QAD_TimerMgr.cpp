@@ -21,15 +21,20 @@
 
 
   //-------------------------
+  //-------------------------
 	//QAD_TimerMgr Constructors
 
 //QAD_TimerMgr::QAD_TimerMgr
 //QAD_TimerMgr Constructor
+//
+//Fills out details for the system's Tiemr peripherals
+//As this is a private method in a singleton class, this method will be called the first time the class's get() method is called
 QAD_TimerMgr::QAD_TimerMgr() {
 
   for (uint8_t i=0; i < QAD_Timer_PeriphCount; i++) {
   	m_sTimers[i].eState   = QAD_Timer_Unused;
   	m_sTimers[i].bEncoder = (i < QAD_Timer9);
+  	m_sTimers[i].bADC     = ((i == QAD_Timer2) || (i == QAD_Timer3));
   }
 
   //Set Timer Periph ID
@@ -96,13 +101,29 @@ QAD_TimerMgr::QAD_TimerMgr() {
 
 
   //-------------------------------
+  //-------------------------------
   //QAD_TimerMgr Management Methods
 
 //QAD_TimerMgr::imp_registerTimer
 //QAD_TimerMgr Management Method
+//
+//To be called from static method registerTimer()
+//Used to register a Timer peripheral as being used by a driver
+//eTimer - The timer peripheral to be registered. A member of QAD_Timer_Periph
+//eState - The purpose the timer is to be used for. A member of QAD_Timer_State
+//         QAD_Timer_InUse_IRQ     - Specifies timer as being used to trigger regular update IRQ
+//         QAD_Timer_InUse_Encoder - Specifies timer as being used in rotary encoder mode
+//         QAD_Timer_InUse_PWM     - Specifies timer as being used to generate PWM signals
+//         QAD_Timer_InUse_ADC     - Specifies timer as being used to trigger ADC conversions
+//Returns QA_OK if registration is successful.
+//        QA_Fail if eState is set to QAD_Timer_Unused.
+//        QA_Error_PeriphBusy if selected Timer is already in use
 QA_Result QAD_TimerMgr::imp_registerTimer(QAD_Timer_Periph eTimer, QAD_Timer_State eState) {
   if (m_sTimers[eTimer].eState)
   	return QA_Error_PeriphBusy;
+
+  if (!eState)
+  	return QA_Fail;
 
   m_sTimers[eTimer].eState = eState;
   return QA_OK;
@@ -111,6 +132,10 @@ QA_Result QAD_TimerMgr::imp_registerTimer(QAD_Timer_Periph eTimer, QAD_Timer_Sta
 
 //QAD_TimerMgr::imp_deregisterTimer
 //QAD_TimerMgr Management Method
+//
+//To be called from static method registerTimer()
+//Used to deregister a Timer peripheral to mark it as no longer being used by a driver
+//eTimer - The Timer peripheral to be deregistered. A member of QAD_Timer_Periph
 void QAD_TimerMgr::imp_deregisterTimer(QAD_Timer_Periph eTimer) {
   m_sTimers[eTimer].eState = QAD_Timer_Unused;
 }
@@ -118,27 +143,65 @@ void QAD_TimerMgr::imp_deregisterTimer(QAD_Timer_Periph eTimer) {
 
 //QAD_TimerMgr::imp_findTimer
 //QAD_TimerMgr Management Method
-QAD_Timer_Periph QAD_TimerMgr::imp_findTimer(QAD_Timer_Type eType, bool bEncoder) {
+//
+//To be called from static method findTimer()
+//Used to find an available timer with the selected counter type (16bit or 32bit)
+//If a 16bit counter type is selected, a 32bit timer can be returned due to 32bit timers having 16bit support
+//eType - A member of QAD_Timer_Type to select if a 16bit or 32bit counter is required
+//Returns QAD_TimerNone if no available timer is found, or another member of QAD_Timer_Periph for the available timer that has been found
+QAD_Timer_Periph QAD_TimerMgr::imp_findTimer(QAD_Timer_Type eType) {
 
 	for (uint8_t i=0; i<QAD_Timer_PeriphCount; i++) {
-
-		if (eType <= m_sTimers[i].eType) {
-			if ((bEncoder && m_sTimers[i].bEncoder) || (!bEncoder)) {
-				return m_sTimers[i].eTimer;
-			}
-		}
+		if ((eType <= m_sTimers[i].eType) && (!m_sTimers[i].eState))
+			return m_sTimers[i].eTimer;
 	}
-
 	return QAD_TimerNone;
 }
 
 
+//QAD_TimerMgr::imp_findTimerEncoder
+//QAD_TimerMgr Management Method
+//
+//To be called from static method findTimerEncoder()
+//Used to find an available timer with rotary encoder support
+//Returns QAD_TimerNone if no available timer is found, or another member of QAD_Timer_Periph for the available timer that has been found
+QAD_Timer_Periph QAD_TimerMgr::imp_findTimerEncoder(void) {
+
+	for (uint8_t i=0; i<QAD_Timer_PeriphCount; i++) {
+		if ((!m_sTimers[i].eState) && (m_sTimers[i].bEncoder))
+			return m_sTimers[i].eTimer;
+	}
+	return QAD_TimerNone;
+}
+
+
+//QAD_TimerMgr::imp_findTimerADC
+//QAD_TimerMgr Management Method
+//
+//To be called from static method findTimerADC()
+//Used to find an available timer with ADC conversion triggering support
+//Returns QAD_TimerNone if no available timer is found, or another member of QAD_Timer_Periph for the available timer that has been found
+QAD_Timer_Periph QAD_TimerMgr::imp_findTimerADC(void) {
+
+	for (uint8_t i=0; i<QAD_Timer_PeriphCount; i++) {
+		if ((!m_sTimers[i].eState) && (m_sTimers[i].bADC))
+			return m_sTimers[i].eTimer;
+	}
+	return QAD_TimerNone;
+}
+
+
+  //--------------------------
   //--------------------------
   //QAD_TimerMgr Clock Methods
 
 
 //QAD_TimerMgr::imp_enableClock
 //QAD_TimerMgr Clock Method
+//
+//To be called by enableClock()
+//Used to enable the clock for a specific Timer peripheral
+//eTimer - the Timer peripheral to enable the clock for
 void QAD_TimerMgr::imp_enableClock(QAD_Timer_Periph eTimer) {
   switch (eTimer) {
     case (QAD_Timer1):
@@ -189,6 +252,10 @@ void QAD_TimerMgr::imp_enableClock(QAD_Timer_Periph eTimer) {
 
 //QAD_TimerMgr::imp_disableClock
 //QAD_TimerMgr Clock Method
+//
+//To be called by disableClock()
+//Used to disable the clock for a specific Timer peripheral
+//eTimer - The timer peripheral to disable the clock for
 void QAD_TimerMgr::imp_disableClock(QAD_Timer_Periph eTimer) {
   switch (eTimer) {
     case (QAD_Timer1):
@@ -222,11 +289,15 @@ void QAD_TimerMgr::imp_disableClock(QAD_Timer_Periph eTimer) {
 
 
   //---------------------------
+  //---------------------------
   //QAD_TimerMgr Status Methods
 
 
 //QAD_TimerMgr::imp_getTimersActive
 //QAD_TimerMgr Status Method
+//
+//To be called by getTimersActive()
+//Returns the number of Timer peripherals that are currently in-use (registered/active)
 uint8_t QAD_TimerMgr::imp_getTimersActive(void) {
   uint8_t uCount = 0;
   for (uint8_t i=0; i<QAD_Timer_PeriphCount; i++) {
@@ -239,6 +310,9 @@ uint8_t QAD_TimerMgr::imp_getTimersActive(void) {
 
 //QAD_TimerMgr::getTimersInactive
 //QAD_TimerMgr Status Method
+//
+//To be called by getTimersInactive()
+//Returns the number of Timer peripherals that are currently not being used (deregistered/inactive)
 uint8_t QAD_TimerMgr::imp_getTimersInactive(void) {
   uint8_t uCount = 0;
   for (uint8_t i=0; i<QAD_Timer_PeriphCount; i++) {

@@ -32,7 +32,7 @@
 //-----------------
 //QAD_EXTI_EdgeType
 //
-//Ised with the QAD_EXTI driver class to deternmine if interrupt is to be triggered on rising edge, falling edge, or both edges.
+//Used with the QAD_EXTI driver class to determine if interrupt is to be triggered on rising edge, falling edge, or both edges.
 enum QAD_EXTI_EdgeType : uint8_t {
 	QAD_EXTI_EdgeType_Rising = 0,     //Interrupt to trigger on rising edge
 	QAD_EXTI_EdgeType_Falling,        //Interrupt to trigger on falling edge
@@ -52,7 +52,7 @@ private:
 	QA_ActiveState    m_eEXTIState;  //Stores whether the GPIO pin is in standard input mode (QA_Inactive),
 	                                 //or as an external interrupt (QA_Active). Uses QA_ActiveState enum defined in setup.hpp
 
-	QAD_EXTI_EdgeType m_eEdgeType;   //Stores whether the external interrupt triggeres on rising edge, falling edge, or both edges.
+	QAD_EXTI_EdgeType m_eEdgeType;   //Stores whether the external interrupt trigges on rising edge, falling edge, or both edges.
 	                                 //A member of the QAD_EXTI_EdgeType enum
 
 	IRQn_Type         m_eIRQ;        //Stores the IRQ handler to be triggered. A member of IRQn_Type as defined in stm32f411xe.h

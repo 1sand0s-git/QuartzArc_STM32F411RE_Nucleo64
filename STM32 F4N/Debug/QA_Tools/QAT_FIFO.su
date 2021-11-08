@@ -1,9 +1,9 @@
 gthr-default.h:229:1:int __gthread_key_delete(__gthread_key_t)	16	static
-QAT_FIFO.cpp:28:6:void QAT_FIFOBuffer::clear()	16	static
-QAT_FIFO.cpp:36:27:QAT_FIFOBuffer::FIFOState QAT_FIFOBuffer::empty()	16	static
-QAT_FIFO.cpp:43:10:uint16_t QAT_FIFOBuffer::pending()	24	static
-QAT_FIFO.cpp:54:6:void QAT_FIFOBuffer::push(uint8_t)	16	static
-QAT_FIFO.cpp:64:9:uint8_t QAT_FIFOBuffer::pop()	24	static
+QAT_FIFO.cpp:31:6:void QAT_FIFOBuffer::clear()	16	static
+QAT_FIFO.cpp:39:27:QAT_FIFOBuffer::FIFOState QAT_FIFOBuffer::empty()	16	static
+QAT_FIFO.cpp:46:10:uint16_t QAT_FIFOBuffer::pending()	24	static
+QAT_FIFO.cpp:57:6:void QAT_FIFOBuffer::push(uint8_t)	16	static
+QAT_FIFO.cpp:67:9:uint8_t QAT_FIFOBuffer::pop()	24	static
 unique_ptr.h:611:7:typename std::add_lvalue_reference<_Tp>::type std::unique_ptr<_Tp [], _Dp>::operator[](std::size_t) const [with _Tp = unsigned char; _Dp = std::default_delete<unsigned char []>]	16	static
 unique_ptr.h:619:7:std::unique_ptr<_Tp [], _Dp>::pointer std::unique_ptr<_Tp [], _Dp>::get() const [with _Tp = unsigned char; _Dp = std::default_delete<unsigned char []>]	16	static
 unique_ptr.h:154:18:std::__uniq_ptr_impl<_Tp, _Dp>::pointer std::__uniq_ptr_impl<_Tp, _Dp>::_M_ptr() const [with _Tp = unsigned char; _Dp = std::default_delete<unsigned char []>]	16	static

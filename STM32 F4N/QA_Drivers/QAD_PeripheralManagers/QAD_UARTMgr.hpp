@@ -39,6 +39,10 @@ enum QAD_UART_Periph : uint8_t {
 	QAD_UARTNone
 };
 
+
+//--------------------
+//QAD_UART_PeriphCount
+//
 //UART Peripheral Count
 const uint8_t QAD_UART_PeriphCount = QAD_UARTNone;
 
@@ -61,9 +65,11 @@ enum QAD_UART_State : uint8_t {
 
 //-------------
 //QAD_UART_Data
+//
+//Structure used in array within QAD_UARTMgr class to hold information for UART peripherals
 typedef struct {
 
-	QAD_UART_Periph   eUART;      //Used to store which UART peripheral is represented by the structure, used for manager methods that find usused UARTs
+	QAD_UART_Periph   eUART;      //Used to store which UART peripheral is represented by the structure, used for manager methods that find unused UARTs
 
 	QAD_UART_State    eState;     //Stores whether the UART peripheral is currently being used or not
 
@@ -83,8 +89,8 @@ typedef struct {
 //QAD_UARTMgr
 //
 //Singleton class
-//Used to allow management of UART peripherals in order to make sure that a driver is prevented from accessing any UART devices
-//that are already being used by another driver
+//Used to allow management of UART peripherals in order to make sure that a driver is prevented from accessing any
+//UART peripherals that are already being used by another driver
 class QAD_UARTMgr {
 private:
 
