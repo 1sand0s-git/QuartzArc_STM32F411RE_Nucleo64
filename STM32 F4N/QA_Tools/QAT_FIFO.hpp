@@ -29,36 +29,54 @@
 	//------------------------------------------
 	//------------------------------------------
 
+//-------------
+//QAT_FIFOState
+//
+//Used to indicate if FIFO is empty or not
+enum QAT_FIFOState : uint8_t {
+	QAT_FIFOState_NotEmpty = 0, //FIFO is not empty and currently has data pending
+	QAT_FIFOState_Empty         //FIFO is empty and no data is pending
+};
+
+	//------------------------------------------
+	//------------------------------------------
+	//------------------------------------------
+
 //--------------
 //QAT_FIFOBuffer
+//
+//Circular FIFO Buffer class used for temporary data storage for streaming data, such as
+//within QAS_Serial_Dev_Base system class.
 class QAT_FIFOBuffer {
-public:
-	enum FIFOState : uint8_t {FS_NotEmpty = 0, FS_Empty};
-
 private:
 
-  std::unique_ptr<uint8_t[]> m_pBuffer;
-	uint16_t                   m_uSize;
+  std::unique_ptr<uint8_t[]> m_pBuffer;    //Pointer to dynamically allocated buffer. Buffer is allocated upon class creation
+	uint16_t                   m_uSize;      //Size in bytes of the buffer
 
-	uint16_t                   m_uReadIdx;
-	uint16_t                   m_uWriteIdx;
+	uint16_t                   m_uReadIdx;   //Data read index
+	uint16_t                   m_uWriteIdx;  //Data write index
 
 public:
 
-	  //Constructors / Destructors
+	//--------------------------
+  //Constructors / Destructors
 
-	QAT_FIFOBuffer() = delete;
-	QAT_FIFOBuffer(uint16_t uSize) :
+	QAT_FIFOBuffer() = delete;         //Delete default class constructor, as the buffer size needs to be supplied upon class creation
+
+	QAT_FIFOBuffer(uint16_t uSize) :   //Constructor to be used, which has the buffer size (in bytes) passed to it
 		m_pBuffer(std::make_unique<uint8_t[]>(uSize)),
 		m_uSize(uSize),
 		m_uReadIdx(0),
 		m_uWriteIdx(0) {}
 
 
-	  //Data Methods
+	//NOTE: See QAT_FIFO.cpp for details of the following methods
+
+	//------------
+	//Data Methods
 
 	void clear(void);
-	FIFOState empty(void);
+	QAT_FIFOState empty(void);
   uint16_t pending(void);
 
   void push(uint8_t uData);

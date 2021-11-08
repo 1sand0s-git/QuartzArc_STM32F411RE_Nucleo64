@@ -27,23 +27,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  00020074  2**0
                   CONTENTS, READONLY
- 12 .debug_line   00017dc4  00000000  00000000  000200a4  2**0
+ 12 .debug_line   00017dc6  00000000  00000000  000200a4  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_info   0002eec9  00000000  00000000  00037e68  2**0
+ 13 .debug_info   0002eec3  00000000  00000000  00037e6a  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_abbrev 00006166  00000000  00000000  00066d31  2**0
+ 14 .debug_abbrev 00006167  00000000  00000000  00066d2d  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  15 .debug_aranges 00001308  00000000  00000000  0006ce98  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_str    000a9fac  00000000  00000000  0006e1a0  2**0
+ 16 .debug_str    000a9fc6  00000000  00000000  0006e1a0  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_ranges 000011c0  00000000  00000000  00118150  2**3
+ 17 .debug_ranges 000011c0  00000000  00000000  00118168  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_macro  0001eda2  00000000  00000000  00119310  2**0
+ 18 .debug_macro  0001eda2  00000000  00000000  00119328  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000053  00000000  00000000  001380b2  2**0
+ 19 .comment      00000053  00000000  00000000  001380ca  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  0000542c  00000000  00000000  00138108  2**2
+ 20 .debug_frame  0000542c  00000000  00000000  00138120  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -1252,12 +1252,12 @@ void TIM2_IRQHandler(void) {
  8000992:	bd80      	pop	{r7, pc}
 
 08000994 <_ZN14QAT_FIFOBufferC1Et>:
-public:
+	//--------------------------
+  //Constructors / Destructors
 
-	  //Constructors / Destructors
+	QAT_FIFOBuffer() = delete;         //Delete default class constructor, as the buffer size needs to be supplied upon class creation
 
-	QAT_FIFOBuffer() = delete;
-	QAT_FIFOBuffer(uint16_t uSize) :
+	QAT_FIFOBuffer(uint16_t uSize) :   //Constructor to be used, which has the buffer size (in bytes) passed to it
  8000994:	b580      	push	{r7, lr}
  8000996:	b082      	sub	sp, #8
  8000998:	af00      	add	r7, sp, #0
@@ -14515,17 +14515,17 @@ void QAS_Serial_Dev_UART::imp_rxStop(void) {
  800590a:	4770      	bx	lr
 
 0800590c <_ZN14QAT_FIFOBuffer5emptyEv>:
-}
-
-
 //QAT_FIFOBuffer::empty
 //QAT_FIFOBuffer Data Method
-QAT_FIFOBuffer::FIFOState QAT_FIFOBuffer::empty(void) {
+//
+//Used to check if FIFO buffer is empty, or if it has data pending
+//Returns a member of QAT_FIFOState enum as defined in QAT_FIFO.hpp
+QAT_FIFOState QAT_FIFOBuffer::empty(void) {
  800590c:	b480      	push	{r7}
  800590e:	b083      	sub	sp, #12
  8005910:	af00      	add	r7, sp, #0
  8005912:	6078      	str	r0, [r7, #4]
-	return (m_uReadIdx == m_uWriteIdx) ? FS_Empty : FS_NotEmpty;
+	return (m_uReadIdx == m_uWriteIdx) ? QAT_FIFOState_Empty : QAT_FIFOState_NotEmpty;
  8005914:	687b      	ldr	r3, [r7, #4]
  8005916:	88da      	ldrh	r2, [r3, #6]
  8005918:	687b      	ldr	r3, [r7, #4]
@@ -14543,11 +14543,11 @@ QAT_FIFOBuffer::FIFOState QAT_FIFOBuffer::empty(void) {
  8005930:	4770      	bx	lr
 
 08005932 <_ZN14QAT_FIFOBuffer4pushEh>:
-}
-
-
 //QAT_FIFOBuffer::push
 //QAT_FIFOBuffer Data Method
+//
+//Used to push a byte of data into the FIFO buffer
+//uData - The byte to be pushed into the buffer
 void QAT_FIFOBuffer::push(uint8_t uData) {
  8005932:	b580      	push	{r7, lr}
  8005934:	b082      	sub	sp, #8
@@ -14593,10 +14593,11 @@ void QAT_FIFOBuffer::push(uint8_t uData) {
  8005978:	bd80      	pop	{r7, pc}
 
 0800597a <_ZN14QAT_FIFOBuffer3popEv>:
-
-
 //QAT_FIFOBuffer::pop
 //QAT_FIFOBuffer Data Method
+//
+//Used to pull a byte of data from the FIFO buffer
+//Returns the byte of data pulled from the buffer
 uint8_t QAT_FIFOBuffer::pop(void) {
  800597a:	b580      	push	{r7, lr}
  800597c:	b084      	sub	sp, #16

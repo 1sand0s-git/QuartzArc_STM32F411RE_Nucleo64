@@ -39,8 +39,19 @@
 //or serial protocols, such as the QAS_Serial_Dev_UART class, or serial streaming to/from files and is not intended to be used standalone.
 class QAS_Serial_Dev_Base {
 public:
-	enum DataState : uint8_t {NoData = 0, HasData};
-	enum DeviceType : uint8_t {DT_UART = 0, DT_File = 1, DT_Unknown};
+
+	//DataState enum, used to indicate if data is pending or not
+	enum DataState : uint8_t {
+		NoData = 0,  //No data is pending
+		HasData      //Data is currently pending
+	};
+
+	//DeviceType enum, used to indicate the type of serial device of the inheriting serial system class
+	enum DeviceType : uint8_t {
+		DT_UART = 0,  //Inheriting serial system class is using a UART hardware peripheral
+		DT_File = 1,  //Inheriting serial system class is using file I/O
+		DT_Unknown    //Inheriting serial system class is unknown
+	};
 
 public:
 

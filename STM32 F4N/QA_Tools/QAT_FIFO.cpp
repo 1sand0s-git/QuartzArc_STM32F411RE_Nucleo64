@@ -24,10 +24,14 @@
 	//------------------------------------------
 
   //---------------------------
+  //---------------------------
   //QAT_FIFOBuffer Data Methods
 
 //QAT_FIFOBuffer::clear
 //QAT_FIFOBuffer Data Method
+//
+//Used to clear pending data from the FIFO buffer
+//This is done by setting both read and write indexes to zero
 void QAT_FIFOBuffer::clear(void) {
 	m_uReadIdx = 0;
 	m_uWriteIdx = 0;
@@ -36,13 +40,19 @@ void QAT_FIFOBuffer::clear(void) {
 
 //QAT_FIFOBuffer::empty
 //QAT_FIFOBuffer Data Method
-QAT_FIFOBuffer::FIFOState QAT_FIFOBuffer::empty(void) {
-	return (m_uReadIdx == m_uWriteIdx) ? FS_Empty : FS_NotEmpty;
+//
+//Used to check if FIFO buffer is empty, or if it has data pending
+//Returns a member of QAT_FIFOState enum as defined in QAT_FIFO.hpp
+QAT_FIFOState QAT_FIFOBuffer::empty(void) {
+	return (m_uReadIdx == m_uWriteIdx) ? QAT_FIFOState_Empty : QAT_FIFOState_NotEmpty;
 }
 
 
 //QAT_FIFOBuffer::pending
 //QAT_FIFOBuffer Data Method
+//
+//Used to return how many bytes of data are currently pending in the FIFO buffer
+//Returns size in bytes of pending data
 uint16_t QAT_FIFOBuffer::pending(void) {
 	uint16_t uWriteIdx = m_uWriteIdx;
 	if (uWriteIdx > m_uReadIdx) {
@@ -54,6 +64,9 @@ uint16_t QAT_FIFOBuffer::pending(void) {
 
 //QAT_FIFOBuffer::push
 //QAT_FIFOBuffer Data Method
+//
+//Used to push a byte of data into the FIFO buffer
+//uData - The byte to be pushed into the buffer
 void QAT_FIFOBuffer::push(uint8_t uData) {
 	m_pBuffer[m_uWriteIdx] = uData;
 	if (m_uWriteIdx <= (m_uSize-1))
@@ -64,6 +77,9 @@ void QAT_FIFOBuffer::push(uint8_t uData) {
 
 //QAT_FIFOBuffer::pop
 //QAT_FIFOBuffer Data Method
+//
+//Used to pull a byte of data from the FIFO buffer
+//Returns the byte of data pulled from the buffer
 uint8_t QAT_FIFOBuffer::pop(void) {
 	if (!empty()) {
 		uint8_t uData = m_pBuffer[m_uReadIdx];

@@ -103,8 +103,8 @@ private:
 
 public:
 
-	//-----------------------------------------------
-	//Delete copy constructor and assignment operator
+	//------------------------------------------------------------------------------
+	//Delete copy constructor and assignment operator due to being a singleton class
 	QAD_UARTMgr(const QAD_UARTMgr& other) = delete;
 	QAD_UARTMgr& operator=(const QAD_UARTMgr& other) = delete;
 

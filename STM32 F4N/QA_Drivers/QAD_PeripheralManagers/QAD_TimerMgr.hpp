@@ -124,8 +124,8 @@ private:
 
 public:
 
-	//-----------------------------------------------
-	//Delete copy constructor and assignment operator
+	//------------------------------------------------------------------------------
+	//Delete copy constructor and assignment operator due to being a singleton class
 	QAD_TimerMgr(const QAD_TimerMgr& other) = delete;
 	QAD_TimerMgr& operator=(const QAD_TimerMgr& other) = delete;
 
