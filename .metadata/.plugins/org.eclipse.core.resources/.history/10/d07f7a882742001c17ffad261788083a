@@ -111,12 +111,12 @@ void  SysTick_Handler(void) {
 	//------------------------------------------
 	//------------------------------------------
 
-  //---------------------------
-	//---------------------------
-	//Interrupt Handler Functions
+  //-------------------------
+	//-------------------------
+	//Interrupt Handler Methods
 
 //USART2_IRQHandler
-//Interrupt Handler Function
+//Interrupt Handler Method
 //
 //This is used for TX and RX interrupts for serial over ST-Link
 void USART2_IRQHandler(void) {
@@ -125,7 +125,7 @@ void USART2_IRQHandler(void) {
 
 
 //EXTI15_10_IRQHandler
-//Interrupt Handler Function
+//Interrupt Handler Method
 //
 //This is currently used for testing of the QAD_EXTI driver class
 void EXTI15_10_IRQHandler(void) {
@@ -134,7 +134,7 @@ void EXTI15_10_IRQHandler(void) {
 
 
 //TIM2_IRQHandler
-//Interrupt Handler Function
+//Interrupt Handler Method
 //
 //This is currently used for testing of the QAD_Timer driver class
 void TIM2_IRQHandler(void) {

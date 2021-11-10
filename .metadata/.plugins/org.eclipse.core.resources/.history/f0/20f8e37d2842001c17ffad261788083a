@@ -63,7 +63,7 @@ QA_Result SystemInitialize(void) {
   //---------------------
   //Configure Oscillators
   //
-  //Configure High Speed External (HSE) oscillator to be used, and setup primary PLL to provide a 100MHz clock
+  //Configure High Speed External oscillator to be used, and setup primary PLL to provide a 100MHz clock
   RCC_OscInitTypeDef RCC_OscInit = {0};
   RCC_OscInit.OscillatorType = RCC_OSCILLATORTYPE_HSE; //Define which oscillator is to be configured
   RCC_OscInit.HSEState       = RCC_HSE_BYPASS;         //Set High Speed External oscillator as system clock
