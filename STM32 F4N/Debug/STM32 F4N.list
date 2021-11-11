@@ -547,11 +547,11 @@ QA_Result SystemInitialize(void) {
  80005ae:	f403 4340 	and.w	r3, r3, #49152	; 0xc000
  80005b2:	617b      	str	r3, [r7, #20]
  80005b4:	697b      	ldr	r3, [r7, #20]
-
   //---------------------
   //Configure Oscillators
   //
-  //Configure High Speed External oscillator to be used, and setup primary PLL to provide a 100MHz clock
+  //Configure High Speed External (HSE) oscillator to be used, and setup primary PLL to provide a 100MHz clock
+  //NOTE: HSE Oscillator provided on STM32F411RE Nucleo 64 board is an 8MHz clock signal provided by the ST-Link MCU's Master Clock Output
   RCC_OscInitTypeDef RCC_OscInit = {0};
  80005b6:	f107 0330 	add.w	r3, r7, #48	; 0x30
  80005ba:	2230      	movs	r2, #48	; 0x30
@@ -636,15 +636,20 @@ QA_Result SystemInitialize(void) {
   		                         RCC_CLOCKTYPE_SYSCLK |
 															 RCC_CLOCKTYPE_PCLK1 |
 															 RCC_CLOCKTYPE_PCLK2;
+
   RCC_ClkInit.SYSCLKSource   = RCC_SYSCLKSOURCE_PLLCLK;   //Set primary PLL as system clock source
  8000636:	2302      	movs	r3, #2
  8000638:	623b      	str	r3, [r7, #32]
+
   RCC_ClkInit.AHBCLKDivider  = RCC_SYSCLK_DIV1;           //Set clock divider for host bus (AHB), DIV1 provides an AHB frequency of 100MHz
  800063a:	2300      	movs	r3, #0
  800063c:	627b      	str	r3, [r7, #36]	; 0x24
+
   RCC_ClkInit.APB1CLKDivider = RCC_HCLK_DIV2;             //Set clock divider for peripheral bus 1 (APB1), DIV2 provides an APB1 frequency of 50MHz
  800063e:	f44f 5380 	mov.w	r3, #4096	; 0x1000
  8000642:	62bb      	str	r3, [r7, #40]	; 0x28
+                                                          //NOTE: APB1 timer clocks are clock doubled, providing APB1 timers with 100MHz clocks
+
   RCC_ClkInit.APB2CLKDivider = RCC_HCLK_DIV1;             //Set clock divider for peripheral bus 2 (APB2), DIV1 provides an APB2 frequency of 100MHz
  8000644:	2300      	movs	r3, #0
  8000646:	62fb      	str	r3, [r7, #44]	; 0x2c
@@ -865,7 +870,7 @@ void  SysTick_Handler(void) {
 08000750 <USART2_IRQHandler>:
 
 //USART2_IRQHandler
-//Interrupt Handler Method
+//Interrupt Handler Function
 //
 //This is used for TX and RX interrupts for serial over ST-Link
 void USART2_IRQHandler(void) {
@@ -885,7 +890,7 @@ void USART2_IRQHandler(void) {
 08000768 <EXTI15_10_IRQHandler>:
 
 //EXTI15_10_IRQHandler
-//Interrupt Handler Method
+//Interrupt Handler Function
 //
 //This is currently used for testing of the QAD_EXTI driver class
 void EXTI15_10_IRQHandler(void) {
@@ -905,7 +910,7 @@ void EXTI15_10_IRQHandler(void) {
 08000780 <TIM2_IRQHandler>:
 
 //TIM2_IRQHandler
-//Interrupt Handler Method
+//Interrupt Handler Function
 //
 //This is currently used for testing of the QAD_Timer driver class
 void TIM2_IRQHandler(void) {
