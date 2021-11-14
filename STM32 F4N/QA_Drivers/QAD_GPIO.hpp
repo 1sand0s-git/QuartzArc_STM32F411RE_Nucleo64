@@ -53,9 +53,9 @@ enum QAD_GPIO_OutputMode : uint8_t {
 //
 //Used with both QAD_GPIO_Output and QAD_GPIO_Input driver classes to select if a pin is to use the inbuilt Pull Up, Pull Down resistors.
 enum QAD_GPIO_PullMode : uint32_t {
-	QAD_GPIO_PullMode_NoPull = 0,   //Neither pull-up or pull-down resistor to be used
-	QAD_GPIO_PullMode_Up,           //Pull-up resistor to be used
-	QAD_GPIO_PullMode_Down          //Pull-down resistor to be used
+	QAD_GPIO_PullMode_NoPull = GPIO_NOPULL,  //Neither pull-up or pull-down resistor to be used
+	QAD_GPIO_PullMode_Up     = GPIO_PULLUP,  //Pull-up resistor to be used
+	QAD_GPIO_PullMode_Down   = GPIO_PULLDOWN //Pull-down resistor to be used
 };
 
 
@@ -63,10 +63,10 @@ enum QAD_GPIO_PullMode : uint32_t {
 //
 //Used with both QAD_GPIO_Output and QAD_GPIO_Input driver classes to select the speed/frequency of the GPIO pin
 enum QAD_GPIO_Speed : uint32_t {
-	QAD_GPIO_Speed_Low = 0,         //GPIO pin to be used in low speed mode       (2MHz)
-	QAD_GPIO_Speed_Medium,          //GPIO pin to be used in medium speed mode    (12.5MHz to 50MHz)
-	QAD_GPIO_Speed_High,            //GPIO pin to be used in high speed mode      (25MHz to 100MHz)
-	QAD_GPIO_Speed_VeryHigh         //GPIO pin to be used in very high speed mode (50MHz to 200MHz)
+	QAD_GPIO_Speed_Low      = GPIO_SPEED_FREQ_LOW,       //GPIO pin to be used in low speed mode       (2MHz)
+	QAD_GPIO_Speed_Medium   = GPIO_SPEED_FREQ_MEDIUM,    //GPIO pin to be used in medium speed mode    (12.5MHz to 50MHz)
+	QAD_GPIO_Speed_High     = GPIO_SPEED_FREQ_HIGH,      //GPIO pin to be used in high speed mode      (25MHz to 100MHz)
+	QAD_GPIO_Speed_VeryHigh = GPIO_SPEED_FREQ_VERY_HIGH  //GPIO pin to be used in very high speed mode (50MHz to 200MHz)
 };
 
 
