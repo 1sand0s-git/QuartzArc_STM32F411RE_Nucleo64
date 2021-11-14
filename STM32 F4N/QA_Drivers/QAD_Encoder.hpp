@@ -185,6 +185,7 @@ private:
 
 };
 
+
 //Prevent Recursive Inclusion
 #endif /* __QAD_ENCODER_HPP_ */
 
