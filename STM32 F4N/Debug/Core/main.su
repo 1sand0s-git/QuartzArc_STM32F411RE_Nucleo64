@@ -1,15 +1,16 @@
-QAD_Timer.hpp:115:2:QAD_Timer::QAD_Timer(QAD_Timer_InitStruct&)	16	static
-QAD_Encoder.hpp:119:3:QAD_Encoder::QAD_Encoder(QAD_Encoder_InitStruct&)	16	static
-QAD_PWM.hpp:73:30:QAD_PWM_Channel_InitStruct& QAD_PWM_Channel_InitStruct::operator=(const QAD_PWM_Channel_InitStruct&)	16	static
-QAD_PWM.hpp:143:3:QAD_PWM::QAD_PWM(QAD_PWM_InitStruct&)	24	static
+QAD_ADC.hpp:178:2:QAD_ADC::QAD_ADC()	16	static
+QAD_ADC.hpp:196:18:static QAD_ADC& QAD_ADC::get()	8	static
+QAD_ADC.hpp:205:19:static QA_Result QAD_ADC::init(QAD_ADC_InitStruct&)	16	static
+QAD_ADC.hpp:225:20:static QA_Result QAD_ADC::start()	8	static
+QAD_ADC.hpp:233:15:static void QAD_ADC::addChannel(QAD_ADC_ChannelData&)	16	static
+QAD_ADC.hpp:245:18:static uint8_t QAD_ADC::getChannelCount()	8	static
+QAD_ADC.hpp:260:18:static uint16_t QAD_ADC::getData(uint8_t)	16	static
 gthr-default.h:229:1:int __gthread_key_delete(__gthread_key_t)	16	static
 QAT_FIFO.hpp:66:2:QAT_FIFOBuffer::QAT_FIFOBuffer(uint16_t)	16	static
 QAS_Serial_Dev_Base.hpp:80:2:QAS_Serial_Dev_Base::QAS_Serial_Dev_Base(uint16_t, uint16_t, QAS_Serial_Dev_Base::DeviceType)	24	static
 QAD_UART.hpp:107:2:QAD_UART::QAD_UART(QAD_UART_InitStruct&)	16	static
 QAS_Serial_Dev_UART.hpp:76:3:QAS_Serial_Dev_UART::QAS_Serial_Dev_UART(QAS_Serial_Dev_UART_InitStruct&)	16	static
-main.cpp:51:6:void EXTI_Test_Handler(void*)	16	static
-main.cpp:61:6:void Timer_Test_Handler(void*)	16	static
-main.cpp:96:5:int main()	176	static
+main.cpp:75:5:int main()	360	static
 unique_ptr.h:862:5:typename std::_MakeUniq<_Tp>::__array std::make_unique(std::size_t) [with _Tp = unsigned char []]	24	static
 unique_ptr.h:856:5:) [with _Tp = QAT_FIFOBuffer; _Args = {short unsigned int&}]	24	static
 unique_ptr.h:856:5:) [with _Tp = QAD_UART; _Args = {QAD_UART_InitStruct&}]	24	static

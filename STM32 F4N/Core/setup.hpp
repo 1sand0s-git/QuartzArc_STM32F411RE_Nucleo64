@@ -113,6 +113,8 @@ public:
 
 #define QAD_IRQPRIORITY_EXTI     ((uint8_t) 0x0A) //Priority to be used by external interrupt handlers. Shared by all external interrupts
 
+#define QAD_IRQPRIORITY_ADC      ((uint8_t) 0x0A)
+
 
 //Prevent Recursive Inclusion
 #endif /* __SETUP_HPP */

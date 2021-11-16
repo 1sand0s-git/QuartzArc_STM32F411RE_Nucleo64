@@ -96,6 +96,7 @@
 "./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usart.o"
 "./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.o"
 "./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_utils.o"
+"./QA_Drivers/QAD_ADC.o"
 "./QA_Drivers/QAD_EXTI.o"
 "./QA_Drivers/QAD_Encoder.o"
 "./QA_Drivers/QAD_GPIO.o"

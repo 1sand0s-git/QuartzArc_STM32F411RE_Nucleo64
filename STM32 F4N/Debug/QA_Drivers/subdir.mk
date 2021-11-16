@@ -5,6 +5,7 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
+../QA_Drivers/QAD_ADC.cpp \
 ../QA_Drivers/QAD_EXTI.cpp \
 ../QA_Drivers/QAD_Encoder.cpp \
 ../QA_Drivers/QAD_GPIO.cpp \
@@ -13,6 +14,7 @@ CPP_SRCS += \
 ../QA_Drivers/QAD_UART.cpp 
 
 OBJS += \
+./QA_Drivers/QAD_ADC.o \
 ./QA_Drivers/QAD_EXTI.o \
 ./QA_Drivers/QAD_Encoder.o \
 ./QA_Drivers/QAD_GPIO.o \
@@ -21,6 +23,7 @@ OBJS += \
 ./QA_Drivers/QAD_UART.o 
 
 CPP_DEPS += \
+./QA_Drivers/QAD_ADC.d \
 ./QA_Drivers/QAD_EXTI.d \
 ./QA_Drivers/QAD_Encoder.d \
 ./QA_Drivers/QAD_GPIO.d \

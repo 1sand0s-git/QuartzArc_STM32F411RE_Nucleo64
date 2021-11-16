@@ -18,8 +18,7 @@
 //Includes
 #include "handlers.hpp"
 
-#include "QAD_EXTI.hpp"
-#include "QAD_Timer.hpp"
+#include "QAD_ADC.hpp"
 
 #include "QAS_Serial_Dev_UART.hpp"
 
@@ -30,9 +29,9 @@
 
 extern QAS_Serial_Dev_UART* UART_STLink;  //UART System for serial over ST-Link (defined in main.cpp)
 
-extern QAD_EXTI* EXTI_Test;               //EXTI test driver (defined in main.cpp)
-extern QAD_Timer* Timer_Test;             //Timer test driver (defined in main.cpp)
 
+//extern ADC_HandleTypeDef ADC_Handle;
+//extern uint16_t ADC_TempData;
 
 
 	//------------------------------------------
@@ -123,24 +122,11 @@ void USART2_IRQHandler(void) {
 }
 
 
-//EXTI15_10_IRQHandler
+//ADC_IRQHandler
 //Interrupt Handler Function
-//
-//This is currently used for testing of the QAD_EXTI driver class
-void EXTI15_10_IRQHandler(void) {
-  EXTI_Test->handler();  //Calls interrupt handler method in QAD_EXTI driver class
+void ADC_IRQHandler(void) {
+  QAD_ADC::handler();
 }
-
-
-//TIM2_IRQHandler
-//Interrupt Handler Function
-//
-//This is currently used for testing of the QAD_Timer driver class
-void TIM2_IRQHandler(void) {
-  Timer_Test->handler();  //Calls interrupt handler method in QAD_Timer driver class
-}
-
-
 
 
 

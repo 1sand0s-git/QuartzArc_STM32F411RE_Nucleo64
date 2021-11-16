@@ -1,0 +1,24 @@
+QAD_TimerMgr.hpp:137:23:static QAD_TimerMgr& QAD_TimerMgr::get()	8	static
+QAD_TimerMgr.hpp:149:25:static QAD_Timer_State QAD_TimerMgr::getState(QAD_Timer_Periph)	16	static
+QAD_TimerMgr.hpp:184:14:static bool QAD_TimerMgr::getADC(QAD_Timer_Periph)	16	static
+QAD_TimerMgr.hpp:191:22:static TIM_TypeDef* QAD_TimerMgr::getInstance(QAD_Timer_Periph)	16	static
+QAD_TimerMgr.hpp:209:19:static QA_Result QAD_TimerMgr::registerTimer(QAD_Timer_Periph, QAD_Timer_State)	16	static
+QAD_TimerMgr.hpp:215:14:static void QAD_TimerMgr::deregisterTimer(QAD_Timer_Periph)	16	static
+QAD_TimerMgr.hpp:245:14:static void QAD_TimerMgr::enableClock(QAD_Timer_Periph)	16	static
+QAD_TimerMgr.hpp:251:14:static void QAD_TimerMgr::disableClock(QAD_Timer_Periph)	16	static
+QAD_ADC.hpp:137:23:QAD_ADC_ChannelData& QAD_ADC_ChannelData::operator=(const QAD_ADC_ChannelData&)	16	static
+QAD_ADC.cpp:33:11:QA_Result QAD_ADC::imp_init(QAD_ADC_InitStruct&)	24	static
+QAD_ADC.cpp:56:6:void QAD_ADC::imp_deinit()	16	static
+QAD_ADC.cpp:71:11:QA_Result QAD_ADC::imp_periphInit(QAD_ADC_InitStruct&)	32	static
+QAD_ADC.cpp:112:6:void QAD_ADC::imp_periphDeinit(QAD_ADC::DeinitMode)	16	static
+QAD_ADC.cpp:148:6:void QAD_ADC::imp_handler()	16	static
+QAD_ADC.cpp:167:11:QA_Result QAD_ADC::imp_start()	56	static
+QAD_ADC.cpp:240:6:void QAD_ADC::imp_stop()	24	static
+QAD_ADC.cpp:261:6:void QAD_ADC::imp_addChannel(QAD_ADC_ChannelData&)	24	static
+QAD_ADC.cpp:286:6:void QAD_ADC::imp_removeChannel(QAD_ADC_Channel)	24	static
+QAD_ADC.cpp:312:6:void QAD_ADC::imp_removeChannelPeriph(QAD_ADC_PeriphChannel)	24	static
+QAD_ADC.cpp:342:10:uint16_t QAD_ADC::imp_getDataPeriph(QAD_ADC_PeriphChannel)	24	static
+QAD_ADC.cpp:353:10:uint16_t QAD_ADC::imp_getDataIdx(uint8_t)	16	static
+QAD_ADC.cpp:370:10:uint32_t QAD_ADC::imp_getTrigger()	24	static
+QAD_ADC.cpp:388:8:int8_t QAD_ADC::imp_findChannel(QAD_ADC_Channel)	16	static
+QAD_ADC.cpp:398:8:int8_t QAD_ADC::imp_findChannelPeriph(QAD_ADC_PeriphChannel)	24	static

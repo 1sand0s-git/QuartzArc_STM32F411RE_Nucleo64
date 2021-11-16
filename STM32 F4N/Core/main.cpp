@@ -24,6 +24,7 @@
 #include "QAD_Timer.hpp"
 #include "QAD_Encoder.hpp"
 #include "QAD_PWM.hpp"
+#include "QAD_ADC.hpp"
 
 #include "QAS_Serial_Dev_UART.hpp"
 
@@ -43,32 +44,10 @@ QAD_GPIO_Output* GPIO_UserLED;
 QAS_Serial_Dev_UART* UART_STLink;
 
 
-//Driver class for testing EXTI driver functionality (driver defined in QAD_EXTI.hpp)
-QAD_EXTI* EXTI_Test;
 
-//Callback function for testing EXTI driver functionality
-//This is the method that will be called when the EXTI interrupt is triggered
-void EXTI_Test_Handler(void* pData) {
-	UART_STLink->txStringCR("Interrupt Triggered");
-}
-
-
-//Driver class for testing Timer interrupt driver functionality (driver defined in QAD_Timer.hpp)
-QAD_Timer* Timer_Test;
-
-//Callback function for testing Timer interrupt driver functionality
-//This is the method that will be called when the Timer Update interrupt is triggered
-void Timer_Test_Handler(void* pData) {
-	UART_STLink->txStringCR("Timer Triggered");
-}
-
-
-//Driver class for testing Rotary Encoder driver functionality (driver defined in QAD_Encoder.hpp)
-QAD_Encoder* Encoder_Test;
-
-
-//Driver class for testing Pulse Width Modulation functionality (driver defined in QAD_PWM.hpp)
-QAD_PWM* PWM_Test;
+//
+//ADC_HandleTypeDef ADC_Handle = {0};
+//uint16_t ADC_TempData = 0;
 
 
 
@@ -77,7 +56,7 @@ QAD_PWM* PWM_Test;
 //These constants are used to determine the update rate (in milliseconds) of each of the
 //tasks that are run in the processing loop within the main() function.
 //
-const uint32_t QA_FT_EncoderTickThreshold = 50;     //Time in milliseconds between encoder task updates
+const uint32_t QA_FT_ADCUpdateTickThreshold = 1000;       //
 
 const uint32_t QA_FT_HeartbeatTickThreshold = 500;  //Time in milliseconds between heartbeat LED updates
                                                     //The rate of flashing of the heartbeat LED will be double the value defined here
@@ -146,172 +125,138 @@ int main(void) {
   UART_STLink->txStringCR("STM32F411 Nucleo64 Booting...");
 
 
-	//----------------------------------
-  //Initialize a QAD_EXTI driver class to test EXTI functionality (defined in QAD_EXTI.hpp)
-  //QAD_USERBUTTON_GPIO_PORT and QAD_USERBUTTON_GPIO_PIN are defined in setup.hpp
 
-  //Create the driver class, passing to it the GPIO port and pin that are to be used
-  EXTI_Test = new QAD_EXTI(QAD_USERBUTTON_GPIO_PORT, QAD_USERBUTTON_GPIO_PIN);
+  //---------
+  //---------
+  //Setup ADC
 
-  //Set the interrupt handler function that is to be called by the driver class when the
-  //external interrupt is triggered
-  EXTI_Test->setHandlerFunction(EXTI_Test_Handler);
+/*  //Setup ADC GPIO
+  GPIO_InitTypeDef GPIO_Init = {0};
+  GPIO_Init.Pin    = GPIO_PIN_0;
+  GPIO_Init.Mode   = GPIO_MODE_ANALOG;
+  GPIO_Init.Pull   = GPIO_NOPULL;
+  GPIO_Init.Speed  = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOA, &GPIO_Init);
 
-  //Enable the external interrupt, with triggering on both rising and falling edges
-  //EXTI_Test->enable(QAD_EXTI::EdgeBoth);
 
+  //Setup ADC Trigger Timer
+  __HAL_RCC_TIM2_CLK_ENABLE();
 
-	//----------------------------------
-  //Initialize a QAD_Timer driver class to test functionality (defined in QAD_Timer.hpp)
-  //QAD_Timer driver is used to trigger interrupts at regular intervals
-
-  //Fill out the initialization structure required to create the driver class (defined in QAD_Timer.hpp)
-  QAD_Timer_InitStruct Timer_Test_Init;
-  Timer_Test_Init.eTimer         = QAD_Timer2;          //Define the timer peripheral is to be used (enum defined in QAD_TimerMgr.hpp)
-  Timer_Test_Init.eMode          = QAD_TimerMultiple;   //Define which mode to use (Continuous, Multiple or Single)
-  Timer_Test_Init.uPrescaler     = 20000;               //Define the timer prescaler
-  Timer_Test_Init.uPeriod        = 5000;                //Define the timer period
-  Timer_Test_Init.uIRQPriority   = 0x9;                 //Set the interrupt priority
-  Timer_Test_Init.uCounterTarget = 6;                   //Set the counter target (used when driver is in Multiple mode)
-
-  //Create the timer class, passing it a reference to the initialization structure
-  //Driver class is created in an uninitialized state
-  Timer_Test = new QAD_Timer(Timer_Test_Init);
-
-  //Initialize the timer class, and if initialization fails (returns true) the turn on
-  //User LED, output failed message via serial and enter infinite loop
-  if (Timer_Test->init()) {
+  //
+  TIM_HandleTypeDef TIM_Handle = {0};
+  TIM_Handle.Instance               = TIM2;
+  TIM_Handle.Init.Prescaler         = 5000;
+  TIM_Handle.Init.CounterMode       = TIM_COUNTERMODE_UP;
+  TIM_Handle.Init.Period            = 500;
+  TIM_Handle.Init.ClockDivision     = TIM_CLOCKDIVISION_DIV1;
+  TIM_Handle.Init.RepetitionCounter = 0x0;
+  TIM_Handle.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
+  if (HAL_TIM_Base_Init(&TIM_Handle) != HAL_OK) {
   	GPIO_UserLED->on();
-  	UART_STLink->txStringCR("Timer: Initialization Failed");
-  	while (1) {}
+  	UART_STLink->txStringCR("TIM: Initialization Failed");
+  	while(1) {}
   }
+	UART_STLink->txStringCR("TIM: Initialized");
 
-  //If timer initialization passed then output message via serial
-  UART_STLink->txStringCR("Timer: Initialized");
+  //
+  TIM_MasterConfigTypeDef TIM_MC_Init = {0};
+  TIM_MC_Init.MasterOutputTrigger = TIM_TRGO_UPDATE;
+  HAL_TIMEx_MasterConfigSynchronization(&TIM_Handle, &TIM_MC_Init);
 
-  //Set the interrupt handler function to be called when interrupt is triggered
-  Timer_Test->setHandlerFunction(Timer_Test_Handler);
+  //Setup ADC Peripheral
 
-  //Start timer class
-  //Timer_Test->start();
+  //
+  __HAL_RCC_ADC1_CLK_ENABLE();
 
-
-	//----------------------------------
-  //Initialize a QAD_Encoder Driver class to test driver functionality
-
-  //Fill out initialization structure required to create the encoder driver class (defined in QAD_Encoder.hpp)
-  QAD_Encoder_InitStruct sEncoderInit;
-  sEncoderInit.pCh1_GPIO = GPIOB;                   //GPIO used for channel 1 of the timer
-  sEncoderInit.uCh1_Pin  = GPIO_PIN_4;              //GPIO pin used for channel 1
-  sEncoderInit.uCh1_AF   = GPIO_AF2_TIM3;           //Alternate function used to connect GPIO pin to timer peripheral
-  sEncoderInit.pCh2_GPIO = GPIOB;                   //GPIO used for channel 2 of the timer
-  sEncoderInit.uCh2_Pin  = GPIO_PIN_5;              //GPIO pin used for channel 2
-  sEncoderInit.uCh2_AF   = GPIO_AF2_TIM3;           //Alternate function used to connect GPIO pin to timer peripheral
-  sEncoderInit.eTimer    = QAD_Timer3;              //Timer peripheral to be used for rotary encoder (enum defined in QAD_TimerMgr.hpp)
-  sEncoderInit.eMode     = QAD_EncoderMode_Linear;  //Encode mode, can be either Linear or Exponential (enum defined in QAD_Encoder.hpp)
-
-  //Create encoder driver class
-  //Is created in an uninitialized state
-  Encoder_Test = new QAD_Encoder(sEncoderInit);
-
-  //Initialize the encoder driver class
-  //If initialization fails the turn on User LED, output failed message via UART and enter infinite loop
-  if (Encoder_Test->init()) {
+  //
+  ADC_Handle.Instance                   = ADC1;
+  ADC_Handle.Init.ClockPrescaler        = ADC_CLOCKPRESCALER_PCLK_DIV4;
+  ADC_Handle.Init.Resolution            = ADC_RESOLUTION_12B;
+  ADC_Handle.Init.ScanConvMode          = ENABLE;
+  ADC_Handle.Init.ContinuousConvMode    = DISABLE;
+  ADC_Handle.Init.DiscontinuousConvMode = DISABLE;
+  ADC_Handle.Init.NbrOfDiscConversion   = 0;
+  ADC_Handle.Init.ExternalTrigConvEdge  = ADC_EXTERNALTRIGCONVEDGE_RISING;
+  ADC_Handle.Init.ExternalTrigConv      = ADC_EXTERNALTRIGCONV_T2_TRGO;
+  ADC_Handle.Init.DataAlign             = ADC_DATAALIGN_RIGHT;
+  ADC_Handle.Init.NbrOfConversion       = 1;
+  ADC_Handle.Init.DMAContinuousRequests = ENABLE;
+  ADC_Handle.Init.EOCSelection          = ADC_EOC_SINGLE_CONV;
+  if (HAL_ADC_Init(&ADC_Handle) != HAL_OK) {
   	GPIO_UserLED->on();
-  	UART_STLink->txStringCR("Encoder: Initialization Failed");
-  	while (1) {}
+  	UART_STLink->txStringCR("ADC: Initialization Failed");
+  	while(1) {}
   }
+  UART_STLink->txStringCR("ADC: Initialized");
 
-  //Start encoder driver class and output message via UART that encoder has successfully initialized and has been started
-  Encoder_Test->start();
-  UART_STLink->txStringCR("Encoder: Initialized & Started");
+  //Setup ADC Channel
+  ADC_ChannelConfTypeDef ADC_Channel_Init = {0};
+  ADC_Channel_Init.Channel      = ADC_CHANNEL_0;
+  ADC_Channel_Init.Rank         = 1;
+  ADC_Channel_Init.Offset       = 0;
+  ADC_Channel_Init.SamplingTime = ADC_SAMPLETIME_84CYCLES;
+  if (HAL_ADC_ConfigChannel(&ADC_Handle, &ADC_Channel_Init) != HAL_OK) {
+  	GPIO_UserLED->on();
+  	UART_STLink->txStringCR("ADC: Channel Setup Failed");
+  	while(1) {}
+  }
+  UART_STLink->txStringCR("ADC: Channel Setup Successful");
 
 
-	//----------------------------------
-  //Timer PWM mode testing as used in STM32 Basics - TIM - PWM video
-  //Has been replaced by QAD_PWM driver class below
+  //Setup ADC Interrupt
+  HAL_NVIC_SetPriority(ADC_IRQn, 0x8, 0x0);
+  HAL_NVIC_EnableIRQ(ADC_IRQn);
 
-  //Initialize GPIO Pin
-/*  GPIO_InitTypeDef GPIO_Init = {0};
-  GPIO_Init.Pin       = GPIO_PIN_6;
-  GPIO_Init.Mode      = GPIO_MODE_AF_PP;
-  GPIO_Init.Pull      = GPIO_NOPULL;
-  GPIO_Init.Speed     = GPIO_SPEED_FREQ_HIGH;
-  GPIO_Init.Alternate = GPIO_AF2_TIM4;
-  HAL_GPIO_Init(GPIOB, &GPIO_Init);
 
-  //Enable Timer Clock
-  __HAL_RCC_TIM4_CLK_ENABLE();
+  //Start ADC Conversion
+  HAL_ADC_Start_IT(&ADC_Handle);
+  __HAL_TIM_ENABLE(&TIM_Handle);*/
 
-  //Initialize Timer
-  TIM_HandleTypeDef sTimerHandle = {0};
-  sTimerHandle.Instance               = TIM4;
-  sTimerHandle.Init.Prescaler         = 100;
-  sTimerHandle.Init.Period            = 256;
-  sTimerHandle.Init.CounterMode       = TIM_COUNTERMODE_UP;
-  sTimerHandle.Init.ClockDivision     = TIM_CLOCKDIVISION_DIV1;
-  sTimerHandle.Init.RepetitionCounter = 0xFF;
-  sTimerHandle.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
-  if (HAL_TIM_PWM_Init(&sTimerHandle) != HAL_OK) {
-  	UART_STLink->txStringCR("PWM: Initialization Failed");
+
+  //----------
+  //ADC Driver
+
+    //Setup ADC Driver
+  QAD_ADC_InitStruct sADCInit;
+  sADCInit.eTimer = QAD_Timer2;
+  sADCInit.uTimer_Prescaler = 5000;
+  sADCInit.uTimer_Period    = 500;
+
+  if (QAD_ADC::init(sADCInit)) {
+  	UART_STLink->txStringCR("ADC: Initialization Failed");
   	GPIO_UserLED->on();
   	while(1) {}
   }
-  UART_STLink->txStringCR("PWM: Initialized");
+  UART_STLink->txStringCR("ADC: Initialized");
 
-  //Initialize PWM Channel
-  TIM_OC_InitTypeDef sChannelInit = {0};
-  sChannelInit.OCMode         = TIM_OCMODE_PWM1;
-  sChannelInit.OCIdleState    = TIM_OCIDLESTATE_SET;
-  sChannelInit.Pulse          = 0;
-  sChannelInit.OCPolarity     = TIM_OCPOLARITY_HIGH;
-  sChannelInit.OCFastMode     = TIM_OCFAST_ENABLE;
-  if (HAL_TIM_PWM_ConfigChannel(&sTimerHandle, &sChannelInit, TIM_CHANNEL_1) != HAL_OK) {
-  	UART_STLink->txStringCR("PWM: Channel Initialization Failed");
+    //Setup Channels
+  QAD_ADC_ChannelData sADCChannel = {0};
+
+  sADCChannel.pGPIO           = GPIOA;
+  sADCChannel.uPin            = GPIO_PIN_0;
+  sADCChannel.eChannel        = QAD_ADC_PeriphChannel0;
+  sADCChannel.eSamplingTime   = QAD_ADC_PeriphSamplingTime_56Cycles;
+  QAD_ADC::addChannel(sADCChannel);
+
+  sADCChannel.pGPIO           = GPIOA;
+  sADCChannel.uPin            = GPIO_PIN_1;
+  sADCChannel.eChannel        = QAD_ADC_PeriphChannel1;
+  sADCChannel.eSamplingTime   = QAD_ADC_PeriphSamplingTime_56Cycles;
+  QAD_ADC::addChannel(sADCChannel);
+
+  sADCChannel.pGPIO           = GPIOA;
+  sADCChannel.uPin            = GPIO_PIN_4;
+  sADCChannel.eChannel        = QAD_ADC_PeriphChannel4;
+  sADCChannel.eSamplingTime   = QAD_ADC_PeriphSamplingTime_56Cycles;
+  QAD_ADC::addChannel(sADCChannel);
+
+    //Start ADC Driver
+  if (QAD_ADC::start()) {
+  	UART_STLink->txStringCR("ADC: Unable to start driver");
   	GPIO_UserLED->on();
   	while(1) {}
   }
-  UART_STLink->txStringCR("PWM: Channel 1 Initialized");
-
-  //Start PWM
-  HAL_TIM_PWM_Start(&sTimerHandle, TIM_CHANNEL_1);
-
-  __HAL_TIM_SET_COMPARE(&sTimerHandle, TIM_CHANNEL_1, 192);*/
-
-
-	//----------------------------------
-  //Initialize PWM driver class for testing of functionality
-
-  //Fill out initialization structure required to creat the PWM driver class (defined in QAD_PWM.hpp)
-  QAD_PWM_InitStruct sPWMInit;
-  sPWMInit.eTimer = QAD_Timer4;                   //Define the timer peripheral to be used (enum defined in QAD_TimerMgr.hpp)
-  sPWMInit.uPrescaler = 100;                      //Define the prescaler for the timer
-  sPWMInit.uPeriod    = 256;                      //Define the period for the timer
-  sPWMInit.sChannels[0].eActive = QA_Active;      //Define timer channel 1 as active
-  sPWMInit.sChannels[0].pGPIO   = GPIOB;          //Define the GPIO port for timer channel 1
-  sPWMInit.sChannels[0].uPin    = GPIO_PIN_6;     //Define the pin number for timer channel 1
-  sPWMInit.sChannels[0].uAF     = GPIO_AF2_TIM4;  //Define the alternate function for timer channel 1
-  sPWMInit.sChannels[1].eActive = QA_Inactive;    //Define timer channel 2 as inactive
-  sPWMInit.sChannels[2].eActive = QA_Inactive;    //Define timer channel 3 as inactive
-  sPWMInit.sChannels[3].eActive = QA_Inactive;    //Define timer channel 4 as inactive
-
-  //Create the QAD_PWM driver class, passing a reference to the initialization structure
-  //Driver class is created in an uninitialized state
-  PWM_Test = new QAD_PWM(sPWMInit);
-
-  //Initialize the PWM driver class
-  //If initialization fails then output failed message via UART, turn on User LED and enter infinite loop
-  if (PWM_Test->init()) {
-  	UART_STLink->txString("PWM: Initialization Failed");
-  	GPIO_UserLED->on();
-  	while(1) {}
-  }
-
-  //Start PWM driver
-  PWM_Test->start();
-
-  //Output message via UART to show PWM driver successfully initialized and has been started
-  UART_STLink->txStringCR("PWM: Initialized & Started");
+  UART_STLink->txStringCR("ADC: Driver started");
 
 
 	//----------------------------------
@@ -326,11 +271,8 @@ int main(void) {
 	uint32_t uOldTick = uNewTick;
 
   //Create task timing variables
-  uint32_t uEncoderTicks = 0;
+	uint32_t uADCUpdateTicks = 0;
 	uint32_t uHeartbeatTicks = 0;
-
-	//Temporary variable used for PWM driver testing
-	int32_t iPWMVal = 128;
 
 
 	//----------------------------------
@@ -356,23 +298,18 @@ int main(void) {
     }
 
 
-  	//----------------------------------
-    //Process encoder task
-    //Currently used to update encoder, retrieve encoder value and use it to update PWM value
-    uEncoderTicks += uTicks;
-    if (uEncoderTicks >= QA_FT_EncoderTickThreshold) {  //If encoder ticks has exceeded threshold then process encoder task
+    //ADC Update
+    uADCUpdateTicks += uTicks;
+    if (uADCUpdateTicks >= QA_FT_ADCUpdateTickThreshold) {
 
-    	Encoder_Test->update(uEncoderTicks);              //Update encoder driver
-    	iPWMVal += Encoder_Test->getValue() * 4;          //Retrieve encoder value and add to PWM value
+    	char strData[256];
+    	for (uint8_t i=0; i<QAD_ADC::getChannelCount(); i++) {
+    	  sprintf(strData, "ADC Channel %u: %u", i, QAD_ADC::getData(i));
+    	  UART_STLink->txStringCR(strData);
+    	}
+    	UART_STLink->txCR();
 
-      if (iPWMVal < 0)                                  //Limit PWM value to between 0-255, as per period defined by period set during PWM driver initialization
-      	iPWMVal = 0;
-      if (iPWMVal > 255)
-      	iPWMVal = 255;
-      PWM_Test->setPWMVal(QAD_PWM_Channel_1, iPWMVal);  //Update PWM value
-
-
-    	uEncoderTicks -= QA_FT_EncoderTickThreshold;      //Reset encoder ticks
+    	uADCUpdateTicks -= QA_FT_ADCUpdateTickThreshold;
     }
 
 
