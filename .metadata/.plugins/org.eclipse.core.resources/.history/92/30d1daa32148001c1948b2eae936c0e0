@@ -146,15 +146,6 @@ void QAD_ADC::imp_periphDeinit(QAD_ADC::DeinitMode eMode) {
 //QAD_ADC::imp_handler
 //QAD_ADC Handler Method
 void QAD_ADC::imp_handler(void) {
-
-	//Check for overrun error
-	if (__HAL_ADC_GET_FLAG(&m_sADCHandle, ADC_FLAG_OVR)) {
-		imp_stop();
-		__HAL_ADC_CLEAR_FLAG(&m_sADCHandle, ADC_FLAG_OVR);
-		imp_start();
-	}
-
-	//Check for end of conversion
 	if (__HAL_ADC_GET_FLAG(&m_sADCHandle, ADC_FLAG_EOC)) {
 
 		m_uData[m_uDataIdx] = m_sADCHandle.Instance->DR;

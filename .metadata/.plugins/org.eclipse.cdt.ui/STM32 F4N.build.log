@@ -1,10 +1,20 @@
-00:12:53 **** Incremental Build of configuration Debug for project STM32 F4N ****
+13:43:25 **** Build of configuration Debug for project STM32 F4N ****
 make -j8 all 
+arm-none-eabi-g++ "../QA_Drivers/QAD_ADC.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Core -I../QA_Drivers -I../QA_Drivers/QAD_PeripheralManagers -I../QA_Tools -I../QA_Systems -I../QA_Systems/QAS_Serial -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"QA_Drivers/QAD_ADC.d" -MT"QA_Drivers/QAD_ADC.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "QA_Drivers/QAD_ADC.o"
+arm-none-eabi-g++ -o "STM32 F4N.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\binar\Desktop\Quartz Arc\QA Codebase Repos\QA_STM32F411RENUCLEO64\QuartzArc_STM32F411RE_Nucleo64\STM32 F4N\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32 F4N.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32 F4N.elf
+ 
 arm-none-eabi-size   STM32\ F4N.elf 
+arm-none-eabi-objdump -h -S  STM32\ F4N.elf  > "STM32 F4N.list"
+arm-none-eabi-objcopy  -O binary  STM32\ F4N.elf  "STM32 F4N.bin"
    text	   data	    bss	    dec	    hex	filename
-  22936	    124	   2268	  25328	   62f0	STM32 F4N.elf
+  22976	    124	   2268	  25368	   6318	STM32 F4N.elf
 Finished building: default.size.stdout
  
+Finished building: STM32 F4N.bin
+ 
+Finished building: STM32 F4N.list
+ 
 
-00:12:54 Build Finished. 0 errors, 0 warnings. (took 1s.81ms)
+13:43:26 Build Finished. 0 errors, 0 warnings. (took 1s.758ms)
 
