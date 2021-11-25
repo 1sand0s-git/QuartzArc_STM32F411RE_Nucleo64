@@ -1,0 +1,26 @@
+QAD_I2CMgr.hpp:105:21:static QAD_I2CMgr& QAD_I2CMgr::get()	8	static
+QAD_I2CMgr.hpp:114:23:static QAD_I2C_State QAD_I2CMgr::getState(QAD_I2C_Periph)	16	static
+QAD_I2CMgr.hpp:121:22:static I2C_TypeDef* QAD_I2CMgr::getInstance(QAD_I2C_Periph)	16	static
+QAD_I2CMgr.hpp:129:19:static IRQn_Type QAD_I2CMgr::getIRQEvent(QAD_I2C_Periph)	16	static
+QAD_I2CMgr.hpp:136:19:static IRQn_Type QAD_I2CMgr::getIRQError(QAD_I2C_Periph)	16	static
+QAD_I2CMgr.hpp:147:19:static QA_Result QAD_I2CMgr::registerI2C(QAD_I2C_Periph, QAD_I2C_State)	16	static
+QAD_I2CMgr.hpp:151:14:static void QAD_I2CMgr::deregisterI2C(QAD_I2C_Periph)	16	static
+QAD_I2CMgr.hpp:159:14:static void QAD_I2CMgr::enableClock(QAD_I2C_Periph)	16	static
+QAD_I2CMgr.hpp:163:14:static void QAD_I2CMgr::disableClock(QAD_I2C_Periph)	16	static
+QAD_I2C.cpp:33:11:QA_Result QAD_I2C::init()	24	static
+QAD_I2C.cpp:48:6:void QAD_I2C::deinit()	16	static
+QAD_I2C.cpp:59:14:QA_InitState QAD_I2C::getInitState()	16	static
+QAD_I2C.cpp:66:20:I2C_HandleTypeDef& QAD_I2C::getHandle()	16	static
+QAD_I2C.cpp:77:6:void QAD_I2C::start()	16	static
+QAD_I2C.cpp:85:6:void QAD_I2C::stop()	16	static
+QAD_I2C.cpp:93:16:QA_ActiveState QAD_I2C::getState()	16	static
+QAD_I2C.cpp:104:11:QA_Result QAD_I2C::write8Bit(uint16_t, uint8_t, uint8_t)	24	static
+QAD_I2C.cpp:111:11:QA_Result QAD_I2C::write16Bit(uint16_t, uint16_t, uint16_t)	40	static
+QAD_I2C.cpp:119:11:QA_Result QAD_I2C::writeMultiple8Bit(uint16_t, uint8_t, uint8_t*, uint16_t)	32	static
+QAD_I2C.cpp:126:11:QA_Result QAD_I2C::read8Bit(uint16_t, uint8_t, uint8_t*)	32	static
+QAD_I2C.cpp:133:11:QA_Result QAD_I2C::read16Bit(uint16_t, uint16_t, uint16_t*)	40	static
+QAD_I2C.cpp:145:11:QA_Result QAD_I2C::readMultiple8Bit(uint16_t, uint8_t, uint8_t*, uint16_t)	32	static
+QAD_I2C.cpp:156:11:QA_Result QAD_I2C::periphInit()	40	static
+QAD_I2C.cpp:216:6:void QAD_I2C::periphDeinit(QAD_I2C::DeinitMode)	16	static
+QAD_I2C.cpp:248:11:QA_Result QAD_I2C::write(uint16_t, uint16_t, uint16_t, uint8_t*, uint16_t)	48	static
+QAD_I2C.cpp:258:11:QA_Result QAD_I2C::read(uint16_t, uint16_t, uint16_t, uint8_t*, uint16_t)	48	static

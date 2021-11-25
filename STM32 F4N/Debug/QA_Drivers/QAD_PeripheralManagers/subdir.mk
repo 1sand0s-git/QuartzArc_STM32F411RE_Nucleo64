@@ -6,16 +6,19 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
 ../QA_Drivers/QAD_PeripheralManagers/QAD_GPIOMgr.cpp \
+../QA_Drivers/QAD_PeripheralManagers/QAD_I2CMgr.cpp \
 ../QA_Drivers/QAD_PeripheralManagers/QAD_TimerMgr.cpp \
 ../QA_Drivers/QAD_PeripheralManagers/QAD_UARTMgr.cpp 
 
 OBJS += \
 ./QA_Drivers/QAD_PeripheralManagers/QAD_GPIOMgr.o \
+./QA_Drivers/QAD_PeripheralManagers/QAD_I2CMgr.o \
 ./QA_Drivers/QAD_PeripheralManagers/QAD_TimerMgr.o \
 ./QA_Drivers/QAD_PeripheralManagers/QAD_UARTMgr.o 
 
 CPP_DEPS += \
 ./QA_Drivers/QAD_PeripheralManagers/QAD_GPIOMgr.d \
+./QA_Drivers/QAD_PeripheralManagers/QAD_I2CMgr.d \
 ./QA_Drivers/QAD_PeripheralManagers/QAD_TimerMgr.d \
 ./QA_Drivers/QAD_PeripheralManagers/QAD_UARTMgr.d 
 

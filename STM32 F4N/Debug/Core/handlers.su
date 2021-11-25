@@ -3,13 +3,13 @@ QAD_ADC.hpp:196:18:static QAD_ADC& QAD_ADC::get()	8	static
 QAD_ADC.hpp:217:14:static void QAD_ADC::handler()	8	static
 gthr-default.h:229:1:int __gthread_key_delete(__gthread_key_t)	16	static
 handlers.cpp:47:7:void NMI_Handler()	4	static
-handlers.cpp:54:7:void HardFault_Handler()	4	static
-handlers.cpp:61:7:void MemManage_Handler()	4	static
-handlers.cpp:68:7:void BusFault_Handler()	4	static
-handlers.cpp:75:7:void UsageFault_Handler()	4	static
-handlers.cpp:82:7:void SVC_Handler()	4	static
-handlers.cpp:89:7:void DebugMon_Handler()	4	static
-handlers.cpp:96:7:void PendSV_Handler()	4	static
-handlers.cpp:103:7:void SysTick_Handler()	8	static
-handlers.cpp:120:6:void USART2_IRQHandler()	8	static
-handlers.cpp:127:6:void ADC_IRQHandler()	8	static
+handlers.cpp:54:7:void HardFault_Handler()	8	static
+handlers.cpp:62:7:void MemManage_Handler()	8	static
+handlers.cpp:70:7:void BusFault_Handler()	8	static
+handlers.cpp:78:7:void UsageFault_Handler()	8	static
+handlers.cpp:86:7:void SVC_Handler()	4	static
+handlers.cpp:93:7:void DebugMon_Handler()	4	static
+handlers.cpp:100:7:void PendSV_Handler()	4	static
+handlers.cpp:107:7:void SysTick_Handler()	8	static
+handlers.cpp:124:6:void USART2_IRQHandler()	8	static
+handlers.cpp:131:6:void ADC_IRQHandler()	8	static

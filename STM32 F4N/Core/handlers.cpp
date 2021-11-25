@@ -18,6 +18,7 @@
 //Includes
 #include "handlers.hpp"
 
+#include "QAD_GPIO.hpp"
 #include "QAD_ADC.hpp"
 
 #include "QAS_Serial_Dev_UART.hpp"
@@ -27,11 +28,10 @@
 	//------------------------------------------
 	//------------------------------------------
 
+
+extern QAD_GPIO_Output* GPIO_UserLED;     //User LED driver class (defined in main.cpp)
+
 extern QAS_Serial_Dev_UART* UART_STLink;  //UART System for serial over ST-Link (defined in main.cpp)
-
-
-//extern ADC_HandleTypeDef ADC_Handle;
-//extern uint16_t ADC_TempData;
 
 
 	//------------------------------------------
@@ -52,6 +52,7 @@ void  NMI_Handler(void) {
 //HardFault_Handler
 //Exception Handler Function
 void  HardFault_Handler(void) {
+	GPIO_UserLED->on();
   while (1) {}
 }
 
@@ -59,6 +60,7 @@ void  HardFault_Handler(void) {
 //MemManage_Handler
 //Exception Handler Function
 void  MemManage_Handler(void) {
+	GPIO_UserLED->on();
   while (1) {}
 }
 
@@ -66,6 +68,7 @@ void  MemManage_Handler(void) {
 //BusFault_Handler
 //Exception Handler Function
 void  BusFault_Handler(void) {
+	GPIO_UserLED->on();
   while (1) {}
 }
 
@@ -73,6 +76,7 @@ void  BusFault_Handler(void) {
 //UsageFault_Handler
 //Exception Handler Function
 void  UsageFault_Handler(void) {
+	GPIO_UserLED->on();
   while (1) {}
 }
 

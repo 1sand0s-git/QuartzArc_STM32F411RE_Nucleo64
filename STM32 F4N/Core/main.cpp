@@ -25,6 +25,7 @@
 #include "QAD_Encoder.hpp"
 #include "QAD_PWM.hpp"
 #include "QAD_ADC.hpp"
+#include "QAD_I2C.hpp"
 
 #include "QAS_Serial_Dev_UART.hpp"
 
@@ -44,10 +45,8 @@ QAD_GPIO_Output* GPIO_UserLED;
 QAS_Serial_Dev_UART* UART_STLink;
 
 
-
-//
-//ADC_HandleTypeDef ADC_Handle = {0};
-//uint16_t ADC_TempData = 0;
+//I2C Test Driver
+QAD_I2C* I2C_ADXL345;
 
 
 
@@ -56,8 +55,6 @@ QAS_Serial_Dev_UART* UART_STLink;
 //These constants are used to determine the update rate (in milliseconds) of each of the
 //tasks that are run in the processing loop within the main() function.
 //
-const uint32_t QA_FT_ADCUpdateTickThreshold = 1000;       //
-
 const uint32_t QA_FT_HeartbeatTickThreshold = 500;  //Time in milliseconds between heartbeat LED updates
                                                     //The rate of flashing of the heartbeat LED will be double the value defined here
 
@@ -126,137 +123,118 @@ int main(void) {
 
 
 
-  //---------
-  //---------
-  //Setup ADC
+  //--------------
+  //--------------
+  //Initialize I2C
 
-/*  //Setup ADC GPIO
-  GPIO_InitTypeDef GPIO_Init = {0};
-  GPIO_Init.Pin    = GPIO_PIN_0;
-  GPIO_Init.Mode   = GPIO_MODE_ANALOG;
-  GPIO_Init.Pull   = GPIO_NOPULL;
-  GPIO_Init.Speed  = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOA, &GPIO_Init);
+  /*GPIO_InitTypeDef GPIO_Init = {0};
+
+    //SCL
+  GPIO_Init.Pin           = GPIO_PIN_10;
+  GPIO_Init.Mode          = GPIO_MODE_AF_OD;
+  GPIO_Init.Pull          = GPIO_PULLUP;
+  GPIO_Init.Speed         = GPIO_SPEED_FREQ_VERY_HIGH;
+  GPIO_Init.Alternate     = GPIO_AF4_I2C2;
+  HAL_GPIO_Init(GPIOB, &GPIO_Init);
+
+    //SDA
+  GPIO_Init.Pin           = GPIO_PIN_3;
+  GPIO_Init.Mode          = GPIO_MODE_AF_OD;
+  GPIO_Init.Pull          = GPIO_PULLUP;
+  GPIO_Init.Speed         = GPIO_SPEED_FREQ_VERY_HIGH;
+  GPIO_Init.Alternate     = GPIO_AF9_I2C2;
+  HAL_GPIO_Init(GPIOB, &GPIO_Init);
 
 
-  //Setup ADC Trigger Timer
-  __HAL_RCC_TIM2_CLK_ENABLE();
+    //Enable I2C Clock
+	__HAL_RCC_I2C2_CLK_ENABLE();
+  __HAL_RCC_I2C2_FORCE_RESET();
+  __HAL_RCC_I2C2_RELEASE_RESET();
 
-  //
-  TIM_HandleTypeDef TIM_Handle = {0};
-  TIM_Handle.Instance               = TIM2;
-  TIM_Handle.Init.Prescaler         = 5000;
-  TIM_Handle.Init.CounterMode       = TIM_COUNTERMODE_UP;
-  TIM_Handle.Init.Period            = 500;
-  TIM_Handle.Init.ClockDivision     = TIM_CLOCKDIVISION_DIV1;
-  TIM_Handle.Init.RepetitionCounter = 0x0;
-  TIM_Handle.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
-  if (HAL_TIM_Base_Init(&TIM_Handle) != HAL_OK) {
+
+    //Init I2C Peripheral
+  I2C_HandleTypeDef I2C_Handle = {0};
+  I2C_Handle.Instance                = I2C2;
+  I2C_Handle.Init.ClockSpeed         = 100000;
+  I2C_Handle.Init.DutyCycle          = I2C_DUTYCYCLE_2;
+  I2C_Handle.Init.AddressingMode     = I2C_ADDRESSINGMODE_7BIT;
+  I2C_Handle.Init.DualAddressMode    = I2C_DUALADDRESS_DISABLE;
+  I2C_Handle.Init.GeneralCallMode    = I2C_GENERALCALL_DISABLE;
+  I2C_Handle.Init.NoStretchMode      = I2C_NOSTRETCH_DISABLE;
+  I2C_Handle.Init.OwnAddress1        = 0x00;
+  I2C_Handle.Init.OwnAddress2        = 0x00;
+  if (HAL_I2C_Init(&I2C_Handle) != HAL_OK) {
   	GPIO_UserLED->on();
-  	UART_STLink->txStringCR("TIM: Initialization Failed");
+  	UART_STLink->txStringCR("I2C: Initialization Failed");
   	while(1) {}
   }
-	UART_STLink->txStringCR("TIM: Initialized");
+  UART_STLink->txStringCR("I2C: Initialized");
 
-  //
-  TIM_MasterConfigTypeDef TIM_MC_Init = {0};
-  TIM_MC_Init.MasterOutputTrigger = TIM_TRGO_UPDATE;
-  HAL_TIMEx_MasterConfigSynchronization(&TIM_Handle, &TIM_MC_Init);
+    //Enable I2C Peripheral
+  __HAL_I2C_ENABLE(&I2C_Handle);
 
-  //Setup ADC Peripheral
 
-  //
-  __HAL_RCC_ADC1_CLK_ENABLE();
-
-  //
-  ADC_Handle.Instance                   = ADC1;
-  ADC_Handle.Init.ClockPrescaler        = ADC_CLOCKPRESCALER_PCLK_DIV4;
-  ADC_Handle.Init.Resolution            = ADC_RESOLUTION_12B;
-  ADC_Handle.Init.ScanConvMode          = ENABLE;
-  ADC_Handle.Init.ContinuousConvMode    = DISABLE;
-  ADC_Handle.Init.DiscontinuousConvMode = DISABLE;
-  ADC_Handle.Init.NbrOfDiscConversion   = 0;
-  ADC_Handle.Init.ExternalTrigConvEdge  = ADC_EXTERNALTRIGCONVEDGE_RISING;
-  ADC_Handle.Init.ExternalTrigConv      = ADC_EXTERNALTRIGCONV_T2_TRGO;
-  ADC_Handle.Init.DataAlign             = ADC_DATAALIGN_RIGHT;
-  ADC_Handle.Init.NbrOfConversion       = 1;
-  ADC_Handle.Init.DMAContinuousRequests = ENABLE;
-  ADC_Handle.Init.EOCSelection          = ADC_EOC_SINGLE_CONV;
-  if (HAL_ADC_Init(&ADC_Handle) != HAL_OK) {
-  	GPIO_UserLED->on();
-  	UART_STLink->txStringCR("ADC: Initialization Failed");
+    //
+  uint8_t uData = 0;
+  if (HAL_I2C_Mem_Read(&I2C_Handle, 0x53 << 1, 0x00, 1, &uData, 1, 1000) != HAL_OK) {
+  	UART_STLink->txStringCR("I2C Read: Failed");
   	while(1) {}
   }
-  UART_STLink->txStringCR("ADC: Initialized");
 
-  //Setup ADC Channel
-  ADC_ChannelConfTypeDef ADC_Channel_Init = {0};
-  ADC_Channel_Init.Channel      = ADC_CHANNEL_0;
-  ADC_Channel_Init.Rank         = 1;
-  ADC_Channel_Init.Offset       = 0;
-  ADC_Channel_Init.SamplingTime = ADC_SAMPLETIME_84CYCLES;
-  if (HAL_ADC_ConfigChannel(&ADC_Handle, &ADC_Channel_Init) != HAL_OK) {
-  	GPIO_UserLED->on();
-  	UART_STLink->txStringCR("ADC: Channel Setup Failed");
-  	while(1) {}
-  }
-  UART_STLink->txStringCR("ADC: Channel Setup Successful");
+  char strOut[256];
+  sprintf(strOut, "I2C Read: ID - %02X", uData);
+  UART_STLink->txStringCR(strOut);*/
 
 
-  //Setup ADC Interrupt
-  HAL_NVIC_SetPriority(ADC_IRQn, 0x8, 0x0);
-  HAL_NVIC_EnableIRQ(ADC_IRQn);
+  QAD_I2C_InitStruct I2C_Init;
+  I2C_Init.eI2C                = QAD_I2C2;
+  I2C_Init.uIRQPriority_Event  = 0xE;
+  I2C_Init.uIRQPriority_Error  = 0xE;
+  I2C_Init.uClockSpeed         = 100000;
+  I2C_Init.eDutyCycle          = QAD_I2C_DutyCycle_2;
+  I2C_Init.eAddressingMode     = QAD_I2C_AddressingMode_7Bit;
+  I2C_Init.eDualAddressingMode = QAD_I2C_DualAddressingMode_Disable;
+  I2C_Init.eGeneralCallMode    = QAD_I2C_GeneralCallMode_Disable;
+  I2C_Init.eNoStretchMode      = QAD_I2C_NoStretchMode_Disable;
+  I2C_Init.uOwnAddress1        = 0;
+  I2C_Init.uOwnAddress2        = 0;
 
+  I2C_Init.pSCL_GPIO           = GPIOB;
+  I2C_Init.uSCL_Pin            = GPIO_PIN_10;
+  I2C_Init.uSCL_AF             = GPIO_AF4_I2C2;
 
-  //Start ADC Conversion
-  HAL_ADC_Start_IT(&ADC_Handle);
-  __HAL_TIM_ENABLE(&TIM_Handle);*/
+  I2C_Init.pSDA_GPIO           = GPIOB;
+  I2C_Init.uSDA_Pin            = GPIO_PIN_3;
+  I2C_Init.uSDA_AF             = GPIO_AF9_I2C2;
+  I2C_ADXL345 = new QAD_I2C(I2C_Init);
 
-
-  //----------
-  //ADC Driver
-
-    //Setup ADC Driver
-  QAD_ADC_InitStruct sADCInit;
-  sADCInit.eTimer = QAD_Timer2;
-  sADCInit.uTimer_Prescaler = 5000;
-  sADCInit.uTimer_Period    = 500;
-
-  if (QAD_ADC::init(sADCInit)) {
-  	UART_STLink->txStringCR("ADC: Initialization Failed");
+  if (I2C_ADXL345->init()) {
+  	UART_STLink->txStringCR("I2C1: Initialization Failed");
   	GPIO_UserLED->on();
   	while(1) {}
   }
-  UART_STLink->txStringCR("ADC: Initialized");
+  I2C_ADXL345->start();
+  UART_STLink->txStringCR("I2C1: Initialized and Started");
 
-    //Setup Channels
-  QAD_ADC_ChannelData sADCChannel = {0};
+  //Test ADXL345
+  uint8_t testVal = 0;
+  char strOut[256];
 
-  sADCChannel.pGPIO           = GPIOA;
-  sADCChannel.uPin            = GPIO_PIN_0;
-  sADCChannel.eChannel        = QAD_ADC_PeriphChannel0;
-  sADCChannel.eSamplingTime   = QAD_ADC_PeriphSamplingTime_56Cycles;
-  QAD_ADC::addChannel(sADCChannel);
+  I2C_ADXL345->read8Bit(0x53 << 1, 0x00, &testVal);
+  sprintf(strOut, "ADXL345 ID: %02X", testVal);
+  UART_STLink->txStringCR(strOut);
 
-  sADCChannel.pGPIO           = GPIOA;
-  sADCChannel.uPin            = GPIO_PIN_1;
-  sADCChannel.eChannel        = QAD_ADC_PeriphChannel1;
-  sADCChannel.eSamplingTime   = QAD_ADC_PeriphSamplingTime_56Cycles;
-  QAD_ADC::addChannel(sADCChannel);
+  testVal = 0;
+  I2C_ADXL345->write8Bit(0x53 << 1, 0x31, 0x00);
+  I2C_ADXL345->read8Bit(0x53 << 1, 0x31, &testVal);
+  sprintf(strOut, "ADXL345 Data Format: %02X", testVal);
+  UART_STLink->txStringCR(strOut);
 
-  sADCChannel.pGPIO           = GPIOA;
-  sADCChannel.uPin            = GPIO_PIN_4;
-  sADCChannel.eChannel        = QAD_ADC_PeriphChannel4;
-  sADCChannel.eSamplingTime   = QAD_ADC_PeriphSamplingTime_56Cycles;
-  QAD_ADC::addChannel(sADCChannel);
-
-    //Start ADC Driver
-  if (QAD_ADC::start()) {
-  	UART_STLink->txStringCR("ADC: Unable to start driver");
-  	GPIO_UserLED->on();
-  	while(1) {}
-  }
-  UART_STLink->txStringCR("ADC: Driver started");
+  testVal = 0;
+  I2C_ADXL345->write8Bit(0x53 << 1, 0x31, 0x04);
+  I2C_ADXL345->read8Bit(0x53 << 1, 0x31, &testVal);
+  sprintf(strOut, "ADXL345 Data Format: %02X", testVal);
+  UART_STLink->txStringCR(strOut);
 
 
 	//----------------------------------
@@ -271,7 +249,6 @@ int main(void) {
 	uint32_t uOldTick = uNewTick;
 
   //Create task timing variables
-	uint32_t uADCUpdateTicks = 0;
 	uint32_t uHeartbeatTicks = 0;
 
 
@@ -298,21 +275,6 @@ int main(void) {
     }
 
 
-    //ADC Update
-    uADCUpdateTicks += uTicks;
-    if (uADCUpdateTicks >= QA_FT_ADCUpdateTickThreshold) {
-
-    	char strData[256];
-    	for (uint8_t i=0; i<QAD_ADC::getChannelCount(); i++) {
-    	  sprintf(strData, "ADC Channel %u: %u", i, QAD_ADC::getData(i));
-    	  UART_STLink->txStringCR(strData);
-    	}
-    	UART_STLink->txCR();
-
-    	uADCUpdateTicks -= QA_FT_ADCUpdateTickThreshold;
-    }
-
-
   	//----------------------------------
     //Update Heartbeat LED
     //The heartbeat LED uses the User LED to flash at a regular rate to visually show whether the microcontroller has locked up or
@@ -320,7 +282,7 @@ int main(void) {
     uHeartbeatTicks += uTicks;
     if (uHeartbeatTicks >= QA_FT_HeartbeatTickThreshold) { //If heartbeat ticks has exceeded threshold then update heartbeat LED
     	GPIO_UserLED->toggle();
-    	uHeartbeatTicks -= QA_FT_HeartbeatTickThreshold;     //Reset hearbeat ticks
+    	uHeartbeatTicks -= QA_FT_HeartbeatTickThreshold;     //Reset heartbeat ticks
     }
 
 	}

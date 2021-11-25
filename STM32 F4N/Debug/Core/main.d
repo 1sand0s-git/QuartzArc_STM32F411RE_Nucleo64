@@ -39,7 +39,8 @@ Core/main.o: ../Core/main.cpp ../Core/main.hpp ../Core/setup.hpp \
  ../QA_Drivers/QAD_Timer.hpp \
  ../QA_Drivers/QAD_PeripheralManagers/QAD_TimerMgr.hpp \
  ../QA_Drivers/QAD_Encoder.hpp ../QA_Drivers/QAD_PWM.hpp \
- ../QA_Drivers/QAD_ADC.hpp \
+ ../QA_Drivers/QAD_ADC.hpp ../QA_Drivers/QAD_I2C.hpp \
+ ../QA_Drivers/QAD_PeripheralManagers/QAD_I2CMgr.hpp \
  ../QA_Systems/QAS_Serial/QAS_Serial_Dev_UART.hpp \
  ../QA_Tools/QAT_FIFO.hpp \
  ../QA_Systems/QAS_Serial/QAS_Serial_Dev_Base.hpp \
@@ -139,6 +140,10 @@ Core/main.o: ../Core/main.cpp ../Core/main.hpp ../Core/setup.hpp \
 ../QA_Drivers/QAD_PWM.hpp:
 
 ../QA_Drivers/QAD_ADC.hpp:
+
+../QA_Drivers/QAD_I2C.hpp:
+
+../QA_Drivers/QAD_PeripheralManagers/QAD_I2CMgr.hpp:
 
 ../QA_Systems/QAS_Serial/QAS_Serial_Dev_UART.hpp:
 
