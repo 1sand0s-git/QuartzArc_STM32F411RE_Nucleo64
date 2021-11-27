@@ -1,4 +1,4 @@
-QAD_I2C.hpp:158:2:QAD_I2C::QAD_I2C(QAD_I2C_InitStruct&)	16	static
+QAD_I2C.hpp:182:2:QAD_I2C::QAD_I2C(QAD_I2C_InitStruct&)	16	static
 gthr-default.h:229:1:int __gthread_key_delete(__gthread_key_t)	16	static
 QAT_FIFO.hpp:66:2:QAT_FIFOBuffer::QAT_FIFOBuffer(uint16_t)	16	static
 QAS_Serial_Dev_Base.hpp:80:2:QAS_Serial_Dev_Base::QAS_Serial_Dev_Base(uint16_t, uint16_t, QAS_Serial_Dev_Base::DeviceType)	24	static

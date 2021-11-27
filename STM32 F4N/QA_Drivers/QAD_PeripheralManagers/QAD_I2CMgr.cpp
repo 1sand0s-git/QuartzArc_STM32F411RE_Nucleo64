@@ -30,9 +30,13 @@
 
 //QAD_I2CMgr::QAD_I2CMgr
 //QAD_I2CMgr Constructor
+//
+//Fills out details for the system's I2C peripherals
+//As this is a private method in a singleton class, this method will be called the first time the class's static get() method is called.
 QAD_I2CMgr::QAD_I2CMgr() {
 
 	for (uint8_t i=0; i<QAD_I2C_PeriphCount; i++) {
+		//Set current state of peripheral to unused
 		m_sI2Cs[i].eState = QAD_I2C_Unused;
 	}
 
@@ -65,6 +69,11 @@ QAD_I2CMgr::QAD_I2CMgr() {
 
 //QAD_I2CMgr::imp_registerI2C
 //QAD_I2CMgr Management Method
+//
+//To be called from static method registerI2C()
+//Used to register an I2C peripheral as being used by a driver
+//eI2C - the I2C peripheral to be registered
+//Returns QA_OK if successful, or returns QA_Error_PeriphBusy if the selected I2C is already in use
 QA_Result QAD_I2CMgr::imp_registerI2C(QAD_I2C_Periph eI2C, QAD_I2C_State eMode) {
   if (eI2C >= QAD_I2CNone)
   	return QA_Fail;
@@ -79,6 +88,10 @@ QA_Result QAD_I2CMgr::imp_registerI2C(QAD_I2C_Periph eI2C, QAD_I2C_State eMode) 
 
 //QAD_I2CMgr::imp_deregisterI2C
 //QAD_I2CMgr Management Method
+//
+//To be called from static method deregisterI2C()
+//Used to deregister an I2C to mark it as no longer being used by a driver
+//eI2C - the I2C Peripheral to be deregistered
 void QAD_I2CMgr::imp_deregisterI2C(QAD_I2C_Periph eI2C) {
   if (eI2C >= QAD_I2CNone)
   	return;
@@ -93,6 +106,10 @@ void QAD_I2CMgr::imp_deregisterI2C(QAD_I2C_Periph eI2C) {
 
 //QAD_I2CMgr::imp_enableClock
 //QAD_I2CMgr Clock Method
+//
+//To be called by static method enableClock()
+//Used to enable the clock for a specific I2C peripheral
+//eI2C - the I2C peripheral to enable the clock for
 void QAD_I2CMgr::imp_enableClock(QAD_I2C_Periph eI2C) {
   switch (eI2C) {
     case (QAD_I2C1):
@@ -118,6 +135,10 @@ void QAD_I2CMgr::imp_enableClock(QAD_I2C_Periph eI2C) {
 
 //QAD_I2CMgr::imp_disableClock
 //QAD_I2CMgr Clock Method
+//
+//To be called from static method disableClock()
+//Used to disable the clock for a specific I2C peripheral
+//eI2C - the I2C peripheral to disable the clock for
 void QAD_I2CMgr::imp_disableClock(QAD_I2C_Periph eI2C) {
   switch (eI2C) {
     case (QAD_I2C1):
@@ -141,6 +162,9 @@ void QAD_I2CMgr::imp_disableClock(QAD_I2C_Periph eI2C) {
 
 //QAD_I2CMgr::imp_getI2CsActive
 //QAD_I2CMgr Status Method
+//
+//To be called from static method getI2CsActive
+//Returns the number of I2C peripherals that are currently in-use (registered/active)
 uint8_t QAD_I2CMgr::imp_getI2CsActive(void) {
   uint8_t uCount = 0;
   for (uint8_t i=0; i<QAD_I2C_PeriphCount; i++) {
@@ -153,6 +177,9 @@ uint8_t QAD_I2CMgr::imp_getI2CsActive(void) {
 
 //QAD_I2CMgr::imp_getI2CsInactive
 //QAD_I2CMgr Status Method
+//
+//To be called from statuc method getI2CsInactive
+//Returns the number of I2C peripherals that are currently not being used (deregistered/inactive)
 uint8_t QAD_I2CMgr::imp_getI2CsInactive(void) {
   uint8_t uCount = 0;
   for (uint8_t i=0; i<QAD_I2C_PeriphCount; i++) {

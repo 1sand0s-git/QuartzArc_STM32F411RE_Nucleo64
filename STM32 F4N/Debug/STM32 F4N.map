@@ -14142,7 +14142,7 @@ LOAD c:/st/stm32cubeide_1.7.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.exte
 LOAD c:/st/stm32cubeide_1.7.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.9-2020-q2-update.win32_2.0.0.202105311346/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libm.a
 LOAD c:/st/stm32cubeide_1.7.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.9-2020-q2-update.win32_2.0.0.202105311346/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/thumb/v7e-m+fp/hard\libgcc.a
 
-.debug_line     0x0000000000000000    0x18187
+.debug_line     0x0000000000000000    0x1818a
  .debug_line    0x0000000000000000       0x88 ./Core/Startup/startup_stm32f411retx.o
  .debug_line    0x0000000000000088      0x7b5 ./Core/boot.o
  .debug_line    0x000000000000083d     0x17a3 ./Core/handlers.o
@@ -14159,63 +14159,63 @@ LOAD c:/st/stm32cubeide_1.7.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.exte
  .debug_line    0x000000000000cea7     0x2ad7 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o
  .debug_line    0x000000000000f97e      0xe04 ./QA_Drivers/QAD_ADC.o
  .debug_line    0x0000000000010782      0xa37 ./QA_Drivers/QAD_GPIO.o
- .debug_line    0x00000000000111b9      0xbbb ./QA_Drivers/QAD_I2C.o
- .debug_line    0x0000000000011d74      0xac1 ./QA_Drivers/QAD_UART.o
- .debug_line    0x0000000000012835      0x8d1 ./QA_Drivers/QAD_PeripheralManagers/QAD_I2CMgr.o
- .debug_line    0x0000000000013106      0x8de ./QA_Drivers/QAD_PeripheralManagers/QAD_UARTMgr.o
- .debug_line    0x00000000000139e4     0x18af ./QA_Systems/QAS_Serial/QAS_Serial_Dev_Base.o
- .debug_line    0x0000000000015293     0x1839 ./QA_Systems/QAS_Serial/QAS_Serial_Dev_UART.o
- .debug_line    0x0000000000016acc     0x16bb ./QA_Tools/QAT_FIFO.o
+ .debug_line    0x00000000000111b9      0xbbe ./QA_Drivers/QAD_I2C.o
+ .debug_line    0x0000000000011d77      0xac1 ./QA_Drivers/QAD_UART.o
+ .debug_line    0x0000000000012838      0x8d1 ./QA_Drivers/QAD_PeripheralManagers/QAD_I2CMgr.o
+ .debug_line    0x0000000000013109      0x8de ./QA_Drivers/QAD_PeripheralManagers/QAD_UARTMgr.o
+ .debug_line    0x00000000000139e7     0x18af ./QA_Systems/QAS_Serial/QAS_Serial_Dev_Base.o
+ .debug_line    0x0000000000015296     0x1839 ./QA_Systems/QAS_Serial/QAS_Serial_Dev_UART.o
+ .debug_line    0x0000000000016acf     0x16bb ./QA_Tools/QAT_FIFO.o
 
-.debug_info     0x0000000000000000    0x2e019
+.debug_info     0x0000000000000000    0x2e02a
  .debug_info    0x0000000000000000       0x22 ./Core/Startup/startup_stm32f411retx.o
  .debug_info    0x0000000000000022      0x6d5 ./Core/boot.o
  .debug_info    0x00000000000006f7     0x5983 ./Core/handlers.o
- .debug_info    0x000000000000607a     0x7a1c ./Core/main.o
- .debug_info    0x000000000000da96      0xfa8 ./Core/syscalls.o
- .debug_info    0x000000000000ea3e      0xa25 ./Core/sysmem.o
- .debug_info    0x000000000000f463      0x5d0 ./Core/system_stm32f4xx.o
- .debug_info    0x000000000000fa33      0x944 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o
- .debug_info    0x0000000000010377      0xdb4 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.o
- .debug_info    0x000000000001112b      0xe47 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o
- .debug_info    0x0000000000011f72      0x862 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o
- .debug_info    0x00000000000127d4     0x2653 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.o
- .debug_info    0x0000000000014e27      0x9be ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o
- .debug_info    0x00000000000157e5     0x31d6 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o
- .debug_info    0x00000000000189bb     0x2117 ./QA_Drivers/QAD_ADC.o
- .debug_info    0x000000000001aad2      0xd0b ./QA_Drivers/QAD_GPIO.o
- .debug_info    0x000000000001b7dd     0x1a1a ./QA_Drivers/QAD_I2C.o
- .debug_info    0x000000000001d1f7     0x1439 ./QA_Drivers/QAD_UART.o
- .debug_info    0x000000000001e630      0xbf9 ./QA_Drivers/QAD_PeripheralManagers/QAD_I2CMgr.o
- .debug_info    0x000000000001f229      0xb81 ./QA_Drivers/QAD_PeripheralManagers/QAD_UARTMgr.o
- .debug_info    0x000000000001fdaa     0x48f5 ./QA_Systems/QAS_Serial/QAS_Serial_Dev_Base.o
- .debug_info    0x000000000002469f     0x61a9 ./QA_Systems/QAS_Serial/QAS_Serial_Dev_UART.o
- .debug_info    0x000000000002a848     0x37d1 ./QA_Tools/QAT_FIFO.o
+ .debug_info    0x000000000000607a     0x7a21 ./Core/main.o
+ .debug_info    0x000000000000da9b      0xfa8 ./Core/syscalls.o
+ .debug_info    0x000000000000ea43      0xa25 ./Core/sysmem.o
+ .debug_info    0x000000000000f468      0x5d0 ./Core/system_stm32f4xx.o
+ .debug_info    0x000000000000fa38      0x944 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o
+ .debug_info    0x000000000001037c      0xdb4 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.o
+ .debug_info    0x0000000000011130      0xe47 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o
+ .debug_info    0x0000000000011f77      0x862 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o
+ .debug_info    0x00000000000127d9     0x2653 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.o
+ .debug_info    0x0000000000014e2c      0x9be ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o
+ .debug_info    0x00000000000157ea     0x31d6 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o
+ .debug_info    0x00000000000189c0     0x2117 ./QA_Drivers/QAD_ADC.o
+ .debug_info    0x000000000001aad7      0xd0b ./QA_Drivers/QAD_GPIO.o
+ .debug_info    0x000000000001b7e2     0x1a26 ./QA_Drivers/QAD_I2C.o
+ .debug_info    0x000000000001d208     0x1439 ./QA_Drivers/QAD_UART.o
+ .debug_info    0x000000000001e641      0xbf9 ./QA_Drivers/QAD_PeripheralManagers/QAD_I2CMgr.o
+ .debug_info    0x000000000001f23a      0xb81 ./QA_Drivers/QAD_PeripheralManagers/QAD_UARTMgr.o
+ .debug_info    0x000000000001fdbb     0x48f5 ./QA_Systems/QAS_Serial/QAS_Serial_Dev_Base.o
+ .debug_info    0x00000000000246b0     0x61a9 ./QA_Systems/QAS_Serial/QAS_Serial_Dev_UART.o
+ .debug_info    0x000000000002a859     0x37d1 ./QA_Tools/QAT_FIFO.o
 
-.debug_abbrev   0x0000000000000000     0x5d02
+.debug_abbrev   0x0000000000000000     0x5d61
  .debug_abbrev  0x0000000000000000       0x12 ./Core/Startup/startup_stm32f411retx.o
  .debug_abbrev  0x0000000000000012      0x172 ./Core/boot.o
  .debug_abbrev  0x0000000000000184      0xa60 ./Core/handlers.o
- .debug_abbrev  0x0000000000000be4      0xa7e ./Core/main.o
- .debug_abbrev  0x0000000000001662      0x286 ./Core/syscalls.o
- .debug_abbrev  0x00000000000018e8      0x1bf ./Core/sysmem.o
- .debug_abbrev  0x0000000000001aa7      0x145 ./Core/system_stm32f4xx.o
- .debug_abbrev  0x0000000000001bec      0x21e ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o
- .debug_abbrev  0x0000000000001e0a      0x1ef ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.o
- .debug_abbrev  0x0000000000001ff9      0x33c ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o
- .debug_abbrev  0x0000000000002335      0x1f1 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o
- .debug_abbrev  0x0000000000002526      0x293 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.o
- .debug_abbrev  0x00000000000027b9      0x275 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o
- .debug_abbrev  0x0000000000002a2e      0x2fc ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o
- .debug_abbrev  0x0000000000002d2a      0x424 ./QA_Drivers/QAD_ADC.o
- .debug_abbrev  0x000000000000314e      0x41e ./QA_Drivers/QAD_GPIO.o
- .debug_abbrev  0x000000000000356c      0x35a ./QA_Drivers/QAD_I2C.o
- .debug_abbrev  0x00000000000038c6      0x366 ./QA_Drivers/QAD_UART.o
- .debug_abbrev  0x0000000000003c2c      0x309 ./QA_Drivers/QAD_PeripheralManagers/QAD_I2CMgr.o
- .debug_abbrev  0x0000000000003f35      0x309 ./QA_Drivers/QAD_PeripheralManagers/QAD_UARTMgr.o
- .debug_abbrev  0x000000000000423e      0x90e ./QA_Systems/QAS_Serial/QAS_Serial_Dev_Base.o
- .debug_abbrev  0x0000000000004b4c      0x936 ./QA_Systems/QAS_Serial/QAS_Serial_Dev_UART.o
- .debug_abbrev  0x0000000000005482      0x880 ./QA_Tools/QAT_FIFO.o
+ .debug_abbrev  0x0000000000000be4      0xa96 ./Core/main.o
+ .debug_abbrev  0x000000000000167a      0x286 ./Core/syscalls.o
+ .debug_abbrev  0x0000000000001900      0x1bf ./Core/sysmem.o
+ .debug_abbrev  0x0000000000001abf      0x145 ./Core/system_stm32f4xx.o
+ .debug_abbrev  0x0000000000001c04      0x21e ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o
+ .debug_abbrev  0x0000000000001e22      0x1ef ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.o
+ .debug_abbrev  0x0000000000002011      0x33c ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o
+ .debug_abbrev  0x000000000000234d      0x1f1 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o
+ .debug_abbrev  0x000000000000253e      0x293 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.o
+ .debug_abbrev  0x00000000000027d1      0x275 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o
+ .debug_abbrev  0x0000000000002a46      0x2fc ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o
+ .debug_abbrev  0x0000000000002d42      0x424 ./QA_Drivers/QAD_ADC.o
+ .debug_abbrev  0x0000000000003166      0x41e ./QA_Drivers/QAD_GPIO.o
+ .debug_abbrev  0x0000000000003584      0x3a1 ./QA_Drivers/QAD_I2C.o
+ .debug_abbrev  0x0000000000003925      0x366 ./QA_Drivers/QAD_UART.o
+ .debug_abbrev  0x0000000000003c8b      0x309 ./QA_Drivers/QAD_PeripheralManagers/QAD_I2CMgr.o
+ .debug_abbrev  0x0000000000003f94      0x309 ./QA_Drivers/QAD_PeripheralManagers/QAD_UARTMgr.o
+ .debug_abbrev  0x000000000000429d      0x90e ./QA_Systems/QAS_Serial/QAS_Serial_Dev_Base.o
+ .debug_abbrev  0x0000000000004bab      0x936 ./QA_Systems/QAS_Serial/QAS_Serial_Dev_UART.o
+ .debug_abbrev  0x00000000000054e1      0x880 ./QA_Tools/QAT_FIFO.o
 
 .debug_aranges  0x0000000000000000     0x11d0
  .debug_aranges

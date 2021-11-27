@@ -27,23 +27,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  00020074  2**0
                   CONTENTS, READONLY
- 12 .debug_line   00018187  00000000  00000000  000200a4  2**0
+ 12 .debug_line   0001818a  00000000  00000000  000200a4  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_info   0002e019  00000000  00000000  0003822b  2**0
+ 13 .debug_info   0002e02a  00000000  00000000  0003822e  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_abbrev 00005d02  00000000  00000000  00066244  2**0
+ 14 .debug_abbrev 00005d61  00000000  00000000  00066258  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_aranges 000011d0  00000000  00000000  0006bf48  2**3
+ 15 .debug_aranges 000011d0  00000000  00000000  0006bfc0  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_str    000aaac8  00000000  00000000  0006d118  2**0
+ 16 .debug_str    000aaac8  00000000  00000000  0006d190  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_ranges 000010c0  00000000  00000000  00117be0  2**3
+ 17 .debug_ranges 000010c0  00000000  00000000  00117c58  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_macro  0001eba7  00000000  00000000  00118ca0  2**0
+ 18 .debug_macro  0001eba7  00000000  00000000  00118d18  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000053  00000000  00000000  00137847  2**0
+ 19 .comment      00000053  00000000  00000000  001378bf  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  0000514c  00000000  00000000  0013789c  2**2
+ 20 .debug_frame  0000514c  00000000  00000000  00137914  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -1099,9 +1099,9 @@ void ADC_IRQHandler(void) {
 		//--------------------------
 		//Constructors / Destructors
 
-	QAD_I2C() = delete;
+	QAD_I2C() = delete;                      //Delete the default class constructor, as we need an initialization structure to be provided on class creation.
 
-	QAD_I2C(QAD_I2C_InitStruct& sInit) :
+	QAD_I2C(QAD_I2C_InitStruct& sInit) :     //The class constructor to be used, which has a reference to an initialization structure passed to it
  8000904:	b580      	push	{r7, lr}
  8000906:	b082      	sub	sp, #8
  8000908:	af00      	add	r7, sp, #0
@@ -11195,11 +11195,11 @@ void QAD_GPIO_Output::periphInit(void) {
 	...
 
 080045d4 <_ZN10QAD_I2CMgr3getEv>:
-	QAD_I2CMgr& operator=(const QAD_I2CMgr& other) = delete;
-
 
 	//-----------------
 	//Singleton Methods
+	//
+	//Used to retrieve a reference to the singleton class
 	static QAD_I2CMgr& get(void) {
  80045d4:	b580      	push	{r7, lr}
  80045d6:	af00      	add	r7, sp, #0
@@ -11239,11 +11239,11 @@ void QAD_GPIO_Output::periphInit(void) {
  8004620:	20000264 	.word	0x20000264
 
 08004624 <_ZN10QAD_I2CMgr8getStateE14QAD_I2C_Periph>:
-
-
-	//------------
 	//Data Methods
 
+	//Used to retrieve the current state (QAD_I2C_PeriphState enum) of a I2C peripheral
+	//eI2C - The I2C peripheral to retrieve the state for. Member of QAD_I2C_Periph
+	//Returns a member of QAD_I2C_State enum (QAD_I2C_Unused, etc)
 	static QAD_I2C_State getState(QAD_I2C_Periph eI2C) {
  8004624:	b580      	push	{r7, lr}
  8004626:	b082      	sub	sp, #8
@@ -11277,6 +11277,10 @@ void QAD_GPIO_Output::periphInit(void) {
 
 08004656 <_ZN10QAD_I2CMgr11getInstanceE14QAD_I2C_Periph>:
 
+
+	//Used to retrieve an instance for an I2C peripheral
+	//eI2C - The I2C peripheral to retrieve the instance for. Member of QAD_I2C_Periph
+	//Returns I2C_TypeDef, as defined in stm32f411xe.h
 	static I2C_TypeDef* getInstance(QAD_I2C_Periph eI2C) {
  8004656:	b580      	push	{r7, lr}
  8004658:	b082      	sub	sp, #8
@@ -11311,6 +11315,9 @@ void QAD_GPIO_Output::periphInit(void) {
 08004688 <_ZN10QAD_I2CMgr11getIRQEventE14QAD_I2C_Periph>:
 
 
+	//Used to retrieve an Event IRQ Enum for an I2C peripheral
+	//eI2C - The I2C peripheral to retrieve the IRQ enum for. Member of QAD_I2C_Periph
+	//Returns member of IRQn_Type enum, as defined in stm32f411xe.h
 	static IRQn_Type getIRQEvent(QAD_I2C_Periph eI2C) {
  8004688:	b580      	push	{r7, lr}
  800468a:	b082      	sub	sp, #8
@@ -11344,6 +11351,10 @@ void QAD_GPIO_Output::periphInit(void) {
 
 080046be <_ZN10QAD_I2CMgr11getIRQErrorE14QAD_I2C_Periph>:
 
+
+	//Used to retrieve an Error IRQ Enum for an I2C peripheral
+	//eI2C - The I2C peripheral to retrieve the IRQ enum for. Member of QAD_I2C_Periph
+	//Returns member of IRQn_Type enum, as defined in stm32f411xe.h
 	static IRQn_Type getIRQError(QAD_I2C_Periph eI2C) {
  80046be:	b580      	push	{r7, lr}
  80046c0:	b082      	sub	sp, #8
@@ -11376,11 +11387,11 @@ void QAD_GPIO_Output::periphInit(void) {
  80046f2:	bd80      	pop	{r7, pc}
 
 080046f4 <_ZN10QAD_I2CMgr11registerI2CE14QAD_I2C_Periph13QAD_I2C_State>:
-
-
-	//------------------
 	//Management Methods
 
+	//Used to register an I2C peripheral as being used by a driver
+	//eI2C - the I2C peripheral to be registered
+	//Returns QA_OK if successful, or returns QA_Error_PeriphBusy if the selected I2C is already in use
 	static QA_Result registerI2C(QAD_I2C_Periph eI2C, QAD_I2C_State eMode) {
  80046f4:	b580      	push	{r7, lr}
  80046f6:	b082      	sub	sp, #8
@@ -11405,6 +11416,9 @@ void QAD_GPIO_Output::periphInit(void) {
 
 0800471c <_ZN10QAD_I2CMgr13deregisterI2CE14QAD_I2C_Periph>:
 
+
+	//Used to deregister an I2C to mark it as no longer being used by a driver
+	//eI2C - the I2C Peripheral to be deregistered
 	static void deregisterI2C(QAD_I2C_Periph eI2C) {
  800471c:	b580      	push	{r7, lr}
  800471e:	b082      	sub	sp, #8
@@ -11425,11 +11439,11 @@ void QAD_GPIO_Output::periphInit(void) {
  800473c:	bd80      	pop	{r7, pc}
 
 0800473e <_ZN10QAD_I2CMgr11enableClockE14QAD_I2C_Periph>:
-
-
 	//-------------
 	//Clock Methods
 
+	//Used to enable the clock for a specific I2C peripheral
+	//eI2C - the I2C peripheral to enable the clock for
 	static void enableClock(QAD_I2C_Periph eI2C) {
  800473e:	b580      	push	{r7, lr}
  8004740:	b082      	sub	sp, #8
@@ -11451,6 +11465,8 @@ void QAD_GPIO_Output::periphInit(void) {
 
 08004760 <_ZN10QAD_I2CMgr12disableClockE14QAD_I2C_Periph>:
 
+	//Used to disable the clock for a specific I2C peripheral
+	//eI2C - the I2C peripheral to disable the clock for
 	static void disableClock(QAD_I2C_Periph eI2C) {
  8004760:	b580      	push	{r7, lr}
  8004762:	b082      	sub	sp, #8
@@ -11471,16 +11487,18 @@ void QAD_GPIO_Output::periphInit(void) {
  8004780:	bd80      	pop	{r7, pc}
 
 08004782 <_ZN7QAD_I2C4initEv>:
-	//------------------------------
-	//QAD_I2C Initialization Methods
-
 //QAD_I2C::init
 //QAD_I2C Initialization Method
+//
+//Used to initialize the I2C driver
+//Returns QA_OK if initialization successful, or an error if not successful (a member of QA_Result aas defined in setup.hpp)
 QA_Result QAD_I2C::init(void) {
  8004782:	b580      	push	{r7, lr}
  8004784:	b084      	sub	sp, #16
  8004786:	af00      	add	r7, sp, #0
  8004788:	6078      	str	r0, [r7, #4]
+
+	//Check if selected I2C peripheral is currently available
   if (QAD_I2CMgr::getState(m_eI2C))
  800478a:	687b      	ldr	r3, [r7, #4]
  800478c:	799b      	ldrb	r3, [r3, #6]
@@ -11498,18 +11516,22 @@ QA_Result QAD_I2C::init(void) {
  80047a4:	2302      	movs	r3, #2
  80047a6:	e013      	b.n	80047d0 <_ZN7QAD_I2C4initEv+0x4e>
 
+  //Register I2C peripheral as now being in use
   QAD_I2CMgr::registerI2C(m_eI2C, QAD_I2C_InUse_Master);
  80047a8:	687b      	ldr	r3, [r7, #4]
  80047aa:	799b      	ldrb	r3, [r3, #6]
  80047ac:	2101      	movs	r1, #1
  80047ae:	4618      	mov	r0, r3
  80047b0:	f7ff ffa0 	bl	80046f4 <_ZN10QAD_I2CMgr11registerI2CE14QAD_I2C_Periph13QAD_I2C_State>
+
+  //Initialize I2C peripheral
   QA_Result eRes = periphInit();
  80047b4:	6878      	ldr	r0, [r7, #4]
  80047b6:	f000 f875 	bl	80048a4 <_ZN7QAD_I2C10periphInitEv>
  80047ba:	4603      	mov	r3, r0
  80047bc:	73fb      	strb	r3, [r7, #15]
 
+  //If initialization failed then deregister I2C peripheral
   if (eRes)
  80047be:	7bfb      	ldrb	r3, [r7, #15]
  80047c0:	2b00      	cmp	r3, #0
@@ -11519,6 +11541,8 @@ QA_Result QAD_I2C::init(void) {
  80047c6:	799b      	ldrb	r3, [r3, #6]
  80047c8:	4618      	mov	r0, r3
  80047ca:	f7ff ffa7 	bl	800471c <_ZN10QAD_I2CMgr13deregisterI2CE14QAD_I2C_Periph>
+
+  //Return initialization result
   return eRes;
  80047ce:	7bfb      	ldrb	r3, [r7, #15]
 }
@@ -11528,11 +11552,11 @@ QA_Result QAD_I2C::init(void) {
  80047d6:	bd80      	pop	{r7, pc}
 
 080047d8 <_ZN7QAD_I2C5startEv>:
-	//-----------------------
-	//QAD_I2C Control Methods
 
 //QAD_I2C::start
 //QAD_I2C Control Method
+//
+//Used to enable the I2C driver
 void QAD_I2C::start(void) {
  80047d8:	b480      	push	{r7}
  80047da:	b083      	sub	sp, #12
@@ -11559,9 +11583,10 @@ void QAD_I2C::start(void) {
 
 08004802 <_ZN7QAD_I2C4stopEv>:
 
-
 //QAD_I2C::stop
 //QAD_I2C Control Method
+//
+//Used to disable the I2C driver
 void QAD_I2C::stop(void) {
  8004802:	b480      	push	{r7}
  8004804:	b083      	sub	sp, #12
@@ -11587,11 +11612,11 @@ void QAD_I2C::stop(void) {
  800482a:	4770      	bx	lr
 
 0800482c <_ZN7QAD_I2C9write8BitEthh>:
-  //--------------------------
-	//QAD_I2C Transceive Methods
-
-//QAD_I2C::write8Bit
-//QAD_I2C Transceive Method
+//Used to write a value to an I2C device connected to the bus, using an 8bit register address and 8bit data
+//uAddr  - The address of the I2C device to write to
+//uReg   - The register address to access on the I2C device that is being written to
+//uValue - The value to write to the I2C device
+//Returns QA_OK if successful, or QA_Fail if unable to perform write
 QA_Result QAD_I2C::write8Bit(uint16_t uAddr, uint8_t uReg, uint8_t uValue) {
  800482c:	b580      	push	{r7, lr}
  800482e:	b084      	sub	sp, #16
@@ -11628,11 +11653,11 @@ QA_Result QAD_I2C::write8Bit(uint16_t uAddr, uint8_t uReg, uint8_t uValue) {
  800486a:	bd80      	pop	{r7, pc}
 
 0800486c <_ZN7QAD_I2C8read8BitEthPh>:
-}
-
-
-//QAD_I2C::read8Bit
-//QAD_I2C Transceive Method
+//Used to read a value from an I2C device connected to the bus, using an 8bit register address and 8bit data
+//uAddr  - The address of the I2C device to read from
+//uReg   - The register address to access on the I2C device that is being read from
+//pValue - A pointer to a uint8_t where the read data will be stored
+//Returns QA_OK if successful, or QA_Fail if unable to perform read
 QA_Result QAD_I2C::read8Bit(uint16_t uAddr, uint8_t uReg, uint8_t* pValue) {
  800486c:	b580      	push	{r7, lr}
  800486e:	b086      	sub	sp, #24
@@ -11665,11 +11690,11 @@ QA_Result QAD_I2C::read8Bit(uint16_t uAddr, uint8_t uReg, uint8_t* pValue) {
  80048a2:	bd80      	pop	{r7, pc}
 
 080048a4 <_ZN7QAD_I2C10periphInitEv>:
-	//--------------------------------------
-	//QAD_I2C Private Initialization Methods
-
-//QAD_I2C::periphInit
-//QAD_I2C Private Initialization Method
+//
+//Used to initialize the GPIOs, peripheral clock, and the I2C peripheral itself as well as setting interrupt priorities and enabling the interrupts
+//In the case of a failed initialization, a partial deinitialization will be performed to make sure the peripheral, clock and GPIOs are all in the
+//uninitialized state
+//Returns QA_OK if successful, or QA_Fail if initialization fails
 QA_Result QAD_I2C::periphInit(void) {
  80048a4:	b580      	push	{r7, lr}
  80048a6:	b088      	sub	sp, #32
@@ -11684,21 +11709,21 @@ QA_Result QAD_I2C::periphInit(void) {
  80048b8:	60da      	str	r2, [r3, #12]
  80048ba:	611a      	str	r2, [r3, #16]
 
-  //Init SCK Pin
-  GPIO_Init.Pin       = m_uSCL_Pin;
+  //Init SCK GPIO Pin
+  GPIO_Init.Pin       = m_uSCL_Pin;                //Set pin number
  80048bc:	687b      	ldr	r3, [r7, #4]
  80048be:	8d9b      	ldrh	r3, [r3, #44]	; 0x2c
  80048c0:	60fb      	str	r3, [r7, #12]
-  GPIO_Init.Mode      = GPIO_MODE_AF_OD;
+  GPIO_Init.Mode      = GPIO_MODE_AF_OD;           //Set clock pin as alternate function in open-drain mode
  80048c2:	2312      	movs	r3, #18
  80048c4:	613b      	str	r3, [r7, #16]
-  GPIO_Init.Pull      = GPIO_PULLUP;
+  GPIO_Init.Pull      = GPIO_PULLUP;               //Enable pull-up resistor on pin
  80048c6:	2301      	movs	r3, #1
  80048c8:	617b      	str	r3, [r7, #20]
-  GPIO_Init.Speed     = GPIO_SPEED_FREQ_VERY_HIGH;
+  GPIO_Init.Speed     = GPIO_SPEED_FREQ_VERY_HIGH; //Set GPIO pin speed
  80048ca:	2303      	movs	r3, #3
  80048cc:	61bb      	str	r3, [r7, #24]
-  GPIO_Init.Alternate = m_uSCL_AF;
+  GPIO_Init.Alternate = m_uSCL_AF;                 //Set alternate function to suit required I2C peripheral
  80048ce:	687b      	ldr	r3, [r7, #4]
  80048d0:	f893 302e 	ldrb.w	r3, [r3, #46]	; 0x2e
  80048d4:	61fb      	str	r3, [r7, #28]
@@ -11710,21 +11735,21 @@ QA_Result QAD_I2C::periphInit(void) {
  80048e0:	4618      	mov	r0, r3
  80048e2:	f7fd facb 	bl	8001e7c <HAL_GPIO_Init>
 
-  //Init SDA Pin
-  GPIO_Init.Pin       = m_uSDA_Pin;
+  //Init SDA GPIO Pin
+  GPIO_Init.Pin       = m_uSDA_Pin;                //Set pin number
  80048e6:	687b      	ldr	r3, [r7, #4]
  80048e8:	8e9b      	ldrh	r3, [r3, #52]	; 0x34
  80048ea:	60fb      	str	r3, [r7, #12]
-  GPIO_Init.Mode      = GPIO_MODE_AF_OD;
+  GPIO_Init.Mode      = GPIO_MODE_AF_OD;           //Set clock pin as alternate function in open-drain mode
  80048ec:	2312      	movs	r3, #18
  80048ee:	613b      	str	r3, [r7, #16]
-  GPIO_Init.Pull      = GPIO_PULLUP;
+  GPIO_Init.Pull      = GPIO_PULLUP;               //Enable pull-up resistor on pin
  80048f0:	2301      	movs	r3, #1
  80048f2:	617b      	str	r3, [r7, #20]
-  GPIO_Init.Speed     = GPIO_SPEED_FREQ_VERY_HIGH;
+  GPIO_Init.Speed     = GPIO_SPEED_FREQ_VERY_HIGH; //Set GPIO pin speed
  80048f4:	2303      	movs	r3, #3
  80048f6:	61bb      	str	r3, [r7, #24]
-  GPIO_Init.Alternate = m_uSDA_AF;
+  GPIO_Init.Alternate = m_uSDA_AF;                 //Set alternate function to suit required I2C peripheral
  80048f8:	687b      	ldr	r3, [r7, #4]
  80048fa:	f893 3036 	ldrb.w	r3, [r3, #54]	; 0x36
  80048fe:	61fb      	str	r3, [r7, #28]
@@ -11746,7 +11771,7 @@ QA_Result QAD_I2C::periphInit(void) {
 
 
   //Initialize I2C Peripheral
-  m_sHandle.Instance             = QAD_I2CMgr::getInstance(m_eI2C);
+  m_sHandle.Instance             = QAD_I2CMgr::getInstance(m_eI2C);  //Set instance for required I2C peripheral
  800491a:	687b      	ldr	r3, [r7, #4]
  800491c:	799b      	ldrb	r3, [r3, #6]
  800491e:	4618      	mov	r0, r3
@@ -11754,43 +11779,43 @@ QA_Result QAD_I2C::periphInit(void) {
  8004924:	4602      	mov	r2, r0
  8004926:	687b      	ldr	r3, [r7, #4]
  8004928:	63da      	str	r2, [r3, #60]	; 0x3c
-  m_sHandle.Init.ClockSpeed      = m_uClockSpeed;
+  m_sHandle.Init.ClockSpeed      = m_uClockSpeed;                    //Set selected clock speed
  800492a:	687b      	ldr	r3, [r7, #4]
  800492c:	68da      	ldr	r2, [r3, #12]
  800492e:	687b      	ldr	r3, [r7, #4]
  8004930:	641a      	str	r2, [r3, #64]	; 0x40
-  m_sHandle.Init.DutyCycle       = m_eDutyCycle;
+  m_sHandle.Init.DutyCycle       = m_eDutyCycle;                     //Set selected duty-cycle mode
  8004932:	687b      	ldr	r3, [r7, #4]
  8004934:	691a      	ldr	r2, [r3, #16]
  8004936:	687b      	ldr	r3, [r7, #4]
  8004938:	645a      	str	r2, [r3, #68]	; 0x44
-  m_sHandle.Init.AddressingMode  = m_eAddressingMode;
+  m_sHandle.Init.AddressingMode  = m_eAddressingMode;                //Set selected addressing mode
  800493a:	687b      	ldr	r3, [r7, #4]
  800493c:	695a      	ldr	r2, [r3, #20]
  800493e:	687b      	ldr	r3, [r7, #4]
  8004940:	64da      	str	r2, [r3, #76]	; 0x4c
-  m_sHandle.Init.DualAddressMode = m_eDualAddressingMode;
+  m_sHandle.Init.DualAddressMode = m_eDualAddressingMode;            //Set whether dual addressing mode is being used
  8004942:	687b      	ldr	r3, [r7, #4]
  8004944:	699a      	ldr	r2, [r3, #24]
  8004946:	687b      	ldr	r3, [r7, #4]
  8004948:	651a      	str	r2, [r3, #80]	; 0x50
-  m_sHandle.Init.GeneralCallMode = m_eGeneralCallMode;
+  m_sHandle.Init.GeneralCallMode = m_eGeneralCallMode;               //Set whether general call addressing mode is being used
  800494a:	687b      	ldr	r3, [r7, #4]
  800494c:	69da      	ldr	r2, [r3, #28]
  800494e:	687b      	ldr	r3, [r7, #4]
  8004950:	659a      	str	r2, [r3, #88]	; 0x58
-  m_sHandle.Init.NoStretchMode   = m_eNoStretchMode;
+  m_sHandle.Init.NoStretchMode   = m_eNoStretchMode;                 //Set whether clock stretching is currently disabled
  8004952:	687b      	ldr	r3, [r7, #4]
  8004954:	6a1a      	ldr	r2, [r3, #32]
  8004956:	687b      	ldr	r3, [r7, #4]
  8004958:	65da      	str	r2, [r3, #92]	; 0x5c
-  m_sHandle.Init.OwnAddress1     = m_uOwnAddress1;
+  m_sHandle.Init.OwnAddress1     = m_uOwnAddress1;                   //Set primary peripheral I2C address
  800495a:	687b      	ldr	r3, [r7, #4]
  800495c:	8c9b      	ldrh	r3, [r3, #36]	; 0x24
  800495e:	461a      	mov	r2, r3
  8004960:	687b      	ldr	r3, [r7, #4]
  8004962:	649a      	str	r2, [r3, #72]	; 0x48
-  m_sHandle.Init.OwnAddress2     = m_uOwnAddress2;
+  m_sHandle.Init.OwnAddress2     = m_uOwnAddress2;                   //Set secondary peripheral I2C address
  8004964:	687b      	ldr	r3, [r7, #4]
  8004966:	8cdb      	ldrh	r3, [r3, #38]	; 0x26
  8004968:	461a      	mov	r2, r3
@@ -11819,7 +11844,7 @@ QA_Result QAD_I2C::periphInit(void) {
   }
 
 
-  //Enable I2C Interrupts
+  //Enable I2C Interrupt priorties and enable IRQs
   HAL_NVIC_SetPriority(QAD_I2CMgr::getIRQEvent(m_eI2C), m_uIRQPriority_Event, 0x0);
  8004994:	687b      	ldr	r3, [r7, #4]
  8004996:	799b      	ldrb	r3, [r3, #6]
@@ -11864,11 +11889,11 @@ QA_Result QAD_I2C::periphInit(void) {
 
 
   //Set Driver States
-  m_eInitState = QA_Initialized;
+  m_eInitState = QA_Initialized; //Set driver state as initialized
  80049ec:	687b      	ldr	r3, [r7, #4]
  80049ee:	2201      	movs	r2, #1
  80049f0:	711a      	strb	r2, [r3, #4]
-  m_eState     = QA_Inactive;
+  m_eState     = QA_Inactive;    //Set driver as currently inactive
  80049f2:	687b      	ldr	r3, [r7, #4]
  80049f4:	2200      	movs	r2, #0
  80049f6:	715a      	strb	r2, [r3, #5]
@@ -11884,10 +11909,11 @@ QA_Result QAD_I2C::periphInit(void) {
  8004a00:	bd80      	pop	{r7, pc}
 
 08004a02 <_ZN7QAD_I2C12periphDeinitENS_10DeinitModeE>:
-
-
-//QAD_I2C::periphDeinit
-//QAD_I2C Private Initialization Method
+//
+//Used to deinitialize the GPIOs, peripheral clock, and the peripheral itself, as well as disabling interrupts
+//eDeinitMode - Set to DeinitPartial to perform a partial deinitialization (only to be used by periphInit() method
+//              in a case where peripheral initialization has failed).
+//              Set to DeinitFull to perform a full deinitialization in a case where the driver is fully initialized
 void QAD_I2C::periphDeinit(DeinitMode eDeinitMode) {
  8004a02:	b580      	push	{r7, lr}
  8004a04:	b082      	sub	sp, #8
@@ -11896,15 +11922,18 @@ void QAD_I2C::periphDeinit(DeinitMode eDeinitMode) {
  8004a0a:	460b      	mov	r3, r1
  8004a0c:	70fb      	strb	r3, [r7, #3]
 
+	//Check if full deinitialization is required
 	if (eDeinitMode) {
  8004a0e:	78fb      	ldrb	r3, [r7, #3]
  8004a10:	2b00      	cmp	r3, #0
  8004a12:	d019      	beq.n	8004a48 <_ZN7QAD_I2C12periphDeinitENS_10DeinitModeE+0x46>
 
+		//Deactivate the peripheral
 		stop();
  8004a14:	6878      	ldr	r0, [r7, #4]
  8004a16:	f7ff fef4 	bl	8004802 <_ZN7QAD_I2C4stopEv>
 
+		//Disable the interrupts
 		HAL_NVIC_DisableIRQ(QAD_I2CMgr::getIRQError(m_eI2C));
  8004a1a:	687b      	ldr	r3, [r7, #4]
  8004a1c:	799b      	ldrb	r3, [r3, #6]
@@ -11922,6 +11951,7 @@ void QAD_I2C::periphDeinit(DeinitMode eDeinitMode) {
  8004a38:	4618      	mov	r0, r3
  8004a3a:	f7fd fa04 	bl	8001e46 <HAL_NVIC_DisableIRQ>
 
+		//Deinitialize the peripheral
 		HAL_I2C_DeInit(&m_sHandle);
  8004a3e:	687b      	ldr	r3, [r7, #4]
  8004a40:	333c      	adds	r3, #60	; 0x3c
@@ -11929,14 +11959,14 @@ void QAD_I2C::periphDeinit(DeinitMode eDeinitMode) {
  8004a44:	f7fd fde0 	bl	8002608 <HAL_I2C_DeInit>
 	}
 
-	//Disable I2C Clock
+	//Disable peripheral clock
 	QAD_I2CMgr::disableClock(m_eI2C);
  8004a48:	687b      	ldr	r3, [r7, #4]
  8004a4a:	799b      	ldrb	r3, [r3, #6]
  8004a4c:	4618      	mov	r0, r3
  8004a4e:	f7ff fe87 	bl	8004760 <_ZN10QAD_I2CMgr12disableClockE14QAD_I2C_Periph>
 
-	//Deinit GPIOs
+	//Deinitialize GPIOs
 	HAL_GPIO_DeInit(m_pSCL_GPIO, m_uSCL_Pin);
  8004a52:	687b      	ldr	r3, [r7, #4]
  8004a54:	6a9a      	ldr	r2, [r3, #40]	; 0x28
@@ -11955,11 +11985,11 @@ void QAD_I2C::periphDeinit(DeinitMode eDeinitMode) {
  8004a6e:	f7fd fb89 	bl	8002184 <HAL_GPIO_DeInit>
 
   //Set Driver States
-	m_eState     = QA_Inactive;
+	m_eState     = QA_Inactive;       //Set driver as being inactive
  8004a72:	687b      	ldr	r3, [r7, #4]
  8004a74:	2200      	movs	r2, #0
  8004a76:	715a      	strb	r2, [r3, #5]
-	m_eInitState = QA_NotInitialized;
+	m_eInitState = QA_NotInitialized; //Set driver as not being initialized
  8004a78:	687b      	ldr	r3, [r7, #4]
  8004a7a:	2200      	movs	r2, #0
  8004a7c:	711a      	strb	r2, [r3, #4]
@@ -11971,11 +12001,11 @@ void QAD_I2C::periphDeinit(DeinitMode eDeinitMode) {
  8004a84:	bd80      	pop	{r7, pc}
 
 08004a86 <_ZN7QAD_I2C5writeEtttPht>:
-  //----------------------------------
-	//QAD_I2C Private Transceive Methods
-
-//QAD_I2C::write
-//QAD_I2C Private Transceive Method
+//uReg        - The register address to access on the I2C device that is being written to
+//uMemAddress - The number of bytes in size of the register/memory address
+//pData       - A pointer to an array of bytes containing the data to be written
+//uLength     - The number of bytes to be written
+//Returns QA_OK if successful, or QA_Fail if unable to perform write
 QA_Result QAD_I2C::write(uint16_t uAddr, uint16_t uReg, uint16_t uMemAddress, uint8_t* pData, uint16_t uLength) {
  8004a86:	b590      	push	{r4, r7, lr}
  8004a88:	b089      	sub	sp, #36	; 0x24
@@ -12026,10 +12056,11 @@ QA_Result QAD_I2C::write(uint16_t uAddr, uint16_t uReg, uint16_t uMemAddress, ui
  8004adc:	bd90      	pop	{r4, r7, pc}
 
 08004ade <_ZN7QAD_I2C4readEtttPht>:
-
-
-//QAD_I2C::read
-//QAD_I2C Private Transceive Method
+//uReg        - The register address to access on the I2C device that is being read from
+//uMemAddress - The number of bytes in size of the register/memory address
+//pData       - A pointer to an array of bytes to contain the data to be read
+//uLength     - The number of bytes to be read
+//Returns QA_OK if successful, or QA_Fail if unable to perform read
 QA_Result QAD_I2C::read(uint16_t uAddr, uint16_t uReg, uint16_t uMemAddress, uint8_t* pData, uint16_t uLength) {
  8004ade:	b590      	push	{r4, r7, lr}
  8004ae0:	b089      	sub	sp, #36	; 0x24
@@ -12939,11 +12970,11 @@ void QAD_UART::periphDeinit(QAD_UART::DeinitMode eDeinitMode) {
 	...
 
 08004ff4 <_ZN10QAD_I2CMgrC1Ev>:
-	//-----------------------
-	//QAD_I2CMgr Constructors
-
 //QAD_I2CMgr::QAD_I2CMgr
 //QAD_I2CMgr Constructor
+//
+//Fills out details for the system's I2C peripherals
+//As this is a private method in a singleton class, this method will be called the first time the class's static get() method is called.
 QAD_I2CMgr::QAD_I2CMgr() {
  8004ff4:	b480      	push	{r7}
  8004ff6:	b085      	sub	sp, #20
@@ -12956,6 +12987,7 @@ QAD_I2CMgr::QAD_I2CMgr() {
  8005000:	7bfb      	ldrb	r3, [r7, #15]
  8005002:	2b02      	cmp	r3, #2
  8005004:	d80d      	bhi.n	8005022 <_ZN10QAD_I2CMgrC1Ev+0x2e>
+		//Set current state of peripheral to unused
 		m_sI2Cs[i].eState = QAD_I2C_Unused;
  8005006:	7bfa      	ldrb	r2, [r7, #15]
  8005008:	6879      	ldr	r1, [r7, #4]
@@ -13042,11 +13074,11 @@ QAD_I2CMgr::QAD_I2CMgr() {
  8005084:	40005c00 	.word	0x40005c00
 
 08005088 <_ZN10QAD_I2CMgr15imp_registerI2CE14QAD_I2C_Periph13QAD_I2C_State>:
-	//-----------------------------
-	//QAD_I2CMgr Management Methods
-
-//QAD_I2CMgr::imp_registerI2C
-//QAD_I2CMgr Management Method
+//
+//To be called from static method registerI2C()
+//Used to register an I2C peripheral as being used by a driver
+//eI2C - the I2C peripheral to be registered
+//Returns QA_OK if successful, or returns QA_Error_PeriphBusy if the selected I2C is already in use
 QA_Result QAD_I2CMgr::imp_registerI2C(QAD_I2C_Periph eI2C, QAD_I2C_State eMode) {
  8005088:	b480      	push	{r7}
  800508a:	b083      	sub	sp, #12
@@ -13101,10 +13133,11 @@ QA_Result QAD_I2CMgr::imp_registerI2C(QAD_I2C_Periph eI2C, QAD_I2C_State eMode) 
  80050dc:	4770      	bx	lr
 
 080050de <_ZN10QAD_I2CMgr17imp_deregisterI2CE14QAD_I2C_Periph>:
-
-
-//QAD_I2CMgr::imp_deregisterI2C
 //QAD_I2CMgr Management Method
+//
+//To be called from static method deregisterI2C()
+//Used to deregister an I2C to mark it as no longer being used by a driver
+//eI2C - the I2C Peripheral to be deregistered
 void QAD_I2CMgr::imp_deregisterI2C(QAD_I2C_Periph eI2C) {
  80050de:	b480      	push	{r7}
  80050e0:	b083      	sub	sp, #12
@@ -13140,11 +13173,11 @@ void QAD_I2CMgr::imp_deregisterI2C(QAD_I2C_Periph eI2C) {
 	...
 
 08005114 <_ZN10QAD_I2CMgr15imp_enableClockE14QAD_I2C_Periph>:
-	//------------------------
-	//QAD_I2CMgr Clock Methods
-
-//QAD_I2CMgr::imp_enableClock
 //QAD_I2CMgr Clock Method
+//
+//To be called by static method enableClock()
+//Used to enable the clock for a specific I2C peripheral
+//eI2C - the I2C peripheral to enable the clock for
 void QAD_I2CMgr::imp_enableClock(QAD_I2C_Periph eI2C) {
  8005114:	b480      	push	{r7}
  8005116:	b087      	sub	sp, #28
@@ -13259,10 +13292,11 @@ void QAD_I2CMgr::imp_enableClock(QAD_I2C_Periph eI2C) {
  80051ec:	40023800 	.word	0x40023800
 
 080051f0 <_ZN10QAD_I2CMgr16imp_disableClockE14QAD_I2C_Periph>:
-
-
-//QAD_I2CMgr::imp_disableClock
 //QAD_I2CMgr Clock Method
+//
+//To be called from static method disableClock()
+//Used to disable the clock for a specific I2C peripheral
+//eI2C - the I2C peripheral to disable the clock for
 void QAD_I2CMgr::imp_disableClock(QAD_I2C_Periph eI2C) {
  80051f0:	b480      	push	{r7}
  80051f2:	b083      	sub	sp, #12
