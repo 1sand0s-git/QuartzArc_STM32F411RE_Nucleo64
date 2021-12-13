@@ -26,6 +26,7 @@
 #include "QAD_PWM.hpp"
 #include "QAD_ADC.hpp"
 #include "QAD_I2C.hpp"
+#include "QAD_SPI.hpp"
 
 #include "QAS_Serial_Dev_UART.hpp"
 
@@ -45,9 +46,8 @@ QAD_GPIO_Output* GPIO_UserLED;
 QAS_Serial_Dev_UART* UART_STLink;
 
 
-//I2C Test Driver
-QAD_I2C* I2C_ADXL345;
-
+//SPI Test
+QAD_SPI* SPI_Flash;
 
 
 //Task Timing
@@ -122,119 +122,146 @@ int main(void) {
   UART_STLink->txStringCR("STM32F411 Nucleo64 Booting...");
 
 
-
   //--------------
-  //--------------
-  //Initialize I2C
+  //Initialize SPI
 
-  /*GPIO_InitTypeDef GPIO_Init = {0};
+/*  GPIO_InitTypeDef GPIO_Init = {0};
 
-    //SCL
-  GPIO_Init.Pin           = GPIO_PIN_10;
-  GPIO_Init.Mode          = GPIO_MODE_AF_OD;
-  GPIO_Init.Pull          = GPIO_PULLUP;
-  GPIO_Init.Speed         = GPIO_SPEED_FREQ_VERY_HIGH;
-  GPIO_Init.Alternate     = GPIO_AF4_I2C2;
-  HAL_GPIO_Init(GPIOB, &GPIO_Init);
+    //CLK
+  GPIO_Init.Pin       = GPIO_PIN_5;
+  GPIO_Init.Mode      = GPIO_MODE_AF_PP;
+  GPIO_Init.Pull      = GPIO_NOPULL;
+  GPIO_Init.Speed     = GPIO_SPEED_FREQ_HIGH;
+  GPIO_Init.Alternate = GPIO_AF5_SPI1;
+  HAL_GPIO_Init(GPIOA, &GPIO_Init);
 
-    //SDA
-  GPIO_Init.Pin           = GPIO_PIN_3;
-  GPIO_Init.Mode          = GPIO_MODE_AF_OD;
-  GPIO_Init.Pull          = GPIO_PULLUP;
-  GPIO_Init.Speed         = GPIO_SPEED_FREQ_VERY_HIGH;
-  GPIO_Init.Alternate     = GPIO_AF9_I2C2;
-  HAL_GPIO_Init(GPIOB, &GPIO_Init);
+		//MOSI
+	GPIO_Init.Pin       = GPIO_PIN_7;
+	GPIO_Init.Mode      = GPIO_MODE_AF_PP;
+	GPIO_Init.Pull      = GPIO_NOPULL;
+	GPIO_Init.Speed     = GPIO_SPEED_FREQ_HIGH;
+	GPIO_Init.Alternate = GPIO_AF5_SPI1;
+	HAL_GPIO_Init(GPIOA, &GPIO_Init);
+
+		//MISO
+	GPIO_Init.Pin       = GPIO_PIN_6;
+	GPIO_Init.Mode      = GPIO_MODE_AF_PP;
+	GPIO_Init.Pull      = GPIO_NOPULL;
+	GPIO_Init.Speed     = GPIO_SPEED_FREQ_HIGH;
+	GPIO_Init.Alternate = GPIO_AF5_SPI1;
+	HAL_GPIO_Init(GPIOA, &GPIO_Init);
+
+		//CS
+	GPIO_Init.Pin       = GPIO_PIN_4;
+	GPIO_Init.Mode      = GPIO_MODE_AF_PP;
+	GPIO_Init.Pull      = GPIO_PULLUP;
+	GPIO_Init.Speed     = GPIO_SPEED_FREQ_HIGH;
+	GPIO_Init.Alternate = GPIO_AF5_SPI1;
+	HAL_GPIO_Init(GPIOA, &GPIO_Init);
 
 
-    //Enable I2C Clock
-	__HAL_RCC_I2C2_CLK_ENABLE();
-  __HAL_RCC_I2C2_FORCE_RESET();
-  __HAL_RCC_I2C2_RELEASE_RESET();
+	  //Enable Clock
+	__HAL_RCC_SPI1_CLK_ENABLE();
+	__HAL_RCC_SPI1_FORCE_RESET();
+	__HAL_RCC_SPI1_RELEASE_RESET();
 
 
-    //Init I2C Peripheral
-  I2C_HandleTypeDef I2C_Handle = {0};
-  I2C_Handle.Instance                = I2C2;
-  I2C_Handle.Init.ClockSpeed         = 100000;
-  I2C_Handle.Init.DutyCycle          = I2C_DUTYCYCLE_2;
-  I2C_Handle.Init.AddressingMode     = I2C_ADDRESSINGMODE_7BIT;
-  I2C_Handle.Init.DualAddressMode    = I2C_DUALADDRESS_DISABLE;
-  I2C_Handle.Init.GeneralCallMode    = I2C_GENERALCALL_DISABLE;
-  I2C_Handle.Init.NoStretchMode      = I2C_NOSTRETCH_DISABLE;
-  I2C_Handle.Init.OwnAddress1        = 0x00;
-  I2C_Handle.Init.OwnAddress2        = 0x00;
-  if (HAL_I2C_Init(&I2C_Handle) != HAL_OK) {
+	  //Initialize Peripheral
+	SPI_HandleTypeDef SPI_Handle;
+	SPI_Handle.Instance               = SPI1;
+	SPI_Handle.Init.Mode              = SPI_MODE_MASTER;
+	SPI_Handle.Init.Direction         = SPI_DIRECTION_2LINES;
+	SPI_Handle.Init.DataSize          = SPI_DATASIZE_8BIT;
+	SPI_Handle.Init.CLKPolarity       = SPI_POLARITY_LOW;
+	SPI_Handle.Init.CLKPhase          = SPI_PHASE_1EDGE;
+	SPI_Handle.Init.NSS               = SPI_NSS_HARD_OUTPUT;
+	SPI_Handle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_4;
+  SPI_Handle.Init.FirstBit          = SPI_FIRSTBIT_MSB;
+  SPI_Handle.Init.TIMode            = SPI_TIMODE_DISABLE;
+  SPI_Handle.Init.CRCCalculation    = SPI_CRCCALCULATION_DISABLE;
+  SPI_Handle.Init.CRCPolynomial     = 0;
+
+  if (HAL_SPI_Init(&SPI_Handle) != HAL_OK) {
+  	UART_STLink->txStringCR("SPI: Initialization Failed");
   	GPIO_UserLED->on();
-  	UART_STLink->txStringCR("I2C: Initialization Failed");
   	while(1) {}
   }
-  UART_STLink->txStringCR("I2C: Initialized");
+  UART_STLink->txStringCR("SPI: Initialized successfully");
 
-    //Enable I2C Peripheral
-  __HAL_I2C_ENABLE(&I2C_Handle);
+  __HAL_SPI_ENABLE(&SPI_Handle);
 
+    //Test Communication
+  uint8_t dataTX[4] = {0x9F, 0x00, 0x00, 0x00};
+  uint8_t dataRX[4];
 
-    //
-  uint8_t uData = 0;
-  if (HAL_I2C_Mem_Read(&I2C_Handle, 0x53 << 1, 0x00, 1, &uData, 1, 1000) != HAL_OK) {
-  	UART_STLink->txStringCR("I2C Read: Failed");
-  	while(1) {}
+  if (HAL_SPI_TransmitReceive(&SPI_Handle, &dataTX[0], &dataRX[0], 4, 1000) != HAL_OK) {
+  	UART_STLink->txStringCR("SPI: Transceive Failed");
   }
 
   char strOut[256];
-  sprintf(strOut, "I2C Read: ID - %02X", uData);
+  sprintf(strOut, "SPI: Received %02X - %02X - %02X", dataRX[1], dataRX[2], dataRX[3]);
   UART_STLink->txStringCR(strOut);*/
 
 
-  QAD_I2C_InitStruct I2C_Init;
-  I2C_Init.eI2C                = QAD_I2C2;
-  I2C_Init.uIRQPriority_Event  = 0xE;
-  I2C_Init.uIRQPriority_Error  = 0xE;
-  I2C_Init.uClockSpeed         = 100000;
-  I2C_Init.eDutyCycle          = QAD_I2C_DutyCycle_2;
-  I2C_Init.eAddressingMode     = QAD_I2C_AddressingMode_7Bit;
-  I2C_Init.eDualAddressingMode = QAD_I2C_DualAddressingMode_Disable;
-  I2C_Init.eGeneralCallMode    = QAD_I2C_GeneralCallMode_Disable;
-  I2C_Init.eNoStretchMode      = QAD_I2C_NoStretchMode_Disable;
-  I2C_Init.uOwnAddress1        = 0;
-  I2C_Init.uOwnAddress2        = 0;
+  //--------------
+  //--------------
+  //Initialize SPI
+  QAD_SPI_InitStruct SPI_Init;
+  SPI_Init.eSPI              = QAD_SPI1;
+  SPI_Init.uIRQPriority      = 0xE;
+  SPI_Init.eSPIMode          = QAD_SPI_Mode_Master;
+  SPI_Init.eSPIBiDir         = QAD_SPI_BiDir_Enabled;
+  SPI_Init.eSPILines         = QAD_SPI_Lines_2Lines;
+  SPI_Init.eSPIDataSize      = QAD_SPI_DataSize_8bit;
+  SPI_Init.eSPIClkPolarity   = QAD_SPI_ClkPolarity_Low;
+  SPI_Init.eSPIClkPhase      = QAD_SPI_ClkPhase_1Edge;
+  SPI_Init.eSPICS            = QAD_SPI_CS_Soft;
+  SPI_Init.eSPIPrescaler     = QAD_SPI_BaudPrescaler_128	;
+  SPI_Init.eSPIFirstBit      = QAD_SPI_FirstBit_MSB;
+  SPI_Init.eSPITIMode        = QAD_SPI_TIMode_Disable;
+  SPI_Init.eSPICRC           = QAD_SPI_CRC_Disable;
+  SPI_Init.uSPICRCPolynomial = 7;
 
-  I2C_Init.pSCL_GPIO           = GPIOB;
-  I2C_Init.uSCL_Pin            = GPIO_PIN_10;
-  I2C_Init.uSCL_AF             = GPIO_AF4_I2C2;
+  SPI_Init.pClk_GPIO         = GPIOA;
+  SPI_Init.uClk_Pin          = GPIO_PIN_5;
+  SPI_Init.uClk_AF           = GPIO_AF5_SPI1;
 
-  I2C_Init.pSDA_GPIO           = GPIOB;
-  I2C_Init.uSDA_Pin            = GPIO_PIN_3;
-  I2C_Init.uSDA_AF             = GPIO_AF9_I2C2;
-  I2C_ADXL345 = new QAD_I2C(I2C_Init);
+	SPI_Init.pMOSI_GPIO        = GPIOA;
+	SPI_Init.uMOSI_Pin         = GPIO_PIN_7;
+	SPI_Init.uMOSI_AF          = GPIO_AF5_SPI1;
 
-  if (I2C_ADXL345->init()) {
-  	UART_STLink->txStringCR("I2C1: Initialization Failed");
-  	GPIO_UserLED->on();
-  	while(1) {}
-  }
-  I2C_ADXL345->start();
-  UART_STLink->txStringCR("I2C1: Initialized and Started");
+	SPI_Init.pMISO_GPIO        = GPIOA;
+	SPI_Init.uMISO_Pin         = GPIO_PIN_6;
+	SPI_Init.uMISO_AF          = GPIO_AF5_SPI1;
 
-  //Test ADXL345
-  uint8_t testVal = 0;
-  char strOut[256];
+	SPI_Init.pCS_GPIO          = GPIOA;
+	SPI_Init.uCS_Pin           = GPIO_PIN_4;
+	SPI_Init.uCS_AF            = GPIO_AF5_SPI1;
+	SPI_Flash = new QAD_SPI(SPI_Init);
 
-  I2C_ADXL345->read8Bit(0x53 << 1, 0x00, &testVal);
-  sprintf(strOut, "ADXL345 ID: %02X", testVal);
-  UART_STLink->txStringCR(strOut);
+	if (SPI_Flash->init()) {
+		UART_STLink->txStringCR("SPI - Flash: Initialization Failed");
+		GPIO_UserLED->on();
+		while(1) {}
+	}
+	SPI_Flash->start();
+	UART_STLink->txStringCR("SPI - Flash: Initialized and Started");
 
-  testVal = 0;
-  I2C_ADXL345->write8Bit(0x53 << 1, 0x31, 0x00);
-  I2C_ADXL345->read8Bit(0x53 << 1, 0x31, &testVal);
-  sprintf(strOut, "ADXL345 Data Format: %02X", testVal);
-  UART_STLink->txStringCR(strOut);
 
-  testVal = 0;
-  I2C_ADXL345->write8Bit(0x53 << 1, 0x31, 0x04);
-  I2C_ADXL345->read8Bit(0x53 << 1, 0x31, &testVal);
-  sprintf(strOut, "ADXL345 Data Format: %02X", testVal);
-  UART_STLink->txStringCR(strOut);
+	//Read Flash ID
+	uint8_t uDataTX[4];
+	uint8_t uDataRX[4];
+
+	uDataTX[0] = 0x9F;
+	for (uint8_t i=1; i<4; i++)
+		uDataTX[i] = 0x00;
+
+	SPI_Flash->transceive(&uDataTX[0], &uDataRX[0], 4);
+
+	char strID[256];
+	sprintf(strID, "SPI - Flash: ID Register = %02X - %02X - %02X", uDataRX[1], uDataRX[2], uDataRX[3]);
+	UART_STLink->txStringCR(strID);
+
 
 
 	//----------------------------------

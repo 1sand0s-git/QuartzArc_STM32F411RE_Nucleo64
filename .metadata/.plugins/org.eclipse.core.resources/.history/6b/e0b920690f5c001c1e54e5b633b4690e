@@ -1,0 +1,57 @@
+/* ----------------------------------------------------------------------- */
+/*                                                                         */
+/*   Quartz Arc                                                            */
+/*                                                                         */
+/*   STM32 F411RE Nucleo 64                                                */
+/*                                                                         */
+/*   System: Drivers                                                       */
+/*   Role: SPI Management Driver                                           */
+/*   Filename: QAD_SPIMgr.hpp                                              */
+/*   Date: 13th December 2021                                              */
+/*   Created By: Benjamin Rosser                                           */
+/*                                                                         */
+/*   This code is covered by Creative Commons CC-BY-NC-SA license          */
+/*   (C) Copyright 2021 Benjamin Rosser                                    */
+/*                                                                         */
+/* ----------------------------------------------------------------------- */
+
+//Prevent Recursive Inclusion
+#ifndef __QAD_SPIMGR_HPP_
+#define __QAD_SPIMGR_HPP_
+
+//Includes
+#include "setup.hpp"
+
+
+	//------------------------------------------
+	//------------------------------------------
+  //------------------------------------------
+
+
+//--------------
+//QAD_SPI_Periph
+enum QAD_SPI_Periph : uint8_t {
+	QAD_SPI1 = 0,
+	QAD_SPI2,
+	QAD_SPI3,
+	QAD_SPI4,
+	QAD_SPI5,
+	QAD_SPINone
+};
+
+//SPI Peripheral Count
+const uint8_t QAD_SPI_PeriphCount = QAD_SPINone;
+
+
+//------------
+//QAD_SPIState
+enum QAD_SPI_State : uint8_t {
+	QAD_SPI_Unused = 0,
+	QAD_SPI_InUse_SPI,
+	QAD_SPI_InUse_I2S,
+	QAD_SPI_InvalidDevice
+};
+
+
+//Prevent Recursive Inclusion
+#endif /* __QAD_SPIMGR_HPP_ */

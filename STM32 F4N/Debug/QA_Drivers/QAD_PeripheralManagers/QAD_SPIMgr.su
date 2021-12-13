@@ -1,0 +1,7 @@
+QAD_SPIMgr.cpp:33:1:QAD_SPIMgr::QAD_SPIMgr()	24	static
+QAD_SPIMgr.cpp:70:11:QA_Result QAD_SPIMgr::imp_registerSPI(QAD_SPI_Periph, QAD_SPI_State)	16	static
+QAD_SPIMgr.cpp:87:6:void QAD_SPIMgr::imp_deregisterSPI(QAD_SPI_Periph)	16	static
+QAD_SPIMgr.cpp:101:6:void QAD_SPIMgr::imp_enableClock(QAD_SPI_Periph)	40	static
+QAD_SPIMgr.cpp:136:6:void QAD_SPIMgr::imp_disableClock(QAD_SPI_Periph)	16	static
+QAD_SPIMgr.cpp:165:9:uint8_t QAD_SPIMgr::imp_getSPIsActive()	24	static
+QAD_SPIMgr.cpp:177:9:uint8_t QAD_SPIMgr::imp_getSPIsInactive()	24	static

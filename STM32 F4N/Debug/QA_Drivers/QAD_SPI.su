@@ -1,0 +1,20 @@
+QAD_SPIMgr.hpp:109:21:static QAD_SPIMgr& QAD_SPIMgr::get()	8	static
+QAD_SPIMgr.hpp:118:23:static QAD_SPI_State QAD_SPIMgr::getState(QAD_SPI_Periph)	16	static
+QAD_SPIMgr.hpp:126:22:static SPI_TypeDef* QAD_SPIMgr::getInstance(QAD_SPI_Periph)	16	static
+QAD_SPIMgr.hpp:134:19:static IRQn_Type QAD_SPIMgr::getIRQ(QAD_SPI_Periph)	16	static
+QAD_SPIMgr.hpp:153:19:static QA_Result QAD_SPIMgr::registerSPI(QAD_SPI_Periph, QAD_SPI_State)	16	static
+QAD_SPIMgr.hpp:157:14:static void QAD_SPIMgr::deregisterSPI(QAD_SPI_Periph)	16	static
+QAD_SPIMgr.hpp:165:14:static void QAD_SPIMgr::enableClock(QAD_SPI_Periph)	16	static
+QAD_SPIMgr.hpp:169:14:static void QAD_SPIMgr::disableClock(QAD_SPI_Periph)	16	static
+QAD_SPI.cpp:33:11:QA_Result QAD_SPI::init()	24	static
+QAD_SPI.cpp:48:6:void QAD_SPI::deinit()	16	static
+QAD_SPI.cpp:59:14:QA_InitState QAD_SPI::getInitState()	16	static
+QAD_SPI.cpp:66:20:SPI_HandleTypeDef& QAD_SPI::getHandle()	16	static
+QAD_SPI.cpp:77:6:void QAD_SPI::start()	16	static
+QAD_SPI.cpp:85:6:void QAD_SPI::stop()	16	static
+QAD_SPI.cpp:93:16:QA_ActiveState QAD_SPI::getState()	16	static
+QAD_SPI.cpp:104:11:QA_Result QAD_SPI::transmit(uint8_t*, uint16_t)	32	static
+QAD_SPI.cpp:122:11:QA_Result QAD_SPI::receive(uint8_t*, uint16_t)	32	static
+QAD_SPI.cpp:140:11:QA_Result QAD_SPI::transceive(uint8_t*, uint8_t*, uint16_t)	40	static
+QAD_SPI.cpp:162:11:QA_Result QAD_SPI::periphInit()	40	static
+QAD_SPI.cpp:269:6:void QAD_SPI::periphDeinit(QAD_SPI::DeinitMode)	16	static
