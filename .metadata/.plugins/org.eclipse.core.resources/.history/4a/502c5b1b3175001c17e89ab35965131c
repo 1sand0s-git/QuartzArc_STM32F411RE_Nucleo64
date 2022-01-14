@@ -1,0 +1,83 @@
+/* ----------------------------------------------------------------------- */
+/*                                                                         */
+/*   Quartz Arc                                                            */
+/*                                                                         */
+/*   STM32 F411RE Nucleo 64                                                */
+/*                                                                         */
+/*   System: Drivers                                                       */
+/*   Role: RGB LED Driver                                                  */
+/*   Filename: QAD_RGB.cpp                                                 */
+/*   Date: 14th January 2022                                               */
+/*   Created By: Benjamin Rosser                                           */
+/*                                                                         */
+/*   This code is covered by Creative Commons CC-BY-NC-SA license          */
+/*   (C) Copyright 2022 Benjamin Rosser                                    */
+/*                                                                         */
+/* ----------------------------------------------------------------------- */
+
+//Includes
+#include "QAD_RGB.hpp"
+
+
+	//------------------------------------------
+	//------------------------------------------
+	//------------------------------------------
+
+
+  //------------------------------
+  //------------------------------
+  //QAD_RGB Initialization Methods
+
+//QAD_RGB::init
+//QAD_RGB Initialization Method
+QA_Result QAD_RGB::init(void) {
+
+	//Set Color
+	setColor();
+
+	//Set Driver States
+	m_eInitState = QA_Initialized;
+	m_eState     = QA_Inactive;
+
+	//Return
+	return QA_OK;
+}
+
+
+//QAD_RGB::deinit
+//QAD_RGB Initialization Method
+void QAD_RGB::deinit(void) {
+
+	//
+
+	//Set Driver States
+	m_eState     = QA_Inactive;
+	m_eInitState = QA_NotInitialized;
+}
+
+
+	//-----------------------
+	//-----------------------
+	//QAD_RGB Control Methods
+
+uint8_t getRed(void);
+uint8_t getGreen(void);
+uint8_t getBlue(void);
+
+uint8_t getBrightness(void);
+bool getInvert(void);
+
+void setRed(uint8_t uRed);
+void setGreen(uint8_t uGreen);
+void setBlue(uint8_t uBlue);
+
+void setBrightness(uint8_t uBrightness);
+void setInvert(bool bInvert);
+
+
+	//------------------------------
+	//------------------------------
+	//QAD_RGB Private Control Method
+
+void setColor(void);
+

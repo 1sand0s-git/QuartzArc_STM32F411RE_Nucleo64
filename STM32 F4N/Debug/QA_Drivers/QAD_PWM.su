@@ -11,5 +11,6 @@ QAD_PWM.cpp:61:6:void QAD_PWM::deinit()	16	static
 QAD_PWM.cpp:83:6:void QAD_PWM::start()	24	static
 QAD_PWM.cpp:102:6:void QAD_PWM::stop()	24	static
 QAD_PWM.cpp:123:6:void QAD_PWM::setPWMVal(QAD_PWM_Channel, uint16_t)	16	static
-QAD_PWM.cpp:146:11:QA_Result QAD_PWM::periphInit()	72	static
-QAD_PWM.cpp:221:6:void QAD_PWM::periphDeinit(QAD_PWM::DeinitMode)	24	static
+QAD_PWM.cpp:138:10:uint16_t QAD_PWM::getPeriod()	16	static
+QAD_PWM.cpp:155:11:QA_Result QAD_PWM::periphInit()	72	static
+QAD_PWM.cpp:230:6:void QAD_PWM::periphDeinit(QAD_PWM::DeinitMode)	24	static

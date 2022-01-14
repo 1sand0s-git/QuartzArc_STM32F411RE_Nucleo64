@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;STM32 F4N/QA_Drivers/QAS_RGB.hpp&apos; to &apos;QAD_RGB.hpp&apos;" description="Rename resource &apos;QAS_RGB.hpp&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="QA_Drivers/QAS_RGB.hpp" name="QAD_RGB.hpp" stamp="1642160431859" updateReferences="true"/>
+</session>

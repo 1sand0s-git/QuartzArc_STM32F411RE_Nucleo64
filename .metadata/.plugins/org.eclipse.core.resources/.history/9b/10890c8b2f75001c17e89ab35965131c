@@ -1,0 +1,51 @@
+/* ----------------------------------------------------------------------- */
+/*                                                                         */
+/*   Quartz Arc                                                            */
+/*                                                                         */
+/*   STM32 F411RE Nucleo 64                                                */
+/*                                                                         */
+/*   System: Drivers                                                       */
+/*   Role: RGB LED Driver                                                  */
+/*   Filename: QAD_RGB.hpp                                                 */
+/*   Date: 14th January 2022                                               */
+/*   Created By: Benjamin Rosser                                           */
+/*                                                                         */
+/*   This code is covered by Creative Commons CC-BY-NC-SA license          */
+/*   (C) Copyright 2022 Benjamin Rosser                                    */
+/*                                                                         */
+/* ----------------------------------------------------------------------- */
+
+//Prevent Recursive Inclusion
+#ifndef __QAD_RGB_HPP_
+#define __QAD_RGB_HPP_
+
+//Includes
+#include "setup.hpp"
+
+#include "QAD_PWM.hpp"
+
+
+	//------------------------------------------
+	//------------------------------------------
+	//------------------------------------------
+
+//------------------
+//QAD_RGB_InitStruct
+typedef struct {
+
+	QAD_PWM*            cPWM;
+
+	QAD_PWM_Channel     eRedChannel;
+	QAD_PWM_Channel     eGreenChannel;
+	QAD_PWM_Channel     eBlueChannel;
+
+} QAD_RGB_InitStruct;
+
+
+	//------------------------------------------
+	//------------------------------------------
+	//------------------------------------------
+
+
+//Prevent Recursive Inlusion
+#endif /* __QAD_RGB_HPP_ */

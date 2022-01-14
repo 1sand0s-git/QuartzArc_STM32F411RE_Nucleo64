@@ -1,0 +1,15 @@
+QAD_RGB.cpp:33:11:QA_Result QAD_RGB::init()	16	static
+QAD_RGB.cpp:48:6:void QAD_RGB::deinit()	16	static
+QAD_RGB.cpp:63:9:uint8_t QAD_RGB::getRed()	16	static
+QAD_RGB.cpp:70:9:uint8_t QAD_RGB::getGreen()	16	static
+QAD_RGB.cpp:77:9:uint8_t QAD_RGB::getBlue()	16	static
+QAD_RGB.cpp:85:9:uint8_t QAD_RGB::getBrightness()	16	static
+QAD_RGB.cpp:92:6:bool QAD_RGB::getInvert()	16	static
+QAD_RGB.cpp:99:6:void QAD_RGB::setRed(uint8_t)	16	static
+QAD_RGB.cpp:108:6:void QAD_RGB::setGreen(uint8_t)	16	static
+QAD_RGB.cpp:117:6:void QAD_RGB::setBlue(uint8_t)	16	static
+QAD_RGB.cpp:126:6:void QAD_RGB::setRGB(uint8_t, uint8_t, uint8_t)	16	static
+QAD_RGB.cpp:137:6:void QAD_RGB::setRGB(uint32_t)	16	static
+QAD_RGB.cpp:148:6:void QAD_RGB::setBrightness(uint8_t)	16	static
+QAD_RGB.cpp:157:6:void QAD_RGB::setInvert(bool)	16	static
+QAD_RGB.cpp:170:6:void QAD_RGB::setColor()	40	static

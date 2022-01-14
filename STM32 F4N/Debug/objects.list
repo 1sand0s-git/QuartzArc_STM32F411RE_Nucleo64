@@ -102,6 +102,7 @@
 "./QA_Drivers/QAD_GPIO.o"
 "./QA_Drivers/QAD_I2C.o"
 "./QA_Drivers/QAD_PWM.o"
+"./QA_Drivers/QAD_RGB.o"
 "./QA_Drivers/QAD_SPI.o"
 "./QA_Drivers/QAD_Timer.o"
 "./QA_Drivers/QAD_UART.o"

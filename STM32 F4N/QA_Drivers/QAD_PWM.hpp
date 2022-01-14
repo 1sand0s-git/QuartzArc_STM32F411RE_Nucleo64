@@ -189,6 +189,8 @@ public:
 
   void setPWMVal(QAD_PWM_Channel eChannel, uint16_t uVal);
 
+  uint16_t getPeriod(void);
+
 private:
 
   //----------------------

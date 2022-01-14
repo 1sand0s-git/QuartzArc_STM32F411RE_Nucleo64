@@ -131,6 +131,15 @@ void QAD_PWM::setPWMVal(QAD_PWM_Channel eChannel, uint16_t uVal) {
 }
 
 
+//QAD_PWM::getPeriod
+//QAD_PWM Control Method
+//
+//Returns the current timer period value
+uint16_t QAD_PWM::getPeriod(void) {
+	return m_uPeriod;
+}
+
+
   //--------------------------------------
   //--------------------------------------
   //QAD_PWM Private Initialization Methods

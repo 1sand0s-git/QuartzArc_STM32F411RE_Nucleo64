@@ -27,6 +27,7 @@
 #include "QAD_ADC.hpp"
 #include "QAD_I2C.hpp"
 #include "QAD_SPI.hpp"
+#include "QAD_RGB.hpp"
 
 #include "QAS_Serial_Dev_UART.hpp"
 
@@ -46,8 +47,9 @@ QAD_GPIO_Output* GPIO_UserLED;
 QAS_Serial_Dev_UART* UART_STLink;
 
 
-//SPI Test
-QAD_SPI* SPI_Flash;
+//
+QAD_PWM* PWM_LED;
+QAD_RGB* RGB_LED;
 
 
 //Task Timing
@@ -55,6 +57,8 @@ QAD_SPI* SPI_Flash;
 //These constants are used to determine the update rate (in milliseconds) of each of the
 //tasks that are run in the processing loop within the main() function.
 //
+const uint32_t QA_FT_LEDTickThreshold       = 10;
+
 const uint32_t QA_FT_HeartbeatTickThreshold = 500;  //Time in milliseconds between heartbeat LED updates
                                                     //The rate of flashing of the heartbeat LED will be double the value defined here
 
@@ -121,147 +125,59 @@ int main(void) {
   UART_STLink->txCR();
   UART_STLink->txStringCR("STM32F411 Nucleo64 Booting...");
 
+	//----------------------------------
+	//----------------------------------
+  //Initialize RGB
 
-  //--------------
-  //Initialize SPI
+  //PWM
+  QAD_PWM_InitStruct PWM_Init;
+  PWM_Init.eTimer = QAD_Timer1;
+  PWM_Init.uPrescaler = 1000;
+  PWM_Init.uPeriod    = 255;
 
-/*  GPIO_InitTypeDef GPIO_Init = {0};
+  PWM_Init.sChannels[0].eActive = QA_Active;
+  PWM_Init.sChannels[0].pGPIO   = GPIOA;
+  PWM_Init.sChannels[0].uPin    = GPIO_PIN_8;
+  PWM_Init.sChannels[0].uAF     = GPIO_AF1_TIM1;
+  PWM_Init.sChannels[1].eActive = QA_Active;
+  PWM_Init.sChannels[1].pGPIO   = GPIOA;
+  PWM_Init.sChannels[1].uPin    = GPIO_PIN_9;
+  PWM_Init.sChannels[1].uAF     = GPIO_AF1_TIM1;
+  PWM_Init.sChannels[2].eActive = QA_Active;
+  PWM_Init.sChannels[2].pGPIO   = GPIOA;
+  PWM_Init.sChannels[2].uPin    = GPIO_PIN_10;
+  PWM_Init.sChannels[2].uAF     = GPIO_AF1_TIM1;
+  PWM_Init.sChannels[3].eActive = QA_Inactive;
+  PWM_LED = new QAD_PWM(PWM_Init);
 
-    //CLK
-  GPIO_Init.Pin       = GPIO_PIN_5;
-  GPIO_Init.Mode      = GPIO_MODE_AF_PP;
-  GPIO_Init.Pull      = GPIO_NOPULL;
-  GPIO_Init.Speed     = GPIO_SPEED_FREQ_HIGH;
-  GPIO_Init.Alternate = GPIO_AF5_SPI1;
-  HAL_GPIO_Init(GPIOA, &GPIO_Init);
-
-		//MOSI
-	GPIO_Init.Pin       = GPIO_PIN_7;
-	GPIO_Init.Mode      = GPIO_MODE_AF_PP;
-	GPIO_Init.Pull      = GPIO_NOPULL;
-	GPIO_Init.Speed     = GPIO_SPEED_FREQ_HIGH;
-	GPIO_Init.Alternate = GPIO_AF5_SPI1;
-	HAL_GPIO_Init(GPIOA, &GPIO_Init);
-
-		//MISO
-	GPIO_Init.Pin       = GPIO_PIN_6;
-	GPIO_Init.Mode      = GPIO_MODE_AF_PP;
-	GPIO_Init.Pull      = GPIO_NOPULL;
-	GPIO_Init.Speed     = GPIO_SPEED_FREQ_HIGH;
-	GPIO_Init.Alternate = GPIO_AF5_SPI1;
-	HAL_GPIO_Init(GPIOA, &GPIO_Init);
-
-		//CS
-	GPIO_Init.Pin       = GPIO_PIN_4;
-	GPIO_Init.Mode      = GPIO_MODE_AF_PP;
-	GPIO_Init.Pull      = GPIO_PULLUP;
-	GPIO_Init.Speed     = GPIO_SPEED_FREQ_HIGH;
-	GPIO_Init.Alternate = GPIO_AF5_SPI1;
-	HAL_GPIO_Init(GPIOA, &GPIO_Init);
-
-
-	  //Enable Clock
-	__HAL_RCC_SPI1_CLK_ENABLE();
-	__HAL_RCC_SPI1_FORCE_RESET();
-	__HAL_RCC_SPI1_RELEASE_RESET();
-
-
-	  //Initialize Peripheral
-	SPI_HandleTypeDef SPI_Handle;
-	SPI_Handle.Instance               = SPI1;
-	SPI_Handle.Init.Mode              = SPI_MODE_MASTER;
-	SPI_Handle.Init.Direction         = SPI_DIRECTION_2LINES;
-	SPI_Handle.Init.DataSize          = SPI_DATASIZE_8BIT;
-	SPI_Handle.Init.CLKPolarity       = SPI_POLARITY_LOW;
-	SPI_Handle.Init.CLKPhase          = SPI_PHASE_1EDGE;
-	SPI_Handle.Init.NSS               = SPI_NSS_HARD_OUTPUT;
-	SPI_Handle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_4;
-  SPI_Handle.Init.FirstBit          = SPI_FIRSTBIT_MSB;
-  SPI_Handle.Init.TIMode            = SPI_TIMODE_DISABLE;
-  SPI_Handle.Init.CRCCalculation    = SPI_CRCCALCULATION_DISABLE;
-  SPI_Handle.Init.CRCPolynomial     = 0;
-
-  if (HAL_SPI_Init(&SPI_Handle) != HAL_OK) {
-  	UART_STLink->txStringCR("SPI: Initialization Failed");
+  if (PWM_LED->init()) {
+  	UART_STLink->txStringCR("PWM: Initialization Failed");
   	GPIO_UserLED->on();
   	while(1) {}
   }
-  UART_STLink->txStringCR("SPI: Initialized successfully");
+  PWM_LED->start();
+  UART_STLink->txStringCR("PWM: Initialized and started");
 
-  __HAL_SPI_ENABLE(&SPI_Handle);
 
-    //Test Communication
-  uint8_t dataTX[4] = {0x9F, 0x00, 0x00, 0x00};
-  uint8_t dataRX[4];
+  //RGB
+  QAD_RGB_InitStruct RGB_Init;
+  RGB_Init.cPWM          = PWM_LED;
+  RGB_Init.eRedChannel   = QAD_PWM_Channel_1;
+  RGB_Init.eGreenChannel = QAD_PWM_Channel_2;
+  RGB_Init.eBlueChannel  = QAD_PWM_Channel_3;
+  RGB_Init.uRed          = 0x07;
+  RGB_Init.uGreen        = 0x7F;
+  RGB_Init.uBlue         = 0x07;
+  RGB_Init.uBrightness   = 0xBF;
+  RGB_Init.bInvert       = true;
+  RGB_LED = new QAD_RGB(RGB_Init);
 
-  if (HAL_SPI_TransmitReceive(&SPI_Handle, &dataTX[0], &dataRX[0], 4, 1000) != HAL_OK) {
-  	UART_STLink->txStringCR("SPI: Transceive Failed");
+  if (RGB_LED->init()) {
+  	UART_STLink->txStringCR("RGB: Initialization Failed");
+  	GPIO_UserLED->on();
+  	while(1) {}
   }
-
-  char strOut[256];
-  sprintf(strOut, "SPI: Received %02X - %02X - %02X", dataRX[1], dataRX[2], dataRX[3]);
-  UART_STLink->txStringCR(strOut);*/
-
-
-  //--------------
-  //--------------
-  //Initialize SPI
-  QAD_SPI_InitStruct SPI_Init;
-  SPI_Init.eSPI              = QAD_SPI1;
-  SPI_Init.uIRQPriority      = 0xE;
-  SPI_Init.eSPIMode          = QAD_SPI_Mode_Master;
-  SPI_Init.eSPIBiDir         = QAD_SPI_BiDir_Enabled;
-  SPI_Init.eSPILines         = QAD_SPI_Lines_2Lines;
-  SPI_Init.eSPIDataSize      = QAD_SPI_DataSize_8bit;
-  SPI_Init.eSPIClkPolarity   = QAD_SPI_ClkPolarity_Low;
-  SPI_Init.eSPIClkPhase      = QAD_SPI_ClkPhase_1Edge;
-  SPI_Init.eSPICS            = QAD_SPI_CS_Soft;
-  SPI_Init.eSPIPrescaler     = QAD_SPI_BaudPrescaler_128	;
-  SPI_Init.eSPIFirstBit      = QAD_SPI_FirstBit_MSB;
-  SPI_Init.eSPITIMode        = QAD_SPI_TIMode_Disable;
-  SPI_Init.eSPICRC           = QAD_SPI_CRC_Disable;
-  SPI_Init.uSPICRCPolynomial = 7;
-
-  SPI_Init.pClk_GPIO         = GPIOA;
-  SPI_Init.uClk_Pin          = GPIO_PIN_5;
-  SPI_Init.uClk_AF           = GPIO_AF5_SPI1;
-
-	SPI_Init.pMOSI_GPIO        = GPIOA;
-	SPI_Init.uMOSI_Pin         = GPIO_PIN_7;
-	SPI_Init.uMOSI_AF          = GPIO_AF5_SPI1;
-
-	SPI_Init.pMISO_GPIO        = GPIOA;
-	SPI_Init.uMISO_Pin         = GPIO_PIN_6;
-	SPI_Init.uMISO_AF          = GPIO_AF5_SPI1;
-
-	SPI_Init.pCS_GPIO          = GPIOA;
-	SPI_Init.uCS_Pin           = GPIO_PIN_4;
-	SPI_Init.uCS_AF            = GPIO_AF5_SPI1;
-	SPI_Flash = new QAD_SPI(SPI_Init);
-
-	if (SPI_Flash->init()) {
-		UART_STLink->txStringCR("SPI - Flash: Initialization Failed");
-		GPIO_UserLED->on();
-		while(1) {}
-	}
-	SPI_Flash->start();
-	UART_STLink->txStringCR("SPI - Flash: Initialized and Started");
-
-
-	//Read Flash ID
-	uint8_t uDataTX[4];
-	uint8_t uDataRX[4];
-
-	uDataTX[0] = 0x9F;
-	for (uint8_t i=1; i<4; i++)
-		uDataTX[i] = 0x00;
-
-	SPI_Flash->transceive(&uDataTX[0], &uDataRX[0], 4);
-
-	char strID[256];
-	sprintf(strID, "SPI - Flash: ID Register = %02X - %02X - %02X", uDataRX[1], uDataRX[2], uDataRX[3]);
-	UART_STLink->txStringCR(strID);
-
+  UART_STLink->txStringCR("RGB: Initialized");
 
 
 	//----------------------------------
@@ -276,7 +192,12 @@ int main(void) {
 	uint32_t uOldTick = uNewTick;
 
   //Create task timing variables
+	uint32_t uLEDTicks = 0;
 	uint32_t uHeartbeatTicks = 0;
+
+	//LED Data
+	uint8_t uBrightness = 0;
+	bool    bDirection = true;
 
 
 	//----------------------------------
@@ -301,6 +222,33 @@ int main(void) {
     	uTicks = 0;
     }
 
+
+    //----------------------------------
+    //Update RGB LED
+    uLEDTicks += uTicks;
+    if (uLEDTicks >= QA_FT_LEDTickThreshold) {
+
+    	if (bDirection) {
+
+    		if (uBrightness == 255) {
+    			bDirection = false;
+    		} else {
+    			uBrightness++;
+    		}
+
+    	} else {
+
+    		if (uBrightness == 0) {
+    			bDirection = true;
+    		} else {
+    			uBrightness--;
+    		}
+
+    	}
+    	RGB_LED->setBrightness(uBrightness);
+
+    	uLEDTicks -= QA_FT_LEDTickThreshold;
+    }
 
   	//----------------------------------
     //Update Heartbeat LED
