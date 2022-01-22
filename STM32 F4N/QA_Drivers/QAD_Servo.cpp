@@ -142,7 +142,7 @@ void QAD_Servo::setPosition(float fPos) {
 		uint32_t uRange = m_uCenter - m_uMin;
 		float fStep = uRange / 100.0f;
 		float fVal  = (0.0f - fPos) * fStep;
-		fVal  = fVal + 0.5f;
+		fVal  = fVal - 0.5f;
 
 		m_uCurrent = m_uCenter - fVal;
 

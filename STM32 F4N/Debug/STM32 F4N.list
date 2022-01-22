@@ -11085,10 +11085,10 @@ void QAD_Servo::setPosition(float fPos) {
  80044b8:	ed97 7a06 	vldr	s14, [r7, #24]
  80044bc:	ee67 7a27 	vmul.f32	s15, s14, s15
  80044c0:	edc7 7a05 	vstr	s15, [r7, #20]
-		fVal  = fVal + 0.5f;
+		fVal  = fVal - 0.5f;
  80044c4:	edd7 7a05 	vldr	s15, [r7, #20]
  80044c8:	eeb6 7a00 	vmov.f32	s14, #96	; 0x3f000000  0.5
- 80044cc:	ee77 7a87 	vadd.f32	s15, s15, s14
+ 80044cc:	ee77 7ac7 	vsub.f32	s15, s15, s14
  80044d0:	edc7 7a05 	vstr	s15, [r7, #20]
 
 		m_uCurrent = m_uCenter - fVal;

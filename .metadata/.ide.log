@@ -1291,3 +1291,9 @@
 
 
 2022-01-22 19:50:24,789 [INFO] Activator:178 - !SESSION log4j initialized
+2022-01-23 08:32:28,799 [INFO] Activator:177 - 
+
+
+2022-01-23 08:32:28,799 [INFO] Activator:178 - !SESSION log4j initialized
+2022-01-23 08:33:22,475 [INFO] RetryExec:97 - I/O exception (java.net.SocketException) caught when processing request to {s}->https://archive.eclipse.org:443: Socket operation on nonsocket: configureBlocking
+2022-01-23 08:33:22,479 [INFO] RetryExec:113 - Retrying request to {s}->https://archive.eclipse.org:443
