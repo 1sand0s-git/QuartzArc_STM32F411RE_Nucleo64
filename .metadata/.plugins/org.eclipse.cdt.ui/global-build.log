@@ -891,3 +891,189 @@ Finished building: STM32 F4N.bin
  
 Finished building: STM32 F4N.list
  
+21:06:47 **** Incremental Build of configuration Debug for project STM32 F4N ****
+make -j8 all 
+arm-none-eabi-g++ "../QA_Tools/QAT_FIFO.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Core -I../QA_Drivers -I../QA_Drivers/QAD_PeripheralManagers -I../QA_Tools -I../QA_Systems -I../QA_Systems/QAS_Serial -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"QA_Tools/QAT_FIFO.d" -MT"QA_Tools/QAT_FIFO.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "QA_Tools/QAT_FIFO.o"
+arm-none-eabi-g++ "../QA_Systems/QAS_Serial/QAS_Serial_Dev_Base.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Core -I../QA_Drivers -I../QA_Drivers/QAD_PeripheralManagers -I../QA_Tools -I../QA_Systems -I../QA_Systems/QAS_Serial -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"QA_Systems/QAS_Serial/QAS_Serial_Dev_Base.d" -MT"QA_Systems/QAS_Serial/QAS_Serial_Dev_Base.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "QA_Systems/QAS_Serial/QAS_Serial_Dev_Base.o"
+arm-none-eabi-g++ "../QA_Systems/QAS_Serial/QAS_Serial_Dev_UART.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Core -I../QA_Drivers -I../QA_Drivers/QAD_PeripheralManagers -I../QA_Tools -I../QA_Systems -I../QA_Systems/QAS_Serial -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"QA_Systems/QAS_Serial/QAS_Serial_Dev_UART.d" -MT"QA_Systems/QAS_Serial/QAS_Serial_Dev_UART.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "QA_Systems/QAS_Serial/QAS_Serial_Dev_UART.o"
+arm-none-eabi-g++ "../QA_Drivers/QAD_PeripheralManagers/QAD_GPIOMgr.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Core -I../QA_Drivers -I../QA_Drivers/QAD_PeripheralManagers -I../QA_Tools -I../QA_Systems -I../QA_Systems/QAS_Serial -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"QA_Drivers/QAD_PeripheralManagers/QAD_GPIOMgr.d" -MT"QA_Drivers/QAD_PeripheralManagers/QAD_GPIOMgr.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "QA_Drivers/QAD_PeripheralManagers/QAD_GPIOMgr.o"
+arm-none-eabi-g++ "../QA_Drivers/QAD_PeripheralManagers/QAD_I2CMgr.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Core -I../QA_Drivers -I../QA_Drivers/QAD_PeripheralManagers -I../QA_Tools -I../QA_Systems -I../QA_Systems/QAS_Serial -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"QA_Drivers/QAD_PeripheralManagers/QAD_I2CMgr.d" -MT"QA_Drivers/QAD_PeripheralManagers/QAD_I2CMgr.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "QA_Drivers/QAD_PeripheralManagers/QAD_I2CMgr.o"
+arm-none-eabi-g++ "../QA_Drivers/QAD_PeripheralManagers/QAD_SPIMgr.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Core -I../QA_Drivers -I../QA_Drivers/QAD_PeripheralManagers -I../QA_Tools -I../QA_Systems -I../QA_Systems/QAS_Serial -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"QA_Drivers/QAD_PeripheralManagers/QAD_SPIMgr.d" -MT"QA_Drivers/QAD_PeripheralManagers/QAD_SPIMgr.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "QA_Drivers/QAD_PeripheralManagers/QAD_SPIMgr.o"
+arm-none-eabi-g++ "../QA_Drivers/QAD_PeripheralManagers/QAD_TimerMgr.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Core -I../QA_Drivers -I../QA_Drivers/QAD_PeripheralManagers -I../QA_Tools -I../QA_Systems -I../QA_Systems/QAS_Serial -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"QA_Drivers/QAD_PeripheralManagers/QAD_TimerMgr.d" -MT"QA_Drivers/QAD_PeripheralManagers/QAD_TimerMgr.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "QA_Drivers/QAD_PeripheralManagers/QAD_TimerMgr.o"
+arm-none-eabi-g++ "../QA_Drivers/QAD_PeripheralManagers/QAD_UARTMgr.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Core -I../QA_Drivers -I../QA_Drivers/QAD_PeripheralManagers -I../QA_Tools -I../QA_Systems -I../QA_Systems/QAS_Serial -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"QA_Drivers/QAD_PeripheralManagers/QAD_UARTMgr.d" -MT"QA_Drivers/QAD_PeripheralManagers/QAD_UARTMgr.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "QA_Drivers/QAD_PeripheralManagers/QAD_UARTMgr.o"
+arm-none-eabi-g++ "../QA_Drivers/QAD_ADC.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Core -I../QA_Drivers -I../QA_Drivers/QAD_PeripheralManagers -I../QA_Tools -I../QA_Systems -I../QA_Systems/QAS_Serial -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"QA_Drivers/QAD_ADC.d" -MT"QA_Drivers/QAD_ADC.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "QA_Drivers/QAD_ADC.o"
+arm-none-eabi-g++ "../QA_Drivers/QAD_EXTI.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Core -I../QA_Drivers -I../QA_Drivers/QAD_PeripheralManagers -I../QA_Tools -I../QA_Systems -I../QA_Systems/QAS_Serial -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"QA_Drivers/QAD_EXTI.d" -MT"QA_Drivers/QAD_EXTI.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "QA_Drivers/QAD_EXTI.o"
+arm-none-eabi-g++ "../QA_Drivers/QAD_Encoder.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Core -I../QA_Drivers -I../QA_Drivers/QAD_PeripheralManagers -I../QA_Tools -I../QA_Systems -I../QA_Systems/QAS_Serial -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"QA_Drivers/QAD_Encoder.d" -MT"QA_Drivers/QAD_Encoder.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "QA_Drivers/QAD_Encoder.o"
+arm-none-eabi-g++ "../QA_Drivers/QAD_GPIO.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Core -I../QA_Drivers -I../QA_Drivers/QAD_PeripheralManagers -I../QA_Tools -I../QA_Systems -I../QA_Systems/QAS_Serial -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"QA_Drivers/QAD_GPIO.d" -MT"QA_Drivers/QAD_GPIO.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "QA_Drivers/QAD_GPIO.o"
+arm-none-eabi-g++ "../QA_Drivers/QAD_I2C.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Core -I../QA_Drivers -I../QA_Drivers/QAD_PeripheralManagers -I../QA_Tools -I../QA_Systems -I../QA_Systems/QAS_Serial -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"QA_Drivers/QAD_I2C.d" -MT"QA_Drivers/QAD_I2C.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "QA_Drivers/QAD_I2C.o"
+arm-none-eabi-g++ "../QA_Drivers/QAD_PWM.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Core -I../QA_Drivers -I../QA_Drivers/QAD_PeripheralManagers -I../QA_Tools -I../QA_Systems -I../QA_Systems/QAS_Serial -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"QA_Drivers/QAD_PWM.d" -MT"QA_Drivers/QAD_PWM.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "QA_Drivers/QAD_PWM.o"
+arm-none-eabi-g++ "../QA_Drivers/QAD_RGB.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Core -I../QA_Drivers -I../QA_Drivers/QAD_PeripheralManagers -I../QA_Tools -I../QA_Systems -I../QA_Systems/QAS_Serial -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"QA_Drivers/QAD_RGB.d" -MT"QA_Drivers/QAD_RGB.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "QA_Drivers/QAD_RGB.o"
+arm-none-eabi-g++ "../QA_Drivers/QAD_SPI.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Core -I../QA_Drivers -I../QA_Drivers/QAD_PeripheralManagers -I../QA_Tools -I../QA_Systems -I../QA_Systems/QAS_Serial -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"QA_Drivers/QAD_SPI.d" -MT"QA_Drivers/QAD_SPI.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "QA_Drivers/QAD_SPI.o"
+arm-none-eabi-g++ "../QA_Drivers/QAD_Servo.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Core -I../QA_Drivers -I../QA_Drivers/QAD_PeripheralManagers -I../QA_Tools -I../QA_Systems -I../QA_Systems/QAS_Serial -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"QA_Drivers/QAD_Servo.d" -MT"QA_Drivers/QAD_Servo.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "QA_Drivers/QAD_Servo.o"
+arm-none-eabi-g++ "../QA_Drivers/QAD_Timer.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Core -I../QA_Drivers -I../QA_Drivers/QAD_PeripheralManagers -I../QA_Tools -I../QA_Systems -I../QA_Systems/QAS_Serial -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"QA_Drivers/QAD_Timer.d" -MT"QA_Drivers/QAD_Timer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "QA_Drivers/QAD_Timer.o"
+arm-none-eabi-g++ "../QA_Drivers/QAD_UART.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Core -I../QA_Drivers -I../QA_Drivers/QAD_PeripheralManagers -I../QA_Tools -I../QA_Systems -I../QA_Systems/QAS_Serial -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"QA_Drivers/QAD_UART.d" -MT"QA_Drivers/QAD_UART.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "QA_Drivers/QAD_UART.o"
+arm-none-eabi-g++ "../Core/boot.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Core -I../QA_Drivers -I../QA_Drivers/QAD_PeripheralManagers -I../QA_Tools -I../QA_Systems -I../QA_Systems/QAS_Serial -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/boot.d" -MT"Core/boot.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/boot.o"
+arm-none-eabi-g++ "../Core/handlers.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Core -I../QA_Drivers -I../QA_Drivers/QAD_PeripheralManagers -I../QA_Tools -I../QA_Systems -I../QA_Systems/QAS_Serial -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/handlers.d" -MT"Core/handlers.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/handlers.o"
+arm-none-eabi-g++ "../Core/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Core -I../QA_Drivers -I../QA_Drivers/QAD_PeripheralManagers -I../QA_Tools -I../QA_Systems -I../QA_Systems/QAS_Serial -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/main.d" -MT"Core/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/main.o"
+../Core/main.cpp: In function 'int main()':
+../Core/main.cpp:136:12: error: 'struct QAD_PWM_InitStruct' has no member named 'sChannel'; did you mean 'sChannels'?
+  136 |   PWM_Init.sChannel[0].eActive = QA_Inactive;
+      |            ^~~~~~~~
+      |            sChannels
+../Core/main.cpp:138:12: error: 'struct QAD_PWM_InitStruct' has no member named 'sChannel'; did you mean 'sChannels'?
+  138 |   PWM_Init.sChannel[1].eActive = QA_Active;
+      |            ^~~~~~~~
+      |            sChannels
+../Core/main.cpp:139:12: error: 'struct QAD_PWM_InitStruct' has no member named 'sChannel'; did you mean 'sChannels'?
+  139 |   PWM_Init.sChannel[1].pGPIO   = GPIOA;
+      |            ^~~~~~~~
+      |            sChannels
+../Core/main.cpp:140:12: error: 'struct QAD_PWM_InitStruct' has no member named 'sChannel'; did you mean 'sChannels'?
+  140 |   PWM_Init.sChannel[1].uPin    = GPIO_PIN_1;
+      |            ^~~~~~~~
+      |            sChannels
+../Core/main.cpp:141:12: error: 'struct QAD_PWM_InitStruct' has no member named 'sChannel'; did you mean 'sChannels'?
+  141 |   PWM_Init.sChannel[1].uAF     = GPIO_AF1_TIM2;
+      |            ^~~~~~~~
+      |            sChannels
+../Core/main.cpp:143:12: error: 'struct QAD_PWM_InitStruct' has no member named 'sChannel'; did you mean 'sChannels'?
+  143 |   PWM_Init.sChannel[2].eActive = QA_Inactive;
+      |            ^~~~~~~~
+      |            sChannels
+../Core/main.cpp:144:12: error: 'struct QAD_PWM_InitStruct' has no member named 'sChannel'; did you mean 'sChannels'?
+  144 |   PWM_Init.sChannel[3].eActive = QA_Inactive;
+      |            ^~~~~~~~
+      |            sChannels
+../Core/main.cpp:170:4: error: 'GPIO_UsedLED' was not declared in this scope; did you mean 'GPIO_UserLED'?
+  170 |    GPIO_UsedLED->on();
+      |    ^~~~~~~~~~~~
+      |    GPIO_UserLED
+make: *** [Core/subdir.mk:38: Core/main.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+21:07:33 **** Incremental Build of configuration Debug for project STM32 F4N ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Core -I../QA_Drivers -I../QA_Drivers/QAD_PeripheralManagers -I../QA_Tools -I../QA_Systems -I../QA_Systems/QAS_Serial -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/main.d" -MT"Core/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/main.o"
+arm-none-eabi-g++ -o "STM32 F4N.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\binar\Desktop\Quartz Arc\QA Codebase Repos\QA_STM32F411RENUCLEO64\QuartzArc_STM32F411RE_Nucleo64\STM32 F4N\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32 F4N.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32 F4N.elf
+ 
+arm-none-eabi-size   STM32\ F4N.elf 
+arm-none-eabi-objdump -h -S  STM32\ F4N.elf  > "STM32 F4N.list"
+arm-none-eabi-objcopy  -O binary  STM32\ F4N.elf  "STM32 F4N.bin"
+   text	   data	    bss	    dec	    hex	filename
+  22724	    124	   2276	  25124	   6224	STM32 F4N.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32 F4N.bin
+ 
+Finished building: STM32 F4N.list
+ 
+21:07:45 **** Incremental Build of configuration Debug for project STM32 F4N ****
+make -j8 all 
+arm-none-eabi-size   STM32\ F4N.elf 
+   text	   data	    bss	    dec	    hex	filename
+  22724	    124	   2276	  25124	   6224	STM32 F4N.elf
+Finished building: default.size.stdout
+ 
+21:08:33 **** Incremental Build of configuration Debug for project STM32 F4N ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Core -I../QA_Drivers -I../QA_Drivers/QAD_PeripheralManagers -I../QA_Tools -I../QA_Systems -I../QA_Systems/QAS_Serial -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/main.d" -MT"Core/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/main.o"
+arm-none-eabi-g++ -o "STM32 F4N.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\binar\Desktop\Quartz Arc\QA Codebase Repos\QA_STM32F411RENUCLEO64\QuartzArc_STM32F411RE_Nucleo64\STM32 F4N\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32 F4N.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32 F4N.elf
+ 
+arm-none-eabi-size   STM32\ F4N.elf 
+arm-none-eabi-objdump -h -S  STM32\ F4N.elf  > "STM32 F4N.list"
+arm-none-eabi-objcopy  -O binary  STM32\ F4N.elf  "STM32 F4N.bin"
+   text	   data	    bss	    dec	    hex	filename
+  22724	    124	   2276	  25124	   6224	STM32 F4N.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32 F4N.bin
+ 
+Finished building: STM32 F4N.list
+ 
+21:09:18 **** Incremental Build of configuration Debug for project STM32 F4N ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Core -I../QA_Drivers -I../QA_Drivers/QAD_PeripheralManagers -I../QA_Tools -I../QA_Systems -I../QA_Systems/QAS_Serial -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/main.d" -MT"Core/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/main.o"
+arm-none-eabi-g++ -o "STM32 F4N.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\binar\Desktop\Quartz Arc\QA Codebase Repos\QA_STM32F411RENUCLEO64\QuartzArc_STM32F411RE_Nucleo64\STM32 F4N\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32 F4N.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32 F4N.elf
+ 
+arm-none-eabi-size   STM32\ F4N.elf 
+arm-none-eabi-objdump -h -S  STM32\ F4N.elf  > "STM32 F4N.list"
+arm-none-eabi-objcopy  -O binary  STM32\ F4N.elf  "STM32 F4N.bin"
+   text	   data	    bss	    dec	    hex	filename
+  22724	    124	   2276	  25124	   6224	STM32 F4N.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32 F4N.bin
+ 
+Finished building: STM32 F4N.list
+ 
+21:11:08 **** Incremental Build of configuration Debug for project STM32 F4N ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Core -I../QA_Drivers -I../QA_Drivers/QAD_PeripheralManagers -I../QA_Tools -I../QA_Systems -I../QA_Systems/QAS_Serial -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/main.d" -MT"Core/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/main.o"
+arm-none-eabi-g++ -o "STM32 F4N.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\binar\Desktop\Quartz Arc\QA Codebase Repos\QA_STM32F411RENUCLEO64\QuartzArc_STM32F411RE_Nucleo64\STM32 F4N\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32 F4N.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32 F4N.elf
+ 
+arm-none-eabi-size   STM32\ F4N.elf 
+arm-none-eabi-objdump -h -S  STM32\ F4N.elf  > "STM32 F4N.list"
+arm-none-eabi-objcopy  -O binary  STM32\ F4N.elf  "STM32 F4N.bin"
+   text	   data	    bss	    dec	    hex	filename
+  22724	    124	   2276	  25124	   6224	STM32 F4N.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32 F4N.bin
+ 
+Finished building: STM32 F4N.list
+ 
+21:12:56 **** Incremental Build of configuration Debug for project STM32 F4N ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Core -I../QA_Drivers -I../QA_Drivers/QAD_PeripheralManagers -I../QA_Tools -I../QA_Systems -I../QA_Systems/QAS_Serial -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/main.d" -MT"Core/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/main.o"
+arm-none-eabi-g++ -o "STM32 F4N.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\binar\Desktop\Quartz Arc\QA Codebase Repos\QA_STM32F411RENUCLEO64\QuartzArc_STM32F411RE_Nucleo64\STM32 F4N\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32 F4N.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32 F4N.elf
+ 
+arm-none-eabi-size   STM32\ F4N.elf 
+arm-none-eabi-objdump -h -S  STM32\ F4N.elf  > "STM32 F4N.list"
+arm-none-eabi-objcopy  -O binary  STM32\ F4N.elf  "STM32 F4N.bin"
+   text	   data	    bss	    dec	    hex	filename
+  22940	    124	   2276	  25340	   62fc	STM32 F4N.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32 F4N.bin
+ 
+Finished building: STM32 F4N.list
+ 
+21:19:30 **** Incremental Build of configuration Debug for project STM32 F4N ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Core -I../QA_Drivers -I../QA_Drivers/QAD_PeripheralManagers -I../QA_Tools -I../QA_Systems -I../QA_Systems/QAS_Serial -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/main.d" -MT"Core/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/main.o"
+../Core/main.cpp: In function 'int main()':
+../Core/main.cpp:254:21: error: 'QA_FT_ServoTicksThreshold' was not declared in this scope; did you mean 'QA_FT_ServoTickThreshold'?
+  254 |      uServoTicks -= QA_FT_ServoTicksThreshold;
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~
+      |                     QA_FT_ServoTickThreshold
+make: *** [Core/subdir.mk:38: Core/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+21:19:42 **** Incremental Build of configuration Debug for project STM32 F4N ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Core -I../QA_Drivers -I../QA_Drivers/QAD_PeripheralManagers -I../QA_Tools -I../QA_Systems -I../QA_Systems/QAS_Serial -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/main.d" -MT"Core/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/main.o"
+arm-none-eabi-g++ -o "STM32 F4N.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\binar\Desktop\Quartz Arc\QA Codebase Repos\QA_STM32F411RENUCLEO64\QuartzArc_STM32F411RE_Nucleo64\STM32 F4N\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32 F4N.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32 F4N.elf
+ 
+arm-none-eabi-size   STM32\ F4N.elf 
+arm-none-eabi-objdump -h -S  STM32\ F4N.elf  > "STM32 F4N.list"
+arm-none-eabi-objcopy  -O binary  STM32\ F4N.elf  "STM32 F4N.bin"
+   text	   data	    bss	    dec	    hex	filename
+  23380	    124	   2276	  25780	   64b4	STM32 F4N.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32 F4N.bin
+ 
+Finished building: STM32 F4N.list
+ 
+21:19:54 **** Incremental Build of configuration Debug for project STM32 F4N ****
+make -j8 all 
+arm-none-eabi-size   STM32\ F4N.elf 
+   text	   data	    bss	    dec	    hex	filename
+  23380	    124	   2276	  25780	   64b4	STM32 F4N.elf
+Finished building: default.size.stdout
+ 

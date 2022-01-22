@@ -1,0 +1,33 @@
+/* ----------------------------------------------------------------------- */
+/*                                                                         */
+/*   Quartz Arc                                                            */
+/*                                                                         */
+/*   STM32 F411RE Nucleo 64                                                */
+/*                                                                         */
+/*   System: Drivers                                                       */
+/*   Role: Servo Driver                                                    */
+/*   Filename: QAD_Servo.hpp                                               */
+/*   Date: 22nd January 2022                                               */
+/*   Created By: Benjamin Rosser                                           */
+/*                                                                         */
+/*   This code is covered by Creative Commons CC-BY-NC-SA license          */
+/*   (C) Copyright 2021 Benjamin Rosser                                    */
+/*                                                                         */
+/* ----------------------------------------------------------------------- */
+
+//Prevent Recursive Inclusion
+#ifndef __QAD_SERVO_HPP_
+#define __QAD_SERVO_HPP_
+
+//Includes
+#include "setup.hpp"
+
+#include "QAD_PWM.hpp"
+
+
+	//------------------------------------------
+	//------------------------------------------
+	//------------------------------------------
+
+//Prevent Recursive Inclusion
+#endif /* __QAD_SERVO_HPP_ */

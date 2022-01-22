@@ -7,7 +7,7 @@
 /*   System: Core                                                          */
 /*   Role: System Initialization                                           */
 /*   Filename: boot.hpp                                                    */
-/*   Date: 22th October 2021                                               */
+/*   Date: 22nd October 2021                                               */
 /*   Created By: Benjamin Rosser                                           */
 /*                                                                         */
 /*   This code is covered by Creative Commons CC-BY-NC-SA license          */

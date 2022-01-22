@@ -7,7 +7,7 @@
 /*   System: Core                                                          */
 /*   Role: Application Entry Point                                         */
 /*   Filename: main.cpp                                                    */
-/*   Date: 22th October 2021                                               */
+/*   Date: 22nd October 2021                                               */
 /*   Created By: Benjamin Rosser                                           */
 /*                                                                         */
 /*   This code is covered by Creative Commons CC-BY-NC-SA license          */
@@ -28,6 +28,7 @@
 #include "QAD_I2C.hpp"
 #include "QAD_SPI.hpp"
 #include "QAD_RGB.hpp"
+#include "QAD_Servo.hpp"
 
 #include "QAS_Serial_Dev_UART.hpp"
 
@@ -48,8 +49,8 @@ QAS_Serial_Dev_UART* UART_STLink;
 
 
 //
-QAD_PWM* PWM_LED;
-QAD_RGB* RGB_LED;
+QAD_PWM*   PWM_Test;
+QAD_Servo* Servo_Test;
 
 
 //Task Timing
@@ -57,7 +58,7 @@ QAD_RGB* RGB_LED;
 //These constants are used to determine the update rate (in milliseconds) of each of the
 //tasks that are run in the processing loop within the main() function.
 //
-const uint32_t QA_FT_LEDTickThreshold       = 10;
+const uint32_t QA_FT_ServoTickThreshold     = 10;
 
 const uint32_t QA_FT_HeartbeatTickThreshold = 500;  //Time in milliseconds between heartbeat LED updates
                                                     //The rate of flashing of the heartbeat LED will be double the value defined here
@@ -125,59 +126,61 @@ int main(void) {
   UART_STLink->txCR();
   UART_STLink->txStringCR("STM32F411 Nucleo64 Booting...");
 
-	//----------------------------------
-	//----------------------------------
-  //Initialize RGB
 
-  //PWM
+  //--------------------------
+  //--------------------------
+  //Setup PWM Driver for Servo
   QAD_PWM_InitStruct PWM_Init;
-  PWM_Init.eTimer = QAD_Timer1;
-  PWM_Init.uPrescaler = 1000;
-  PWM_Init.uPeriod    = 255;
+  PWM_Init.eTimer     = QAD_Timer2;
+  PWM_Init.uPrescaler = 100;
+  PWM_Init.uPeriod    = 20000;
 
-  PWM_Init.sChannels[0].eActive = QA_Active;
-  PWM_Init.sChannels[0].pGPIO   = GPIOA;
-  PWM_Init.sChannels[0].uPin    = GPIO_PIN_8;
-  PWM_Init.sChannels[0].uAF     = GPIO_AF1_TIM1;
+  PWM_Init.sChannels[0].eActive = QA_Inactive;
+
   PWM_Init.sChannels[1].eActive = QA_Active;
   PWM_Init.sChannels[1].pGPIO   = GPIOA;
-  PWM_Init.sChannels[1].uPin    = GPIO_PIN_9;
-  PWM_Init.sChannels[1].uAF     = GPIO_AF1_TIM1;
-  PWM_Init.sChannels[2].eActive = QA_Active;
-  PWM_Init.sChannels[2].pGPIO   = GPIOA;
-  PWM_Init.sChannels[2].uPin    = GPIO_PIN_10;
-  PWM_Init.sChannels[2].uAF     = GPIO_AF1_TIM1;
-  PWM_Init.sChannels[3].eActive = QA_Inactive;
-  PWM_LED = new QAD_PWM(PWM_Init);
+  PWM_Init.sChannels[1].uPin    = GPIO_PIN_1;
+  PWM_Init.sChannels[1].uAF     = GPIO_AF1_TIM2;
 
-  if (PWM_LED->init()) {
+  PWM_Init.sChannels[2].eActive = QA_Inactive;
+  PWM_Init.sChannels[3].eActive = QA_Inactive;
+
+  PWM_Test = new QAD_PWM(PWM_Init);
+
+  if (PWM_Test->init()) {
   	UART_STLink->txStringCR("PWM: Initialization Failed");
   	GPIO_UserLED->on();
   	while(1) {}
   }
-  PWM_LED->start();
-  UART_STLink->txStringCR("PWM: Initialized and started");
+  PWM_Test->start();
+  UART_STLink->txStringCR("PWM: Initialized and Started");
 
 
-  //RGB
-  QAD_RGB_InitStruct RGB_Init;
-  RGB_Init.cPWM          = PWM_LED;
-  RGB_Init.eRedChannel   = QAD_PWM_Channel_1;
-  RGB_Init.eGreenChannel = QAD_PWM_Channel_2;
-  RGB_Init.eBlueChannel  = QAD_PWM_Channel_3;
-  RGB_Init.uRed          = 0x07;
-  RGB_Init.uGreen        = 0x7F;
-  RGB_Init.uBlue         = 0x07;
-  RGB_Init.uBrightness   = 0xBF;
-  RGB_Init.bInvert       = true;
-  RGB_LED = new QAD_RGB(RGB_Init);
+  //------------------
+  //Setup Servo Driver
+  QAD_Servo_InitStruct Servo_Init;
+  Servo_Init.cPWM     = PWM_Test;
+  Servo_Init.eChannel = QAD_PWM_Channel_2;
+  Servo_Init.uCenter  = 1500;
+  Servo_Init.uMin     = 600;
+  Servo_Init.uMax     = 2400;
+  Servo_Init.uCurrent = 1500;
+  Servo_Test = new QAD_Servo(Servo_Init);
 
-  if (RGB_LED->init()) {
-  	UART_STLink->txStringCR("RGB: Initialization Failed");
+  if (Servo_Test->init()) {
+  	UART_STLink->txStringCR("Servo: Initialization Failed");
   	GPIO_UserLED->on();
   	while(1) {}
   }
-  UART_STLink->txStringCR("RGB: Initialized");
+  UART_STLink->txStringCR("Servo: Initialized");
+
+
+  HAL_Delay(1000);
+  Servo_Test->min();
+  HAL_Delay(1000);
+  Servo_Test->max();
+  HAL_Delay(1000);
+  Servo_Test->center();
 
 
 	//----------------------------------
@@ -192,12 +195,12 @@ int main(void) {
 	uint32_t uOldTick = uNewTick;
 
   //Create task timing variables
-	uint32_t uLEDTicks = 0;
+	uint32_t uServoTicks = 0;
 	uint32_t uHeartbeatTicks = 0;
 
-	//LED Data
-	uint8_t uBrightness = 0;
-	bool    bDirection = true;
+	//Servo Data
+	int8_t iPosition = 0;
+	bool   bDirection = true;
 
 
 	//----------------------------------
@@ -223,32 +226,34 @@ int main(void) {
     }
 
 
-    //----------------------------------
-    //Update RGB LED
-    uLEDTicks += uTicks;
-    if (uLEDTicks >= QA_FT_LEDTickThreshold) {
+    //------------
+    //Update Servo
+    uServoTicks += uTicks;
+    if (uServoTicks >= QA_FT_ServoTickThreshold) {
 
     	if (bDirection) {
 
-    		if (uBrightness == 255) {
-    			bDirection = false;
+    		if (iPosition < 100) {
+    			iPosition++;
     		} else {
-    			uBrightness++;
+    			bDirection = false;
     		}
 
     	} else {
 
-    		if (uBrightness == 0) {
-    			bDirection = true;
+    		if (iPosition > -100) {
+    			iPosition--;
     		} else {
-    			uBrightness--;
+    			bDirection = true;
     		}
 
     	}
-    	RGB_LED->setBrightness(uBrightness);
 
-    	uLEDTicks -= QA_FT_LEDTickThreshold;
+    	Servo_Test->setPosition(iPosition);
+
+    	uServoTicks -= QA_FT_ServoTickThreshold;
     }
+
 
   	//----------------------------------
     //Update Heartbeat LED

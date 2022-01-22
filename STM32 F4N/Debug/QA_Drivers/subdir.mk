@@ -13,6 +13,7 @@ CPP_SRCS += \
 ../QA_Drivers/QAD_PWM.cpp \
 ../QA_Drivers/QAD_RGB.cpp \
 ../QA_Drivers/QAD_SPI.cpp \
+../QA_Drivers/QAD_Servo.cpp \
 ../QA_Drivers/QAD_Timer.cpp \
 ../QA_Drivers/QAD_UART.cpp 
 
@@ -25,6 +26,7 @@ OBJS += \
 ./QA_Drivers/QAD_PWM.o \
 ./QA_Drivers/QAD_RGB.o \
 ./QA_Drivers/QAD_SPI.o \
+./QA_Drivers/QAD_Servo.o \
 ./QA_Drivers/QAD_Timer.o \
 ./QA_Drivers/QAD_UART.o 
 
@@ -37,6 +39,7 @@ CPP_DEPS += \
 ./QA_Drivers/QAD_PWM.d \
 ./QA_Drivers/QAD_RGB.d \
 ./QA_Drivers/QAD_SPI.d \
+./QA_Drivers/QAD_Servo.d \
 ./QA_Drivers/QAD_Timer.d \
 ./QA_Drivers/QAD_UART.d 
 

@@ -44,6 +44,7 @@ Core/main.o: ../Core/main.cpp ../Core/main.hpp ../Core/setup.hpp \
  ../QA_Drivers/QAD_SPI.hpp \
  ../QA_Drivers/QAD_PeripheralManagers/QAD_SPIMgr.hpp \
  ../QA_Drivers/QAD_RGB.hpp ../QA_Drivers/QAD_PWM.hpp \
+ ../QA_Drivers/QAD_Servo.hpp \
  ../QA_Systems/QAS_Serial/QAS_Serial_Dev_UART.hpp \
  ../QA_Tools/QAT_FIFO.hpp \
  ../QA_Systems/QAS_Serial/QAS_Serial_Dev_Base.hpp \
@@ -155,6 +156,8 @@ Core/main.o: ../Core/main.cpp ../Core/main.hpp ../Core/setup.hpp \
 ../QA_Drivers/QAD_RGB.hpp:
 
 ../QA_Drivers/QAD_PWM.hpp:
+
+../QA_Drivers/QAD_Servo.hpp:
 
 ../QA_Systems/QAS_Serial/QAS_Serial_Dev_UART.hpp:
 
