@@ -49,8 +49,6 @@ QAS_Serial_Dev_UART* UART_STLink;
 
 
 //
-QAD_PWM*   PWM_Test;
-QAD_Servo* Servo_Test;
 
 
 //Task Timing
@@ -58,8 +56,6 @@ QAD_Servo* Servo_Test;
 //These constants are used to determine the update rate (in milliseconds) of each of the
 //tasks that are run in the processing loop within the main() function.
 //
-const uint32_t QA_FT_ServoTickThreshold     = 10;
-
 const uint32_t QA_FT_HeartbeatTickThreshold = 500;  //Time in milliseconds between heartbeat LED updates
                                                     //The rate of flashing of the heartbeat LED will be double the value defined here
 
@@ -127,60 +123,50 @@ int main(void) {
   UART_STLink->txStringCR("STM32F411 Nucleo64 Booting...");
 
 
-  //--------------------------
-  //--------------------------
-  //Setup PWM Driver for Servo
-  QAD_PWM_InitStruct PWM_Init;
-  PWM_Init.eTimer     = QAD_Timer2;
-  PWM_Init.uPrescaler = 100;
-  PWM_Init.uPeriod    = 20000;
+  //
+  uint32_t uFreq;
+  char strFreq[256];
 
-  PWM_Init.sChannels[0].eActive = QA_Inactive;
+		//Sys Clock
+	uFreq = HAL_RCC_GetSysClockFreq() / 1000000;
+	sprintf(strFreq, "SysClock Frequency:  %3lu MHz", uFreq);
+	UART_STLink->txStringCR(strFreq);
 
-  PWM_Init.sChannels[1].eActive = QA_Active;
-  PWM_Init.sChannels[1].pGPIO   = GPIOA;
-  PWM_Init.sChannels[1].uPin    = GPIO_PIN_1;
-  PWM_Init.sChannels[1].uAF     = GPIO_AF1_TIM2;
+		//HCLK
+	uFreq = HAL_RCC_GetHCLKFreq() / 1000000;
+	sprintf(strFreq, "HCLK Frequency:      %3lu MHz", uFreq);
+	UART_STLink->txStringCR(strFreq);
 
-  PWM_Init.sChannels[2].eActive = QA_Inactive;
-  PWM_Init.sChannels[3].eActive = QA_Inactive;
+		//PCLK1
+	uFreq = HAL_RCC_GetPCLK1Freq() / 1000000;
+	sprintf(strFreq, "PCLK1 Frequency:     %3lu MHz", uFreq);
+	UART_STLink->txStringCR(strFreq);
 
-  PWM_Test = new QAD_PWM(PWM_Init);
-
-  if (PWM_Test->init()) {
-  	UART_STLink->txStringCR("PWM: Initialization Failed");
-  	GPIO_UserLED->on();
-  	while(1) {}
-  }
-  PWM_Test->start();
-  UART_STLink->txStringCR("PWM: Initialized and Started");
+		//PCLK2
+	uFreq = HAL_RCC_GetPCLK2Freq() / 1000000;
+	sprintf(strFreq, "PCLK2 Frequency:     %3lu MHz", uFreq);
+	UART_STLink->txStringCR(strFreq);
 
 
-  //------------------
-  //Setup Servo Driver
-  QAD_Servo_InitStruct Servo_Init;
-  Servo_Init.cPWM     = PWM_Test;
-  Servo_Init.eChannel = QAD_PWM_Channel_2;
-  Servo_Init.uCenter  = 1500;
-  Servo_Init.uMin     = 600;
-  Servo_Init.uMax     = 2400;
-  Servo_Init.uCurrent = 1500;
-  Servo_Test = new QAD_Servo(Servo_Init);
+	//
+	GPIO_InitTypeDef GPIO_Init = {0};
 
-  if (Servo_Test->init()) {
-  	UART_STLink->txStringCR("Servo: Initialization Failed");
-  	GPIO_UserLED->on();
-  	while(1) {}
-  }
-  UART_STLink->txStringCR("Servo: Initialized");
+	  //MCO 1
+	GPIO_Init.Pin         = GPIO_PIN_8;
+	GPIO_Init.Mode        = GPIO_MODE_AF_PP;
+	GPIO_Init.Pull        = GPIO_NOPULL;
+	GPIO_Init.Speed       = GPIO_SPEED_FREQ_VERY_HIGH;
+	GPIO_Init.Alternate   = GPIO_AF0_MCO;
+	HAL_GPIO_Init(GPIOA, &GPIO_Init);
+
+	HAL_RCC_MCOConfig(RCC_MCO1, RCC_MCO1SOURCE_HSI, RCC_MCODIV_2);
 
 
-  HAL_Delay(1000);
-  Servo_Test->min();
-  HAL_Delay(1000);
-  Servo_Test->max();
-  HAL_Delay(1000);
-  Servo_Test->center();
+	  //MCO2
+	GPIO_Init.Pin         = GPIO_PIN_9;
+	HAL_GPIO_Init(GPIOC, &GPIO_Init);
+
+	HAL_RCC_MCOConfig(RCC_MCO2, RCC_MCO2SOURCE_HSE, RCC_MCODIV_1);
 
 
 	//----------------------------------
@@ -195,12 +181,7 @@ int main(void) {
 	uint32_t uOldTick = uNewTick;
 
   //Create task timing variables
-	uint32_t uServoTicks = 0;
 	uint32_t uHeartbeatTicks = 0;
-
-	//Servo Data
-	int8_t iPosition = 0;
-	bool   bDirection = true;
 
 
 	//----------------------------------
@@ -223,35 +204,6 @@ int main(void) {
 
     } else {
     	uTicks = 0;
-    }
-
-
-    //------------
-    //Update Servo
-    uServoTicks += uTicks;
-    if (uServoTicks >= QA_FT_ServoTickThreshold) {
-
-    	if (bDirection) {
-
-    		if (iPosition < 100) {
-    			iPosition++;
-    		} else {
-    			bDirection = false;
-    		}
-
-    	} else {
-
-    		if (iPosition > -100) {
-    			iPosition--;
-    		} else {
-    			bDirection = true;
-    		}
-
-    	}
-
-    	Servo_Test->setPosition(iPosition);
-
-    	uServoTicks -= QA_FT_ServoTickThreshold;
     }
 
 
