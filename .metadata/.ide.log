@@ -1770,3 +1770,19 @@
 2022-01-27 20:34:05,762 [INFO] IPUIPlugin:74 - create IPUIPlugin
 2022-01-27 20:34:05,814 [INFO] ApiDbMcu:468 - Load IP Config File for PDM2PCM
 2022-01-27 20:34:05,930 [INFO] OpenFileManager:333 - Restore cursor
+2022-02-01 09:24:50,601 [INFO] Activator:177 - 
+
+
+2022-02-01 09:24:50,604 [INFO] Activator:178 - !SESSION log4j initialized
+2022-02-01 09:24:50,931 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] Managed Build system manifest file error: Could not load icon "icons/chip.png".
+2022-02-01 09:24:50,933 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] Managed Build system manifest file error: Could not load icon "icons/chip.png".
+2022-02-01 09:24:50,946 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] Managed Build system manifest file error: Could not load icon "icons/chip.png".
+2022-02-01 09:24:57,670 [ERROR] AnalyticsContext:980 - The ST intranet updater server is unknown: mcucrossselector.codex.cro.st.com
+2022-02-03 21:33:26,738 [INFO] Activator:177 - 
+
+
+2022-02-03 21:33:26,744 [INFO] Activator:178 - !SESSION log4j initialized
+2022-02-03 21:33:27,095 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] Managed Build system manifest file error: Could not load icon "icons/chip.png".
+2022-02-03 21:33:27,097 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] Managed Build system manifest file error: Could not load icon "icons/chip.png".
+2022-02-03 21:33:27,101 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] Managed Build system manifest file error: Could not load icon "icons/chip.png".
+2022-02-03 21:33:33,853 [ERROR] AnalyticsContext:980 - The ST intranet updater server is unknown: mcucrossselector.codex.cro.st.com

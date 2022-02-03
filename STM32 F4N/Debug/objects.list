@@ -99,6 +99,7 @@
 "./QA_Drivers/QAD_ADC.o"
 "./QA_Drivers/QAD_EXTI.o"
 "./QA_Drivers/QAD_Encoder.o"
+"./QA_Drivers/QAD_Flash.o"
 "./QA_Drivers/QAD_GPIO.o"
 "./QA_Drivers/QAD_I2C.o"
 "./QA_Drivers/QAD_PWM.o"
