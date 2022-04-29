@@ -125,47 +125,112 @@ int main(void) {
   UART_STLink->txCR();
 
 
+
+  //----------
+  //WFE Sleep
   //
-  const uint8_t uSector = 7;
-  const uint8_t uStrSize = 9;
-  char strWrite[uStrSize] = {'T', 'e', 's', 't', 'i', 'n', 'g', 0};
+  //Wake from Event
+  //Wake up using User Button (Pin C13 in event mode)
+  //
+  /*UART_STLink->txStringCR("Sleep Test - Wake from event");
+  UART_STLink->txStringCR("Going to sleep...");
+  HAL_Delay(500);
 
-  //Write To Flash
-  UART_STLink->txStringCR("Writing to Flash");
+  GPIO_InitTypeDef GPIO_Init = {0};
+  GPIO_Init.Pin          = GPIO_PIN_13;
+  GPIO_Init.Mode         = GPIO_MODE_EVT_FALLING;
+  GPIO_Init.Pull         = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOC, &GPIO_Init);
 
-  if (QAD_Flash::eraseAndWriteSector(uSector, (uint8_t*)strWrite, uStrSize))
-  	UART_STLink->txStringCR("ERROR: Unable to write to Flash");
+  HAL_SuspendTick();
+  HAL_PWR_EnterSLEEPMode(PWR_MAINREGULATOR_ON, PWR_SLEEPENTRY_WFE);
 
-  //if (QAD_Flash::eraseSector(uSector))
-  	//UART_STLink->txStringCR("ERROR: Unable to erase Flash");
+  //Device is asleep
 
-  UART_STLink->txCR();
+  HAL_ResumeTick();
+  HAL_GPIO_DeInit(GPIOC, GPIO_PIN_13);
+  UART_STLink->txStringCR("Wake up");*/
 
 
-  //Read From Flash
-  UART_STLink->txStringCR("Reading from Flash");
+  //---------
+  //WFI Sleep
+  //
+  //Wake from Interrupt
+  //Wake up using User Button (Pin C13 in interrupt mode)
+  //
+/*  UART_STLink->txStringCR("Stop Test - Wake from interrupt");
+  UART_STLink->txStringCR("Going to sleep...");
+  HAL_Delay(500);
 
-  char* strReadPtr = (char*)QAD_Flash::getSectorPointer(uSector);
-  char strRead[uStrSize];
-  for (uint8_t i=0; i<uStrSize; i++)
-  	strRead[i] = strReadPtr[i];
+  GPIO_InitTypeDef GPIO_Init = {0};
+  GPIO_Init.Pin          = GPIO_PIN_13;
+  GPIO_Init.Mode         = GPIO_MODE_IT_FALLING;
+  GPIO_Init.Pull         = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOC, &GPIO_Init);
 
-  if (strRead[uStrSize-1]) {
-  	UART_STLink->txStringCR("ERROR: Null terminator missing");
-  	strRead[uStrSize-1] = 0;
+  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0xA, 0x0);
+  HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
+
+  HAL_SuspendTick();
+  HAL_PWR_EnterSLEEPMode(PWR_MAINREGULATOR_ON, PWR_SLEEPENTRY_WFI);
+
+  //Device is asleep
+
+  HAL_ResumeTick();
+  HAL_NVIC_DisableIRQ(EXTI15_10_IRQn);
+  HAL_GPIO_DeInit(GPIOC, GPIO_PIN_13);
+  UART_STLink->txStringCR("Wake up");*/
+
+
+  //--------
+  //WFE Stop
+  //
+  //Wake from Event
+  //Wake up using User Button (Pin C13 in event mode)
+  //
+/*  UART_STLink->txStringCR("Stop Test - Wake from event");
+  UART_STLink->txStringCR("Stopping...");
+  HAL_Delay(500);
+
+  GPIO_InitTypeDef GPIO_Init = {0};
+  GPIO_Init.Pin          = GPIO_PIN_13;
+  GPIO_Init.Mode         = GPIO_MODE_EVT_FALLING;
+  GPIO_Init.Pull         = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOC, &GPIO_Init);
+
+  HAL_PWR_EnterSTOPMode(PWR_LOWPOWERREGULATOR_ON, PWR_SLEEPENTRY_WFE);
+
+  //Device is in stop mode
+
+  SystemInitialize();
+  HAL_GPIO_DeInit(GPIOC, GPIO_PIN_13);
+  UART_STLink->txStringCR("Wake up");*/
+
+
+  //-------
+  //Standby
+  //
+  //Wake up using Wakeup pin 1 (Pin A0)
+  //
+  if (!__HAL_PWR_GET_FLAG(PWR_FLAG_WU)) {
+
+    UART_STLink->txStringCR("Standby Test");
+		UART_STLink->txStringCR("Going into standby...");
+		HAL_Delay(500);
+
+		HAL_PWR_DisableWakeUpPin(PWR_WAKEUP_PIN1);
+		__HAL_PWR_CLEAR_FLAG(PWR_FLAG_WU);
+		HAL_PWR_EnableWakeUpPin(PWR_WAKEUP_PIN1);
+
+		HAL_PWR_EnterSTANDBYMode();
+
+  } else {
+
+		HAL_PWR_DisableWakeUpPin(PWR_WAKEUP_PIN1);
+		UART_STLink->txStringCR("Wake up");
+
   }
 
-  bool blComp = true;
-  for (uint8_t i=0; i<uStrSize; i++) {
-  	if (strRead[i] != strWrite[i])
-  		blComp = false;
-  }
-
-  if (!blComp) {
-  	UART_STLink->txStringCR("ERROR: Readback contains incorrect data");
-  }
-
-  UART_STLink->txStringCR(strRead);
 
 
 

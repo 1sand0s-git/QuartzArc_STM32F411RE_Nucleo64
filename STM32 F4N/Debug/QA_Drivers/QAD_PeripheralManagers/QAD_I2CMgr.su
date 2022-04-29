@@ -1,7 +1,7 @@
-QAD_I2CMgr.cpp:36:1:QAD_I2CMgr::QAD_I2CMgr()	24	static
-QAD_I2CMgr.cpp:77:11:QA_Result QAD_I2CMgr::imp_registerI2C(QAD_I2C_Periph, QAD_I2C_State)	16	static
-QAD_I2CMgr.cpp:95:6:void QAD_I2CMgr::imp_deregisterI2C(QAD_I2C_Periph)	16	static
-QAD_I2CMgr.cpp:113:6:void QAD_I2CMgr::imp_enableClock(QAD_I2C_Periph)	32	static
-QAD_I2CMgr.cpp:142:6:void QAD_I2CMgr::imp_disableClock(QAD_I2C_Periph)	16	static
-QAD_I2CMgr.cpp:168:9:uint8_t QAD_I2CMgr::imp_getI2CsActive()	24	static
-QAD_I2CMgr.cpp:183:9:uint8_t QAD_I2CMgr::imp_getI2CsInactive()	24	static
+../QA_Drivers/QAD_PeripheralManagers/QAD_I2CMgr.cpp:36:1:QAD_I2CMgr::QAD_I2CMgr()	24	static
+../QA_Drivers/QAD_PeripheralManagers/QAD_I2CMgr.cpp:77:11:QA_Result QAD_I2CMgr::imp_registerI2C(QAD_I2C_Periph, QAD_I2C_State)	16	static
+../QA_Drivers/QAD_PeripheralManagers/QAD_I2CMgr.cpp:95:6:void QAD_I2CMgr::imp_deregisterI2C(QAD_I2C_Periph)	16	static
+../QA_Drivers/QAD_PeripheralManagers/QAD_I2CMgr.cpp:113:6:void QAD_I2CMgr::imp_enableClock(QAD_I2C_Periph)	32	static
+../QA_Drivers/QAD_PeripheralManagers/QAD_I2CMgr.cpp:142:6:void QAD_I2CMgr::imp_disableClock(QAD_I2C_Periph)	16	static
+../QA_Drivers/QAD_PeripheralManagers/QAD_I2CMgr.cpp:168:9:uint8_t QAD_I2CMgr::imp_getI2CsActive()	24	static
+../QA_Drivers/QAD_PeripheralManagers/QAD_I2CMgr.cpp:183:9:uint8_t QAD_I2CMgr::imp_getI2CsInactive()	24	static

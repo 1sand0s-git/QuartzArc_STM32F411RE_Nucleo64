@@ -29,6 +29,7 @@
 #include "QAD_SPI.hpp"
 #include "QAD_RGB.hpp"
 #include "QAD_Servo.hpp"
+#include "QAD_Flash.hpp"
 
 #include "QAS_Serial_Dev_UART.hpp"
 
@@ -121,20 +122,66 @@ int main(void) {
   //If initialization succeeded then output a message via serial
   UART_STLink->txCR();
   UART_STLink->txStringCR("STM32F411 Nucleo64 Booting...");
+  UART_STLink->txCR();
 
 
+
+  //----------
+  //WFE Sleep
   //
-  const uint8_t uSector = 7;
-  const uint8_t uStrSize = 9;
-  char strWrite[uStrSize] = {'T', 'e', 's', 't', 'i', 'n', 'g', 0};
+  //Wake from Event
+  //Wake up using User Button (Pin C13 in event mode)
+  //
+  /*UART_STLink->txStringCR("Sleep Test - Wake from event");
+  UART_STLink->txStringCR("Going to sleep...");
+  HAL_Delay(500);
 
-  //Write To Flash
-  UART_STLink->txStringCR("Writing to Flash");
+  GPIO_InitTypeDef GPIO_Init = {0};
+  GPIO_Init.Pin          = GPIO_PIN_13;
+  GPIO_Init.Mode         = GPIO_MODE_EVT_FALLING;
+  GPIO_Init.Pull         = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOC, &GPIO_Init);
 
-  if (QAD_Flash::eraseAndWrite(uSector, (uint8_t*)strWrite, uStrSize))
-  	UART_STLink->txStringCR("ERROR: Unable to write to Flash");
+  HAL_SuspendTick();
+  HAL_PWR_EnterSLEEPMode(PWR_MAINREGULATOR_ON, PWR_SLEEPENTRY_WFE);
 
-  UART_STLink->txCR()/
+  //Device is asleep
+
+  HAL_ResumeTick();
+  HAL_GPIO_DeInit(GPIOC, GPIO_PIN_13);
+  UART_STLink->txStringCR("Wake up");*/
+
+
+  //---------
+  //WFI Sleep
+  //
+  //Wake from Interrupt
+  //Wake up using User Button (Pin C13 in interrupt mode)
+  //
+  UART_STLink->txStringCR("Stop Test - Wake from interrupt");
+  UART_STLink->txStringCR("Going to sleep...");
+  HAL_Delay(500);
+
+  GPIO_InitTypeDef GPIO_Init = {0};
+  GPIO_Init.Pin          = GPIO_PIN_13;
+  GPIO_Init.Mode         = GPIO_MODE_IT_FALLING;
+  GPIO_Init.Pull         = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOC, &GPIO_Init);
+
+  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0xA, 0x0);
+  HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
+
+  HAL_SuspendTick();
+  HAL_PWR_EnterSLEEPMode(PWR_MAINREGULATOR_ON, PWR_SLEEPENTRY_WFI);
+
+  //Device is asleep
+
+  HAL_ResumeTick();
+  HAL_NVIC_DisableIRQ(EXTI15_10_IRQn);
+  HAL_GPIO_DeInit(GPIOC, GPIO_PIN_13);
+  UART_STLink->txStringCR("Wake up");
+
+
 
 
 	//----------------------------------

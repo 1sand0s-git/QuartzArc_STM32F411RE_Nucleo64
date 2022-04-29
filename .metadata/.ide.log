@@ -1786,3 +1786,48 @@
 2022-02-03 21:33:27,097 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] Managed Build system manifest file error: Could not load icon "icons/chip.png".
 2022-02-03 21:33:27,101 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] Managed Build system manifest file error: Could not load icon "icons/chip.png".
 2022-02-03 21:33:33,853 [ERROR] AnalyticsContext:980 - The ST intranet updater server is unknown: mcucrossselector.codex.cro.st.com
+2022-02-08 23:52:50,459 [INFO] Activator:177 - 
+
+
+2022-02-08 23:52:50,461 [INFO] Activator:178 - !SESSION log4j initialized
+2022-02-08 23:52:51,206 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] Managed Build system manifest file error: Could not load icon "icons/chip.png".
+2022-02-08 23:52:51,207 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] Managed Build system manifest file error: Could not load icon "icons/chip.png".
+2022-02-08 23:52:51,217 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] Managed Build system manifest file error: Could not load icon "icons/chip.png".
+2022-02-08 23:53:01,062 [ERROR] AnalyticsContext:980 - The ST intranet updater server is unknown: mcucrossselector.codex.cro.st.com
+2022-02-16 12:10:08,270 [INFO] Activator:177 - 
+
+
+2022-02-16 12:10:08,271 [INFO] Activator:178 - !SESSION log4j initialized
+2022-02-16 12:10:08,863 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] Managed Build system manifest file error: Could not load icon "icons/chip.png".
+2022-02-16 12:10:08,866 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] Managed Build system manifest file error: Could not load icon "icons/chip.png".
+2022-02-16 12:10:08,869 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] Managed Build system manifest file error: Could not load icon "icons/chip.png".
+2022-02-16 12:10:14,842 [ERROR] AnalyticsContext:980 - The ST intranet updater server is unknown: mcucrossselector.codex.cro.st.com
+2022-03-23 09:47:54,662 [INFO] Activator:177 - 
+
+
+2022-03-23 09:47:54,664 [INFO] Activator:178 - !SESSION log4j initialized
+2022-03-23 09:47:55,220 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] Managed Build system manifest file error: Could not load icon "icons/chip.png".
+2022-03-23 09:47:55,221 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] Managed Build system manifest file error: Could not load icon "icons/chip.png".
+2022-03-23 09:47:55,224 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] Managed Build system manifest file error: Could not load icon "icons/chip.png".
+2022-03-23 09:48:02,401 [ERROR] AnalyticsContext:980 - The ST intranet updater server is unknown: mcucrossselector.codex.cro.st.com
+2022-03-26 23:06:57,317 [INFO] Activator:177 - 
+
+
+2022-03-26 23:06:57,319 [INFO] Activator:178 - !SESSION log4j initialized
+2022-03-26 23:06:58,092 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] Managed Build system manifest file error: Could not load icon "icons/chip.png".
+2022-03-26 23:06:58,094 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] Managed Build system manifest file error: Could not load icon "icons/chip.png".
+2022-03-26 23:06:58,103 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] Managed Build system manifest file error: Could not load icon "icons/chip.png".
+2022-03-26 23:07:07,443 [ERROR] AnalyticsContext:980 - The ST intranet updater server is unknown: mcucrossselector.codex.cro.st.com
+2022-03-27 11:45:48,385 [INFO] Activator:177 - 
+
+
+2022-03-27 11:45:48,387 [INFO] Activator:178 - !SESSION log4j initialized
+2022-03-27 11:45:49,065 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] Managed Build system manifest file error: Could not load icon "icons/chip.png".
+2022-03-27 11:45:49,067 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] Managed Build system manifest file error: Could not load icon "icons/chip.png".
+2022-03-27 11:45:49,070 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] Managed Build system manifest file error: Could not load icon "icons/chip.png".
+2022-03-27 11:45:56,942 [ERROR] AnalyticsContext:980 - The ST intranet updater server is unknown: mcucrossselector.codex.cro.st.com
+2022-04-29 18:28:10,795 [INFO] Activator:177 - 
+
+
+2022-04-29 18:28:10,799 [INFO] Activator:178 - !SESSION log4j initialized
+2022-04-29 18:28:18,265 [ERROR] AnalyticsContext:980 - The ST intranet updater server is unknown: mcucrossselector.codex.cro.st.com

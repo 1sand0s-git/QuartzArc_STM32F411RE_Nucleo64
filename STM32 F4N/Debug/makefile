@@ -1,6 +1,6 @@
 ################################################################################
 # Automatically-generated file. Do not edit!
-# Toolchain: GNU Tools for STM32 (9-2020-q2-update)
+# Toolchain: GNU Tools for STM32 (10.3-2021.10)
 ################################################################################
 
 -include ../makefile.init
@@ -63,14 +63,14 @@ BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ART
 EXECUTABLES += \
 STM32\ F4N.elf \
 
+MAP_FILES += \
+STM32\ F4N.map \
+
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
 STM32\ F4N.list \
-
-OBJCOPY_BIN += \
-STM32\ F4N.bin \
 
 
 # All Target
@@ -80,7 +80,7 @@ all: main-build
 main-build: STM32\ F4N.elf secondary-outputs
 
 # Tool invocations
-STM32\ F4N.elf: $(OBJS) $(USER_OBJS) C:\Users\binar\Desktop\Quartz\ Arc\QA\ Codebase\ Repos\QA_STM32F411RENUCLEO64\QuartzArc_STM32F411RE_Nucleo64\STM32\ F4N\STM32F411RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+STM32\ F4N.elf STM32\ F4N.map: $(OBJS) $(USER_OBJS) C:\Users\binar\Desktop\Quartz\ Arc\QA\ Codebase\ Repos\QA_STM32F411RENUCLEO64\QuartzArc_STM32F411RE_Nucleo64\STM32\ F4N\STM32F411RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	arm-none-eabi-g++ -o "STM32 F4N.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\binar\Desktop\Quartz Arc\QA Codebase Repos\QA_STM32F411RENUCLEO64\QuartzArc_STM32F411RE_Nucleo64\STM32 F4N\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32 F4N.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
@@ -95,17 +95,12 @@ STM32\ F4N.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-STM32\ F4N.bin: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "STM32 F4N.bin"
-	@echo 'Finished building: $@'
-	@echo ' '
-
 # Other Targets
 clean:
-	-$(RM) STM32\ F4N.bin STM32\ F4N.elf STM32\ F4N.list STM32\\ F4N.elf default.size.stdout
+	-$(RM) STM32\ F4N.elf STM32\ F4N.list STM32\ F4N.map STM32\\ F4N.elf default.size.stdout
 	-@echo ' '
 
-secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_BIN)
+secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)
 
 fail-specified-linker-script-missing:
 	@echo 'Error: Cannot find the specified linker script. Check the linker settings in the build configuration.'

@@ -1,26 +1,26 @@
-QAD_I2CMgr.hpp:119:21:static QAD_I2CMgr& QAD_I2CMgr::get()	8	static
-QAD_I2CMgr.hpp:131:23:static QAD_I2C_State QAD_I2CMgr::getState(QAD_I2C_Periph)	16	static
-QAD_I2CMgr.hpp:142:22:static I2C_TypeDef* QAD_I2CMgr::getInstance(QAD_I2C_Periph)	16	static
-QAD_I2CMgr.hpp:153:19:static IRQn_Type QAD_I2CMgr::getIRQEvent(QAD_I2C_Periph)	16	static
-QAD_I2CMgr.hpp:164:19:static IRQn_Type QAD_I2CMgr::getIRQError(QAD_I2C_Periph)	16	static
-QAD_I2CMgr.hpp:178:19:static QA_Result QAD_I2CMgr::registerI2C(QAD_I2C_Periph, QAD_I2C_State)	16	static
-QAD_I2CMgr.hpp:185:14:static void QAD_I2CMgr::deregisterI2C(QAD_I2C_Periph)	16	static
-QAD_I2CMgr.hpp:195:14:static void QAD_I2CMgr::enableClock(QAD_I2C_Periph)	16	static
-QAD_I2CMgr.hpp:201:14:static void QAD_I2CMgr::disableClock(QAD_I2C_Periph)	16	static
-QAD_I2C.cpp:36:11:QA_Result QAD_I2C::init()	24	static
-QAD_I2C.cpp:61:6:void QAD_I2C::deinit()	16	static
-QAD_I2C.cpp:80:14:QA_InitState QAD_I2C::getInitState()	16	static
-QAD_I2C.cpp:89:20:I2C_HandleTypeDef& QAD_I2C::getHandle()	16	static
-QAD_I2C.cpp:102:6:void QAD_I2C::start()	16	static
-QAD_I2C.cpp:112:6:void QAD_I2C::stop()	16	static
-QAD_I2C.cpp:123:16:QA_ActiveState QAD_I2C::getState()	16	static
-QAD_I2C.cpp:140:11:QA_Result QAD_I2C::write8Bit(uint16_t, uint8_t, uint8_t)	24	static
-QAD_I2C.cpp:153:11:QA_Result QAD_I2C::write16Bit(uint16_t, uint16_t, uint16_t)	40	static
-QAD_I2C.cpp:168:11:QA_Result QAD_I2C::writeMultiple8Bit(uint16_t, uint8_t, uint8_t*, uint16_t)	32	static
-QAD_I2C.cpp:181:11:QA_Result QAD_I2C::read8Bit(uint16_t, uint8_t, uint8_t*)	32	static
-QAD_I2C.cpp:194:11:QA_Result QAD_I2C::read16Bit(uint16_t, uint16_t, uint16_t*)	40	static
-QAD_I2C.cpp:213:11:QA_Result QAD_I2C::readMultiple8Bit(uint16_t, uint8_t, uint8_t*, uint16_t)	32	static
-QAD_I2C.cpp:229:11:QA_Result QAD_I2C::periphInit()	40	static
-QAD_I2C.cpp:294:6:void QAD_I2C::periphDeinit(QAD_I2C::DeinitMode)	16	static
-QAD_I2C.cpp:338:11:QA_Result QAD_I2C::write(uint16_t, uint16_t, uint16_t, uint8_t*, uint16_t)	48	static
-QAD_I2C.cpp:356:11:QA_Result QAD_I2C::read(uint16_t, uint16_t, uint16_t, uint8_t*, uint16_t)	48	static
+../QA_Drivers/QAD_PeripheralManagers/QAD_I2CMgr.hpp:119:21:static QAD_I2CMgr& QAD_I2CMgr::get()	8	static
+../QA_Drivers/QAD_PeripheralManagers/QAD_I2CMgr.hpp:131:23:static QAD_I2C_State QAD_I2CMgr::getState(QAD_I2C_Periph)	16	static
+../QA_Drivers/QAD_PeripheralManagers/QAD_I2CMgr.hpp:142:22:static I2C_TypeDef* QAD_I2CMgr::getInstance(QAD_I2C_Periph)	16	static
+../QA_Drivers/QAD_PeripheralManagers/QAD_I2CMgr.hpp:153:19:static IRQn_Type QAD_I2CMgr::getIRQEvent(QAD_I2C_Periph)	16	static
+../QA_Drivers/QAD_PeripheralManagers/QAD_I2CMgr.hpp:164:19:static IRQn_Type QAD_I2CMgr::getIRQError(QAD_I2C_Periph)	16	static
+../QA_Drivers/QAD_PeripheralManagers/QAD_I2CMgr.hpp:178:19:static QA_Result QAD_I2CMgr::registerI2C(QAD_I2C_Periph, QAD_I2C_State)	16	static
+../QA_Drivers/QAD_PeripheralManagers/QAD_I2CMgr.hpp:185:14:static void QAD_I2CMgr::deregisterI2C(QAD_I2C_Periph)	16	static
+../QA_Drivers/QAD_PeripheralManagers/QAD_I2CMgr.hpp:195:14:static void QAD_I2CMgr::enableClock(QAD_I2C_Periph)	16	static
+../QA_Drivers/QAD_PeripheralManagers/QAD_I2CMgr.hpp:201:14:static void QAD_I2CMgr::disableClock(QAD_I2C_Periph)	16	static
+../QA_Drivers/QAD_I2C.cpp:36:11:QA_Result QAD_I2C::init()	24	static
+../QA_Drivers/QAD_I2C.cpp:61:6:void QAD_I2C::deinit()	16	static
+../QA_Drivers/QAD_I2C.cpp:80:14:QA_InitState QAD_I2C::getInitState()	16	static
+../QA_Drivers/QAD_I2C.cpp:89:20:I2C_HandleTypeDef& QAD_I2C::getHandle()	16	static
+../QA_Drivers/QAD_I2C.cpp:102:6:void QAD_I2C::start()	16	static
+../QA_Drivers/QAD_I2C.cpp:112:6:void QAD_I2C::stop()	16	static
+../QA_Drivers/QAD_I2C.cpp:123:16:QA_ActiveState QAD_I2C::getState()	16	static
+../QA_Drivers/QAD_I2C.cpp:140:11:QA_Result QAD_I2C::write8Bit(uint16_t, uint8_t, uint8_t)	24	static
+../QA_Drivers/QAD_I2C.cpp:153:11:QA_Result QAD_I2C::write16Bit(uint16_t, uint16_t, uint16_t)	40	static
+../QA_Drivers/QAD_I2C.cpp:168:11:QA_Result QAD_I2C::writeMultiple8Bit(uint16_t, uint8_t, uint8_t*, uint16_t)	32	static
+../QA_Drivers/QAD_I2C.cpp:181:11:QA_Result QAD_I2C::read8Bit(uint16_t, uint8_t, uint8_t*)	32	static
+../QA_Drivers/QAD_I2C.cpp:194:11:QA_Result QAD_I2C::read16Bit(uint16_t, uint16_t, uint16_t*)	40	static
+../QA_Drivers/QAD_I2C.cpp:213:11:QA_Result QAD_I2C::readMultiple8Bit(uint16_t, uint8_t, uint8_t*, uint16_t)	32	static
+../QA_Drivers/QAD_I2C.cpp:229:11:QA_Result QAD_I2C::periphInit()	40	static
+../QA_Drivers/QAD_I2C.cpp:294:6:void QAD_I2C::periphDeinit(QAD_I2C::DeinitMode)	16	static
+../QA_Drivers/QAD_I2C.cpp:338:11:QA_Result QAD_I2C::write(uint16_t, uint16_t, uint16_t, uint8_t*, uint16_t)	48	static
+../QA_Drivers/QAD_I2C.cpp:356:11:QA_Result QAD_I2C::read(uint16_t, uint16_t, uint16_t, uint8_t*, uint16_t)	48	static
